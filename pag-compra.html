@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <title>Musas</title>
 </head>
+
 <body>
 
     <header id="header">
@@ -19,32 +23,34 @@
             <div class="contenedor-nav-top">
 
                 <div class="nav-menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2 icon-open" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2 icon-open"
+                        width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <line x1="4" y1="6" x2="20" y2="6" />
                         <line x1="4" y1="12" x2="20" y2="12" />
                         <line x1="4" y1="18" x2="20" y2="18" />
                     </svg>
                     <a href="index.html">
-                            <img src="img/logo.jpg" alt="Logo">
+                        <img src="img/logo.jpg" alt="Logo">
                     </a>
                 </div>
-                
-                
+
+
                 <div class="nav-menu-despegable hidden-menu">
                     <div class="nav-menu-despegable-content">
-                        <a href="pag-acerca-nosotros.html">Conocenos</a>  
-                        <a href="#ubicacion-horarios">Ubicación y horarios</a> 
+                        <a href="pag-acerca-nosotros.html">Conocenos</a>
+                        <a href="#ubicacion-horarios">Ubicación y horarios</a>
                     </div>
-                
+
                     <div class="nav-menu-despegable-contacto">
                         <p>Delivery</p>
                         <p>Numero de celular</p>
                     </div>
                 </div>
-                
+
                 <div class="nav-top-login">
-                    <a href="#">
+                    <a href="pag-inicio-sesion.html" class="d-flex align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <circle cx="12" cy="12" r="9" />
@@ -52,19 +58,22 @@
                             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
                         </svg>
                         
+                    
+                        <p class="lh-1">Inicia sesión o crea tu cuenta</p>
                     </a>
-                    <p>Inicia sesión o crea tu cuenta</p>
                 </div>
             </div>
-            
+
             <button class="icon-shopping">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <circle cx="6" cy="19" r="2" />
-                        <circle cx="17" cy="19" r="2" />
-                        <path d="M17 17h-11v-14h-2" />
-                        <path d="M6 5l14 1l-1 7h-13" />
-                    </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="40"
+                    height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="6" cy="19" r="2" />
+                    <circle cx="17" cy="19" r="2" />
+                    <path d="M17 17h-11v-14h-2" />
+                    <path d="M6 5l14 1l-1 7h-13" />
+                </svg>
             </button>
         </div>
 
@@ -74,12 +83,72 @@
                 <a href="combos-personales.html">Combos personales</a>
                 <a href="combos-duo+.html">Combos duo+</a>
             </div>
-            
+
         </div>
 
     </header>
+    <section class="mt-4 mb-4">
+        <div class="container">
+            <div class="seccion-compra h-75 container-sm mx-auto cont">
+                <h1>Compra</h1>
+            </div>
+            <div class="mt-3 m-auto">   
+                <div class="row text-start">
+                    <div class="col-lg-6">
+                        <div class="seccion-compra">
+                            <h1>Checkout</h1>
+                        </div>
+                        <div class="smp1">
+                            <div class="info-compra">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="seccion-compra">
+                            <h1>Detalle de pedido</h1>
+                        </div>
+                        <div class="productos-pag-compra">
 
-   
+                        </div>
+
+                        <div class="resumen-costos-fin">
+                            
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+                <div class="text-start mt-4">
+                    <div class= "col-lg-6">
+                        <div class="seccion-compra">
+                            <h1>Seleccionar método de pago</h1>
+                        </div>
+
+                        <form action="" class="mt-2 mb-3 metodo-pago">
+                            <div>
+                                <input id="tarjeta" type="radio" name="pago">
+                                <label for="tarjeta" class="tarjeta">Tarjeta de crédito / Tarjeta de débito</label>
+                            </div>
+
+                            <div>
+                                <input id="aplicativo" type="radio" name="pago">
+                                <label for="aplicativo" class="aplicativo">Aplicativo móvil (Yape, Plin)</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="btn-finalizar-compra">
+                    <button type="button" class="btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="">Finalizar compra</a></button>
+                </div>
+                <div class="modal-fin-compra"></div>
+                
+            </div>
+            
+            
+        </div>
+
+    </section>
 
     <footer id="footer">
         <div class="footer-top">
@@ -108,7 +177,7 @@
                         <img src="img/fp-visa.jpg" alt="Visa">
                         <img src="img/fp-plin.jpg" alt="Plin">
                         <img src="img/fp-mastercad.jpg" alt="Mastercard">
-    
+
                     </div>
                 </div>
                 <div class=formas-pago-libro-r>
@@ -122,29 +191,33 @@
             <div class="d-flex footer-bottom">
                 <p>Musas todos los derechos reservados</p>
                 <div class="d-flex redes-sociales">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="32"
-                        height="32" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook"
+                        width="32" height="32" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
                     </svg>
-        
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="32"
-                        height="32" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram"
+                        width="32" height="32" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <rect x="4" y="4" width="16" height="16" rx="4" />
                         <circle cx="12" cy="12" r="3" />
                         <line x1="16.5" y1="7.5" x2="16.5" y2="7.501" />
                     </svg>
                 </div>
-        
+
             </div>
         </div>
-        
+
     </footer>
 
     <script src="https://kit.fontawesome.com/868631101c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/script-carrito.js"></script>
+    <script src="js/script-finalizar-compra.js"></script>
 </body>
+
 </html>

@@ -11,12 +11,20 @@
 /* Globales */
 html {
     box-sizing: border-box;
+    height: 100vh;
 }
 *, *:before, *:after {
     box-sizing: inherit;
 }
 body {
     font-family: var(--fuente);
+    height: 100%;
+    padding-top: 150px;
+}
+body.carrito-compras {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 h1,h2,h3,h4 {
     text-align: center;
@@ -41,6 +49,7 @@ p {
     font-weight: 400;
     margin: 0;
     font-size: 12px;
+    line-height: 2;
 }
 span {
     font-size: 12px;
@@ -51,12 +60,15 @@ a {
     color: #fff;
     font-size: 12px;
 }
+a:hover {
+    color: #fff;
+}
 ul {
     list-style: none;
     list-style-position: inside;
     padding: 0;
 }
-button {
+button{
     border: 0;
     background-color: var(--color1);
     padding: 0;
@@ -93,11 +105,25 @@ img {
     img {
         width: 100px;
     }
+    body {
+        padding-top: 180px;
+    }
 }
+.precio {
+    font-weight: 700;
+}
+.precio.anterior {
+    color: red;
+    text-decoration: 2px solid line-through; 
+}
+
 /* Utilidades */
 .contenedor {
     max-width: 1200px;
     margin: auto;
+}
+.bg-titulo {
+    background-color: var(--color2);
 }
 .d-flex {
     display: flex;
@@ -109,13 +135,27 @@ img {
     text-transform: uppercase;
     font-weight: 700;
     transition: background-color .5s ease-in-out;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .btn-botones {
+        width: 50%;
+    }
 }
 .btn:hover {
     background-color: var(--color1-hover);
 }
+.border-bottom-personalizar {
+    border-bottom: 1px solid var(--color1);
+}
 /* Header */
 #header {
-    background-color: var(--color1);   
+    background-color: var(--color1); 
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    top: 0;
+    box-shadow: 0 5px 6px -3px rgb(0 0 0 / 20%);
 }
 .contenedor-nav {
     display: flex;
@@ -502,7 +542,40 @@ img {
         margin-top: 20px;
     }
 }
+@media screen and (min-width:568px){
+    .cards-wrapper{
+        display: flex;
+    }
+    .card{
+        margin: 0 .5em;
+        width: calc(100%/3);
+    }
+}
 
+.carousel-inner{
+    padding: 1em;
+}
+
+
+@media screen and (max-width:576px){
+    .card:not(:first-child){
+        display: none;
+    }
+    .ver-todo a {
+        width: 90%;
+    }
+    .ver-todo {
+        text-align: center;
+    }
+}
+@media (min-width: 768px) {
+    .ver-todo a{
+        width: 10%;
+    }
+    .ver-todo {
+        text-align: end;
+    }
+}
 /* A que nos dedicamos */
 .entrada-conocenos {
     flex-direction: column;
@@ -537,63 +610,377 @@ img {
         flex: 1;
     }
 }
+.container-md {
+    max-width: 1000px;
+}
+.bg-carrousel {
+    background-color: var(--color2);
+}
+
+.nos-dedicamos > img {
+    width: 50%;
+}
 
 /*---------------------------------------------
 --------PRODUCTOS EN PROMOCIÓN ------------------
 -----------------------------------------------*/
-
-/*---------------------------------------------
---------PRODUCTO PROMOCIÓN ------------------------
------------------------------------------------*/
+.producto img {
+    width: 250px;
+}
+.producto p {
+    text-align: center;
+}
 
 /*---------------------------------------------
 --------COMBOS PERSONALES ------------------------
 -----------------------------------------------*/   
 
 /*---------------------------------------------
---------PRODUCTO PERSONAL ------------------------
+--------PRODUCTO PERSONAL, COMBO DUO, PROMOCION ------------------------
 -----------------------------------------------*/
+.imagen-producto-precompra img{
+    width: 60%;
+}
+.personaliza a {
+    color: var(--color1);
+}
+.personaliza h3 {
+    border-bottom: 1px solid var(--color1);
+}
+.custom-item {
+    position: relative;
+    float: left;
+    width: 140px;
+}
 
+.custom-item__img {
+    width: 70px;
+    border: 1px solid var(--color1);
+    border-radius: 50%;
+    overflow: hidden;
+    height: 70px;
+}
+.custom-item__img img {
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .nombre_producto-compra {
+        margin-top: 20px;
+    }
+}
+#agregar-carrito {
+    margin-top: 20px;
+}
+#combear, #salsas {
+    clear: left;
+}
 /*---------------------------------------------
 --------COMBOS DUO+  ------------------------
 -----------------------------------------------*/
 
 /*---------------------------------------------
---------PRODUCTO COMBO DUO+ ------------------------
------------------------------------------------*/
-
-/*---------------------------------------------
 --------PÁGINA CARRITO DE COMPRAS -------------
 -----------------------------------------------*/
-
+.d-block {
+    display: block;
+}
+.precio-carrito,
+.subtotal-carrito {
+    width: 15%;
+}
+.cantidad-carrito {
+    width: 30%;
+}
+.icon-more {
+    cursor: pointer;
+    transition: all .2s;
+}
+.icon-more.active {
+    transform: rotate(-180deg);
+}
+.info-producto {
+    display: none;
+}
+.btn-vaciar-carrito {
+    display: none;
+}
+.product-img img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.product-img {
+    width: 100px;
+}
+button.botones-carrito {
+    background-color: var(--color1);
+    color: #fff;
+}
+button.boton-eliminar {
+    background-color: #fff;
+}
+.botones-sec-carrito {
+    display: none;
+}
+.botones-sec-carrito.mostrar {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+#productos-carrito-table p {
+    line-height: 1.5;
+}
+.productos-table {
+    display: none;
+}
+.lista-agregados {
+    margin: 0;
+}
+.lista-agregados p {
+    text-align: start;
+}
 /*---------------------------------------------
 --------PÁGINA DE CONTACTO ----------------------
 -----------------------------------------------*/
+.seccion-contacto {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: center;
+}
+.lista-contacto {
+    text-align: center;
+}
+.select-asunto-contact select {
+    margin: 0;
+}
+.text-area {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .text-area {
+        width: 100%;
+    }
+}
+@media screen and (max-width:768px) {
+    .apellidos-email {
+        margin-top: 20px;
+    }
+}
 
+@media (min-width: 768px) {
+    .button-contacto {
+        width: 30%;
+    }
+}
 /*---------------------------------------------
 --------PÁGINA FORMA DE ENTREGA DELIVERY  --------
 -----------------------------------------------*/
+.stfe{
+    justify-content: center;
+}
+.seccion-fdeli {
+    background-color: var(--color2);
+    padding: 15px;
+}
 
+.btndeli{
+    background-color: rgb(107, 107, 170);
+    padding: 20px;
+    margin: 10mm;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+
+.btnrecojo{
+    background-color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+.contenedor-forma-entrega {
+    max-width: 900px;
+    width: 90%;
+}
+.botones-delivery {
+    justify-content: center;
+}
+.botones-delivery .btn-active {
+    background-color: var(--color1-hover);
+}
+@media (min-width: 768px) {
+    .botones-delivery button {
+        width: 20%;
+        height: 60px;
+    }
+    .btn-guardar-forma {
+        width: 50%;
+    }
+    .direccion-pedido {
+        width: 50%;
+        margin: auto;
+    }
+    #recojo-tienda {
+        width: 50%;
+    }
+}
 /*---------------------------------------------
 ----PÁGINA FORMA DE ENTREGA RECOJO EN TIENDA ---
 -----------------------------------------------*/
+.stfr{
+    justify-content: center;
+}
+.distdirec{
+    border: 1px;
+    border: #000;
+    
+}
 
+.seccion-fdeli1 {
+    background-color: var(--color2);
+    padding: 15px;
+}
+
+.btndeli1{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 10mm;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+
+.btnrecojo1{
+    background-color: rgb(107, 107, 170);
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
 /*---------------------------------------------
 ----PÁGINA DE COMPRA ------------------------- ---
 -----------------------------------------------*/
-
+.seccion-compra{
+    background-color: var(--color2);
+    padding: 8px;
+    text-align: center;
+}
+.smp1{
+    line-height: 1cm;
+    padding-top: 0.5cm;
+}
+.detpedido{
+    padding-top: 0.5cm;
+}
+.contenedor-compra {
+    max-width: 1200px;
+}
+#btn-finalizar-compra {
+    width: 100%;
+    display: flex;
+}
+@media (min-width: 768px) {
+    #btn-finalizar-compra  {
+        width: 50%;
+    }
+}
+.elija-uno {
+    color: red;
+}
 /*---------------------------------------------
 ----PÁGINA LIBRO DE RECLAMACIONES -------------
 -----------------------------------------------*/
 
+.form1 {
+    width: 50%;
+}
+
+.seccion-libror {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: center;
+    margin-top: 0.5cm;
+}
+
+
+.seccion-libror1 {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: left;
+    margin: 45px;
+}
+
+
+
+.datosrecla {
+    line-height: 40px;
+    margin-top: 10px;
+}
+
+.datosrecla1 p {
+    line-height: 15px;
+    padding-bottom: 50px;
+
+}
+
+.datosrecla1 button {
+    margin-bottom: 1cm;
+}
+
+
+section {
+    text-align: center;
+}
+
+.input-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-info input,
+select {
+    margin-bottom: 1cm;
+
+
+}
+
+
+.input-info label {
+    margin-right: -1cm;
+}
+
+.checkbox1 input {
+    margin: 0.7cm;
+}
+
+.btnrecla {
+    float: right;
+    margin-right: 1.2cm;
+}
 /*---------------------------------------------
 ----PÁGINA ACERCA DE NOSOTROS ---------------
 -----------------------------------------------*/
-
+.contenedoran{
+    padding: 30px;
+}
+.seccion-adn{
+    background-color: var(--color2);
+    text-align: center;
+    padding: 15px;
+}
+.seccion-adn1{
+    background-color: var(--color2);
+    padding: 15px;
+}
 /*---------------------------------------------
 ----------PÁGINA PREGUNTAS FRECUENTES ----------
 -----------------------------------------------*/
-
+.bg-titulos {
+    background-color: var(--color2);
+}
 /*---------------------------------------------
 ----PÁGINA INICIO SESIÓN  ----------------
 -----------------------------------------------*/

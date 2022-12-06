@@ -66,6 +66,8 @@ if(esDispositivoMovil()) {
             atencion_cliente.classList.add('active');
         }
     }); 
+
+
 } else {
     const nav_main = document.querySelector('.nav-main');
     
@@ -78,13 +80,15 @@ if(esDispositivoMovil()) {
     <path d="M17 17h-11v-14h-2" />
     <path d="M6 5l14 1l-1 7h-13" /></svg>
     </a>`;
-    nav_main.classList.add('d-flex');
+    nav_main.classList.add('d-flex'); 
 }
 
-
-
-
-
+const btn_vaciar_carrito = document.querySelector('.btn-vaciar-carrito');
+const btn_sec_carrito = document.querySelector('.botones-sec-carrito');
+if( btn_vaciar_carrito != null && btn_sec_carrito != null && localStorage.length != 0) {
+    btn_vaciar_carrito.classList.add('d-block');
+    btn_sec_carrito.classList.add('mostrar');
+}
 
 
 // function quitarEfectos(widtPag) {
@@ -105,3 +109,24 @@ if(esDispositivoMovil()) {
 //         quitarEfectos(window.innerWidth);
 //     }
 // }
+
+const triggerTabList = document.querySelectorAll('#myTab a')
+const agregar = triggerTabList[0];
+const quitar = triggerTabList[1];
+triggerTabList.forEach(triggerEl => {
+    const tabTrigger = new bootstrap.Tab(triggerEl);
+    triggerEl.addEventListener('click', event => {
+        event.preventDefault();
+        const enlace = event.target.parentElement.attributes[0].textContent;
+        console.log(enlace);
+        
+        if(enlace == agregar.attributes[0].textContent) {
+            agregar.classList.add('border-bottom-personalizar');
+            quitar.classList.remove('border-bottom-personalizar');
+        } else {
+            agregar.classList.remove('border-bottom-personalizar');
+            quitar.classList.add('border-bottom-personalizar');
+        }
+        tabTrigger.show()
+    })
+})
