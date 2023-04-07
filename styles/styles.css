@@ -1,0 +1,742 @@
+:root {
+    --color1: #DB4200;
+    --color1-hover: #fd4e04;
+    --color2: #FBD357;
+    --color3: #3D80CC;
+    --blanco: #fff;
+    --negro: #000;
+    --fuente: 'Montserrat', sans-serif;
+}
+
+
+.precio {
+    font-weight: 700;
+}
+.precio.anterior {
+    color: red;
+    text-decoration: 2px solid line-through; 
+}
+
+/* Utilidades */
+.contenedor {
+    max-width: 1200px;
+    margin: auto;
+}
+.bg-titulo {
+    background-color: var(--color2);
+}
+.d-flex {
+    display: flex;
+}
+.btn {
+    background-color: var(--color1);
+    padding: 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .btn-botones {
+        width: 50%;
+    }
+}
+.btn:hover {
+    background-color: var(--color1-hover);
+}
+.border-bottom-personalizar {
+    border-bottom: 1px solid var(--color1);
+}
+
+
+ 
+/* Footer */
+#footer {
+    background-color: var(--color1);
+}
+.footer-top {
+    padding: 20px;
+}
+.footer-top h4 {
+    color: #fff;
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color2);
+    width: 90%;
+    margin: 20px auto 0 auto;
+}
+.formas-pago-img {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.formas-pago-img img {
+    width: 40px;
+    height: 100%;
+}
+.formas-pago-libro-r img {
+    width: 100px;
+}
+.formas-pago h4 {
+    border-bottom: 0;
+    width: 100%;
+}
+.atencion-cliente h4::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 60px;
+    width: 15px;
+    height: 15px;
+    background: url(../img/caret-right-solid.svg) no-repeat;
+    background-size: 100%;
+    transform: rotate(0deg);
+    transition: all .2s;
+}
+.atencion-cliente.active h4::after {
+    transform: rotate(90deg);
+}
+.footer-links {
+    display: none;  
+}
+.footer-links li {
+    margin-top: 10px;
+}
+.footer-links a {
+    font-size: 14px;
+}
+.atencion-cliente.active h4 ~ .footer-links {
+    display: block;
+    border-bottom: 1px solid var(--color2);
+    padding-bottom: 20px;
+}
+.atencion-cliente .footer-links li{
+    text-align: center;
+}
+.formas-pago {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.footer-bottom {
+    border-top: 1px solid var(--color2);
+    color: #fff;
+    padding: 5px 10px;
+    align-items: center;
+    flex-direction: column;
+}
+.logo-conocenos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo-conocenos > a:last-child {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    #footer {
+        padding: 10px 5px;
+    }
+    .footer-top {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+    .footer-top h4 {
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
+    .footer-links {
+        display: block;  
+        margin: 0;
+        text-align: end;
+    }
+    .atencion-cliente {
+        flex: 0 0 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .atencion-cliente h4::after {
+        background: none;
+    }
+    .atencion-cliente h4 {
+        text-transform: uppercase;
+        font-weight: 400;
+        text-align: center;
+    }
+    .atencion-cliente .footer-links li {
+        text-align: start;
+    }
+    .atencion-cliente a {
+        font-size: 16px;
+    }
+    .formas-pago {
+        flex: 0 0 30%;
+        margin: 0;
+        gap: 10px;
+    }
+    .formas-pago-content h4 {
+        margin-bottom: 10px;
+    }
+    .logo-conocenos {
+        flex: 1;
+    }
+    .logo-conocenos h4 {
+        margin-top: 10px;
+    }
+    .logo-conocenos > a:last-child {
+        width: auto;
+    }
+    .contenedor-footer {
+        width: 90%;
+        margin: auto;
+    }
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+/*---------------------------------------------
+--------PAGINA PRINCIPAL ------------------------
+-----------------------------------------------*/
+
+/* Seccion presentacion */
+#seccion-presentacion {
+    background-image: url(../img/fondo-seccion.jpg);
+    height: 500px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.seccion-presentacion-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0 0 0 / 60%);
+}
+.seccion-presentacion-content h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.seccion-presentacion-content p {
+    color: #fff;
+    font-size: 16px;
+}
+/* Seccion ubicacion y horarios */
+.seccion-ubicacion {
+    background-color: var(--color2);
+    padding: 15px 8px;
+}
+.seccion-ubicacion-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.seccion-ubicacion-layout h3 {
+    margin-top: 10px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+.su-ubicacion p {
+    text-align: center;
+}
+.su-horarios ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+.lista-horarios {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lista-horarios span {
+    flex: 0 0 43%;
+    text-align: end;
+}
+.lista-horarios p {
+    flex: 1;
+    text-align: start;
+}
+.su-horarios li {
+    width: 80%;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .seccion-ubicacion-layout {
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width:568px){
+    .cards-wrapper{
+        display: flex;
+    }
+    .card{
+        margin: 0 .5em;
+        width: calc(100%/3);
+    }
+}
+
+.carousel-inner{
+    padding: 1em;
+}
+
+
+@media screen and (max-width:576px){
+    .card:not(:first-child){
+        display: none;
+    }
+    .ver-todo a {
+        width: 90%;
+    }
+    .ver-todo {
+        text-align: center;
+    }
+}
+@media (min-width: 768px) {
+    .ver-todo a{
+        width: 10%;
+    }
+    .ver-todo {
+        text-align: end;
+    }
+}
+/* A que nos dedicamos */
+.entrada-conocenos {
+    flex-direction: column;
+    background-color: var(--color2);
+    margin: 50px 0;
+    padding: 10px 5px;
+}
+.entrada-conocenos-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.entrada-conocenos-texto h2 {
+    margin-bottom: 20px;
+}
+.entrada-conocenos-texto p {
+    text-align: center;
+}
+.entrada-conocenos-texto > button {
+    margin-top: 15px;
+    width: 180px;
+}
+@media (min-width: 768px) {
+    .entrada-conocenos-layout {
+        display: flex;
+        gap: 50px;
+    }
+    .entrada-conocenos-texto {
+        flex: 0 0 50%;
+    }
+    .entrada-conocenos-imagenes {
+        flex: 1;
+    }
+}
+.container-md {
+    max-width: 1000px;
+}
+.bg-carrousel {
+    background-color: var(--color2);
+}
+
+.nos-dedicamos > img {
+    width: 50%;
+}
+
+/*---------------------------------------------
+--------PRODUCTOS EN PROMOCIÓN ------------------
+-----------------------------------------------*/
+.producto img {
+    width: 250px;
+}
+.producto p {
+    text-align: center;
+}
+
+/*---------------------------------------------
+--------COMBOS PERSONALES ------------------------
+-----------------------------------------------*/   
+
+/*---------------------------------------------
+--------PRODUCTO PERSONAL, COMBO DUO, PROMOCION ------------------------
+-----------------------------------------------*/
+.imagen-producto-precompra img{
+    width: 60%;
+}
+.personaliza a {
+    color: var(--color1);
+}
+.personaliza h3 {
+    border-bottom: 1px solid var(--color1);
+}
+.custom-item {
+    position: relative;
+    float: left;
+    width: 140px;
+}
+
+.custom-item__img {
+    width: 70px;
+    border: 1px solid var(--color1);
+    border-radius: 50%;
+    overflow: hidden;
+    height: 70px;
+}
+.custom-item__img img {
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .nombre_producto-compra {
+        margin-top: 20px;
+    }
+}
+#agregar-carrito {
+    margin-top: 20px;
+}
+#combear, #salsas {
+    clear: left;
+}
+/*---------------------------------------------
+--------COMBOS DUO+  ------------------------
+-----------------------------------------------*/
+
+/*---------------------------------------------
+--------PÁGINA CARRITO DE COMPRAS -------------
+-----------------------------------------------*/
+.d-block {
+    display: block;
+}
+.precio-carrito,
+.subtotal-carrito {
+    width: 15%;
+}
+.cantidad-carrito {
+    width: 30%;
+}
+.icon-more {
+    cursor: pointer;
+    transition: all .2s;
+}
+.icon-more.active {
+    transform: rotate(-180deg);
+}
+.info-producto {
+    display: none;
+}
+.btn-vaciar-carrito {
+    display: none;
+}
+.product-img img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.product-img {
+    width: 100px;
+}
+button.botones-carrito {
+    background-color: var(--color1);
+    color: #fff;
+}
+button.boton-eliminar {
+    background-color: #fff;
+}
+.botones-sec-carrito {
+    display: none;
+}
+.botones-sec-carrito.mostrar {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+#productos-carrito-table p {
+    line-height: 1.5;
+}
+.productos-table {
+    display: none;
+}
+.lista-agregados {
+    margin: 0;
+}
+.lista-agregados p {
+    text-align: start;
+}
+/*---------------------------------------------
+--------PÁGINA DE CONTACTO ----------------------
+-----------------------------------------------*/
+.seccion-contacto {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: center;
+}
+.lista-contacto {
+    text-align: center;
+}
+.select-asunto-contact select {
+    margin: 0;
+}
+.text-area {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .text-area {
+        width: 100%;
+    }
+}
+@media screen and (max-width:768px) {
+    .apellidos-email {
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .button-contacto {
+        width: 30%;
+    }
+}
+/*---------------------------------------------
+--------PÁGINA FORMA DE ENTREGA DELIVERY  --------
+-----------------------------------------------*/
+.stfe{
+    justify-content: center;
+}
+.seccion-fdeli {
+    background-color: var(--color2);
+    padding: 15px;
+}
+
+.btndeli{
+    background-color: rgb(107, 107, 170);
+    padding: 20px;
+    margin: 10mm;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+
+.btnrecojo{
+    background-color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+.contenedor-forma-entrega {
+    max-width: 900px;
+    width: 90%;
+}
+.botones-delivery {
+    justify-content: center;
+}
+.botones-delivery .btn-active {
+    background-color: var(--color1-hover);
+}
+@media (min-width: 768px) {
+    .botones-delivery button {
+        width: 20%;
+        height: 60px;
+    }
+    .btn-guardar-forma {
+        width: 50%;
+    }
+    .direccion-pedido {
+        width: 50%;
+        margin: auto;
+    }
+    #recojo-tienda {
+        width: 50%;
+    }
+}
+/*---------------------------------------------
+----PÁGINA FORMA DE ENTREGA RECOJO EN TIENDA ---
+-----------------------------------------------*/
+.stfr{
+    justify-content: center;
+}
+.distdirec{
+    border: 1px;
+    border: #000;
+    
+}
+
+.seccion-fdeli1 {
+    background-color: var(--color2);
+    padding: 15px;
+}
+
+.btndeli1{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 10mm;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+
+.btnrecojo1{
+    background-color: rgb(107, 107, 170);
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .5s ease-in-out;
+}
+/*---------------------------------------------
+----PÁGINA DE COMPRA ------------------------- ---
+-----------------------------------------------*/
+.seccion-compra{
+    background-color: var(--color2);
+    padding: 8px;
+    text-align: center;
+}
+.smp1{
+    line-height: 1cm;
+    padding-top: 0.5cm;
+}
+.detpedido{
+    padding-top: 0.5cm;
+}
+.contenedor-compra {
+    max-width: 1200px;
+}
+#btn-finalizar-compra {
+    width: 100%;
+    display: flex;
+}
+@media (min-width: 768px) {
+    #btn-finalizar-compra  {
+        width: 50%;
+    }
+}
+.elija-uno {
+    color: red;
+}
+/*---------------------------------------------
+----PÁGINA LIBRO DE RECLAMACIONES -------------
+-----------------------------------------------*/
+
+.form1 {
+    width: 50%;
+}
+
+.seccion-libror {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: center;
+    margin-top: 0.5cm;
+}
+
+
+.seccion-libror1 {
+    background-color: var(--color2);
+    padding: 15px;
+    text-align: left;
+    margin: 45px;
+}
+
+
+
+.datosrecla {
+    line-height: 40px;
+    margin-top: 10px;
+}
+
+.datosrecla1 p {
+    line-height: 15px;
+    padding-bottom: 50px;
+
+}
+
+.datosrecla1 button {
+    margin-bottom: 1cm;
+}
+
+
+section {
+    text-align: center;
+}
+
+.input-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-info input,
+select {
+    margin-bottom: 1cm;
+
+
+}
+
+
+.input-info label {
+    margin-right: -1cm;
+}
+
+.checkbox1 input {
+    margin: 0.7cm;
+}
+
+.btnrecla {
+    float: right;
+    margin-right: 1.2cm;
+}
+/*---------------------------------------------
+----PÁGINA ACERCA DE NOSOTROS ---------------
+-----------------------------------------------*/
+.contenedoran{
+    padding: 30px;
+}
+.seccion-adn{
+    background-color: var(--color2);
+    text-align: center;
+    padding: 15px;
+}
+.seccion-adn1{
+    background-color: var(--color2);
+    padding: 15px;
+}
+/*---------------------------------------------
+----------PÁGINA PREGUNTAS FRECUENTES ----------
+-----------------------------------------------*/
+.bg-titulos {
+    background-color: var(--color2);
+}
+/*---------------------------------------------
+----PÁGINA INICIO SESIÓN  ----------------
+-----------------------------------------------*/
+
+/*---------------------------------------------
+----PÁGINA REGISTRARSE  -----------------------
+-----------------------------------------------*/
+
+/*---------------------------------------------
+----PÁGINA RECUPERAR - INGRESAR CORREO ---------
+-----------------------------------------------*/
+
+/*---------------------------------------------
+----PÁGINA RECUPERAR - CAMBIAR CONTRASEÑA -------
+-----------------------------------------------*/
+
+/*---------------------------------------------
+----PÁGINA TÉRMINOS Y CONDICIONES ------------
+-----------------------------------------------*/
