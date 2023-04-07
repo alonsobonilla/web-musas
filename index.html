@@ -7,10 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/header.css">
     <title>Musas</title>
 </head>
 <body>
@@ -18,33 +20,19 @@
     <header id="header">
         <div class="contenedor-nav header-higth">
             <div class="contenedor-nav-top">
-
-                <div class="nav-menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2 icon-open" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <div class="main-top-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <line x1="4" y1="6" x2="20" y2="6" />
                         <line x1="4" y1="12" x2="20" y2="12" />
                         <line x1="4" y1="18" x2="20" y2="18" />
                     </svg>
                     <a href="index.html">
-                            <img src="img/logo.jpg" alt="Logo">
+                        <img src="img/logo.jpg" alt="Logo">
                     </a>
                 </div>
                 
-                
-                <div class="nav-menu-despegable hidden-menu">
-                    <div class="nav-menu-despegable-content">
-                        <a href="pag-acerca-nosotros.html">Conocenos</a>  
-                        <a href="#ubicacion-horarios">Ubicación y horarios</a> 
-                    </div>
-                
-                    <div class="nav-menu-despegable-contacto">
-                        <p>Delivery</p>
-                        <p>Numero de celular</p>
-                    </div>
-                </div>
-                
-                <div class="nav-top-login">
+                <div class="main-top-right">
                     <a href="pag-inicio-sesion.html">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FBD357" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -53,7 +41,7 @@
                             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
                         </svg>
                     </a>
-                    <p>Inicia sesión o crea tu cuenta</p>
+                    <!-- <p>Inicia sesión o crea tu cuenta</p> -->
                 </div>
             </div>
             
@@ -70,24 +58,88 @@
             </button>
         </div>
 
+        <!-- Agregar un menu de categorias con una barrita horizontal
+        <div class="categorias">
+            <div class="categorias-in">
+                <div class="categoria-item">
+                    <p> Nombre categoria </p>
+                </div>
+                <div class="categoria-item">
+                    <p> Nombre categoria </p>
+                </div>
+                <div class="categoria-item">
+                    <p> Nombre categoria </p>
+                </div>
+            </div>
+        </div> -->
+
         <div class="nav-main-bg">
-            <div class="nav-main">
+            <!-- <div class="nav-main">
                 <a href="productos-promocion.html">Promociones</a>
                 <a href="combos-personales.html">Combos personales</a>
                 <a href="combos-duo+.html">Combos duo+</a>
-            </div>
-            
+            </div> -->
+            <h1>Evita nuestra cola al comprar al paso tu hamburguesa. COMPRA ACÁ</h2>
         </div>
 
     </header>
 
-    <section id="seccion-presentacion">
+    <!-- <section id="seccion-presentacion">
         <div class="seccion-presentacion-content">
             <h2>Las Musas BurgerPoint</h2>
             <p>Más que una hamburguesa</p>
         </div>
-    </section>
-
+    </section> -->
+    <div class="menu">
+        <div class="shadow-close"></div>
+        <div class="menu-content">
+            <div class="menu-close">
+                <span></span>
+            </div>
+            <div class="menu-head">
+                <a href="" class="menu-head-logo">
+                    <div>
+                        <img src="" alt="">
+                    </div>Holaa
+                </a>
+                <div class="menu-head-elements-right">
+                    <button class="cuenta">
+                        Logo de la cuenta
+                    </button>
+                </div>
+            </div>
+            <div class="menu-body">
+                <div class="menu-body-list">
+                    <ul>
+                        <li class="list-item">
+                            <a href="">
+                                <span class="item-icon"></span>
+                                <span>Nombre item</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="">
+                                <span class="item-icon"></span>
+                                <span>Nombre item</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="">
+                                <span class="item-icon"></span>
+                                <span>Nombre item</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a href="">
+                                <span class="item-icon"></span>
+                                <span>Nombre item</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <main id="main">
         <section>
             <br>
@@ -335,6 +387,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    <script src="src/app.js" type="module"></script>
 </body>
 </html>
