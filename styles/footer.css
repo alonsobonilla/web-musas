@@ -1,0 +1,152 @@
+/* Footer */
+#footer {
+    background-color: var(--color1);
+}
+.footer-top {
+    padding: 20px;
+}
+.footer-top h4 {
+    color: #fff;
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color2);
+    width: 90%;
+    margin: 20px auto 0 auto;
+}
+.formas-pago-img {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.formas-pago-img img {
+    width: 40px;
+    height: 100%;
+}
+.formas-pago-libro-r img {
+    width: 100px;
+}
+.formas-pago h4 {
+    border-bottom: 0;
+    width: 100%;
+}
+.atencion-cliente {
+    position: relative;
+}
+.atencion-cliente h4::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    background: url(../img/caret-right-solid.svg) no-repeat;
+    background-size: 100%;
+    transform: rotate(0deg);
+    transition: all .2s;
+}
+.atencion-cliente.active h4::after {
+    transform: rotate(90deg);
+}
+.footer-links {
+    display: none;  
+}
+.footer-links li {
+    margin-top: 10px;
+}
+.footer-links a {
+    font-size: 14px;
+}
+.atencion-cliente.active h4 ~ .footer-links {
+    display: block;
+    border-bottom: 1px solid var(--color2);
+    padding-bottom: 20px;
+}
+.atencion-cliente .footer-links li{
+    text-align: center;
+}
+.formas-pago {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.footer-bottom {
+    border-top: 1px solid var(--color2);
+    color: #fff;
+    padding: 5px 10px;
+    align-items: center;
+    flex-direction: column;
+}
+.logo-conocenos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo-conocenos > a:last-child {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    #footer {
+        padding: 10px 5px;
+    }
+    .footer-top {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+    .footer-top h4 {
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
+    .footer-links {
+        display: block;  
+        margin: 0;
+        text-align: end;
+    }
+    .atencion-cliente {
+        flex: 0 0 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .atencion-cliente h4::after {
+        background: none;
+    }
+    .atencion-cliente h4 {
+        text-transform: uppercase;
+        font-weight: 400;
+        text-align: center;
+    }
+    .atencion-cliente .footer-links li {
+        text-align: start;
+    }
+    .atencion-cliente a {
+        font-size: 16px;
+    }
+    .formas-pago {
+        flex: 0 0 30%;
+        margin: 0;
+        gap: 10px;
+    }
+    .formas-pago-content h4 {
+        margin-bottom: 10px;
+    }
+    .logo-conocenos {
+        flex: 1;
+    }
+    .logo-conocenos h4 {
+        margin-top: 10px;
+    }
+    .logo-conocenos > a:last-child {
+        width: auto;
+    }
+    .contenedor-footer {
+        width: 90%;
+        margin: auto;
+    }
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}

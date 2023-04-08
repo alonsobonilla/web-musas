@@ -1,0 +1,145 @@
+#header {
+    background-color: var(--color1); 
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    top: 0;
+    box-shadow: 0 5px 6px -3px rgb(0 0 0 / 20%);
+}
+.contenedor-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px;
+    margin: auto;
+    
+}
+.nav-top-login p{
+    display: none;
+}
+.nav-main-bg {
+    background-color: var(--color2);
+}
+.nav-main {
+    margin-top: 15px;
+    padding: 5px 10px;
+    width: 90%;
+    margin: auto;
+}
+.nav-main a{
+    color: var(--color1);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.main-top-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Menu */
+
+.menu {
+    position: fixed;
+    right: -101%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    display: flex;
+    transition: all .4s;
+    justify-content: flex-end;
+    
+}
+.menu-active {
+    right: 0;
+}
+/* Menu Content */
+.menu-content {
+    position: relative;
+    width: calc(100% - 65px);
+    height: 100%;
+    background-color: var(--color1);
+}
+.menu-close {
+    display: block;
+    background-color: var(--color1);
+    height: 77px;
+    width: 65px;
+    position: absolute;
+    right: 100%;
+    border-bottom: 3px solid var(--color2);
+}
+.menu-head {
+    height: 77px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--color2);
+}
+.menu-head-elements-right {
+    display: flex;
+    align-items: center;
+}
+.menu-body-list {
+    padding-top: 17px;
+    padding-bottom: 19px;
+}
+.menu-body-list>ul {
+    padding: 0;
+    list-style: none;
+}
+.list-item {
+    padding: 5px 0 5px 14px;
+}
+.menu-close span:after, .menu-close span:before {
+    position: absolute;
+    left: 32px;
+    content: " ";
+    height: 38px;
+    width: 2px;
+    top: 16px;
+    background-color: var(--color2);
+}
+.menu-close span:before {
+    transform: rotate(45deg);
+}
+.menu-close span::after {
+    transform: rotate(-45deg);
+}
+
+.shadow-close {
+    padding: 0;
+    background: rgba(0, 0, 0, .46);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: all .2s;
+    pointer-events: none;
+}
+.shadow-close.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Carrito */
+.icono-carrito {
+    display: none;
+}
+/* Desktop */
+@media (min-width: 600px) {
+    .main-top-left > svg {
+        display: none;
+    }
+    .icono-carrito {
+        display: block;
+    }
+}
