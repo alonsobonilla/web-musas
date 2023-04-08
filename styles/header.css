@@ -1,7 +1,7 @@
-/* Header */
 #header {
     background-color: var(--color1); 
     position: fixed;
+    width: 100%;
     z-index: 5;
     top: 0;
     box-shadow: 0 5px 6px -3px rgb(0 0 0 / 20%);
@@ -53,6 +53,7 @@
     display: flex;
     transition: all .4s;
     justify-content: flex-end;
+    
 }
 .menu-active {
     right: 0;
@@ -62,15 +63,16 @@
     position: relative;
     width: calc(100% - 65px);
     height: 100%;
-    background-color: #fff;
+    background-color: var(--color1);
 }
 .menu-close {
     display: block;
-    height: 78px;
+    background-color: var(--color1);
+    height: 77px;
     width: 65px;
-    background-color: #fff;
     position: absolute;
     right: 100%;
+    border-bottom: 3px solid var(--color2);
 }
 .menu-head {
     height: 77px;
@@ -78,6 +80,7 @@
     align-items: center;
     padding: 0 14px;
     justify-content: space-between;
+    border-bottom: 3px solid var(--color2);
 }
 .menu-head-elements-right {
     display: flex;
@@ -94,7 +97,21 @@
 .list-item {
     padding: 5px 0 5px 14px;
 }
-
+.menu-close span:after, .menu-close span:before {
+    position: absolute;
+    left: 32px;
+    content: " ";
+    height: 38px;
+    width: 2px;
+    top: 16px;
+    background-color: var(--color2);
+}
+.menu-close span:before {
+    transform: rotate(45deg);
+}
+.menu-close span::after {
+    transform: rotate(-45deg);
+}
 
 .shadow-close {
     padding: 0;
