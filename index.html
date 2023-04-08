@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="styles/global.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/button-carrito.css" />
+    <link rel="stylesheet" href="styles/categorias.css">
     <title>Musas</title>
   </head>
   <body>
@@ -89,21 +91,6 @@
             </button>
         </div>
       </div>
-      <!-- Agregar un menu de categorias con una barrita horizontal
-        <div class="categorias">
-            <div class="categorias-in">
-                <div class="categoria-item">
-                    <p> Nombre categoria </p>
-                </div>
-                <div class="categoria-item">
-                    <p> Nombre categoria </p>
-                </div>
-                <div class="categoria-item">
-                    <p> Nombre categoria </p>
-                </div>
-            </div>
-        </div> -->
-
       <div class="nav-main-bg">
         <!-- <div class="nav-main">
                 <a href="productos-promocion.html">Promociones</a>
@@ -115,7 +102,32 @@
         </h2>
       </div>
     </header>
-
+  <!-- Menu de categorias -->
+    <div class="categorias-content">
+      <div class="categorias">
+        <div class="categorias-in">
+            <div class="categoria-item">
+                <div>
+                  <img src="#" alt="Categoria">
+                </div>
+                <p> Nombre categoria </p>
+            </div>
+            <div class="categoria-item">
+                <div>
+                  <img src="#" alt="Categoria">
+                </div>  
+              
+                <p> Nombre categoria </p>
+            </div>
+            <div class="categoria-item">
+                <div>
+                  <img src="#" alt="Categoria">
+                </div>  
+                <p> Nombre categoria </p>
+            </div>
+        </div>
+      </div>
+  </div>
     <!-- <section id="seccion-presentacion">
         <div class="seccion-presentacion-content">
             <h2>Las Musas BurgerPoint</h2>
@@ -129,14 +141,35 @@
           <span></span>
         </div>
         <div class="menu-head">
-          <a href="" class="menu-head-logo">
+          <a href="index.html" class="menu-head-logo">
             <div>
-              <img src="" alt="" />
+                <img src="img/logo.jpg" alt="Logo" />
             </div>
-            Holaa
           </a>
           <div class="menu-head-elements-right">
-            <button class="cuenta">Logo de la cuenta</button>
+            <button class="cuenta">
+                <a href="pag-inicio-sesion.html">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-user-circle"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#FBD357"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="10" r="3" />
+                    <path
+                        d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
+                    />
+                    </svg>
+                </a>
+            </button>
           </div>
         </div>
         <div class="menu-body">
@@ -543,5 +576,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="src/app.js" type="module"></script>
+    <script src="src/js/categorias.js"></script>
   </body>
 </html>
