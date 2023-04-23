@@ -6,7 +6,11 @@
     background-position: center;
     position: relative;
 }
-
+@media(min-width: 600px) {
+    .seccion-presentacion {
+        height: 400px;
+    }
+}
 .seccion-presentacion-content {
     position: absolute;
     width: 100%;
