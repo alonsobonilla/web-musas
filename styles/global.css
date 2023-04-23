@@ -1,3 +1,12 @@
+:root {
+    --color1: #DB4200;
+    --color1-hover: #fd4e04;
+    --color2: #FBD357;
+    --color3: #3D80CC;
+    --blanco: #fff;
+    --negro: #000;
+    --fuente: 'Montserrat', sans-serif;
+}
 html {
     box-sizing: border-box;
     height: 100vh;
@@ -8,7 +17,7 @@ html {
 body {
     font-family: var(--fuente);
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
 }
 h1,h2,h3,h4 {
     text-align: center;
@@ -54,7 +63,7 @@ ul {
 }
 button{
     border: 0;
-    background-color: var(--color1);
+    background-color: var(--color2);
     padding: 0;
 }
 iframe {
