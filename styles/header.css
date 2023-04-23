@@ -1,9 +1,10 @@
-#header {
-    background-color: var(--color1); 
-    position: fixed;
-    width: 100%;
-    z-index: 5;
+.header {
+    background-color: var(--color2); 
+    position: fixed; 
     top: 0;
+    z-index: 5;
+    width: 100%;
+    margin-bottom: 100px;
     box-shadow: 0 5px 6px -3px rgb(0 0 0 / 20%);
 }
 .contenedor-nav {
@@ -13,28 +14,6 @@
     width: 100%;
     padding: 8px;
     margin: auto;
-    
-}
-.nav-top-login p{
-    display: none;
-}
-.nav-main-bg {
-    background-color: var(--color2);
-}
-.nav-main {
-    margin-top: 15px;
-    padding: 5px 10px;
-    width: 90%;
-    margin: auto;
-}
-.nav-main a{
-    color: var(--color1);
-    text-transform: uppercase;
-    font-weight: 700;
-    display: block;
-    text-align: center;
-    margin-bottom: 5px;
-    font-size: 14px;
 }
 .main-top-right {
     display: flex;
