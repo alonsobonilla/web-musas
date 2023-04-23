@@ -1,0 +1,143 @@
+.main-content {
+    margin-top: 25px;
+    padding: 20px;
+}
+.main-content-producto {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.imagen-producto img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+.informacion-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.informacion-producto-precio span,
+.informacion-producto-precio{
+    font-size: 20px;
+}
+@media(min-width: 700px) {
+    .main-content {
+        width: 60%;
+        margin: 20px auto;
+
+    }
+}
+
+.main-content-personalizar {
+    margin-top: 20px
+}
+.main-content-personalizar h3 {
+    text-align: start;
+    padding: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+.tab-agregar.activo,
+.tab-quitar.activo {
+    border-bottom: 2px solid var(--color1);
+}
+
+.tab-agregar-quitar {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+.tab-agregar-quitar div {
+    cursor: pointer;
+}
+
+.tab-content-quitar,
+.tab-content-agregar {
+    display: none;
+}
+
+.show {
+    display: flex;
+    justify-content: space-around;
+}
+
+.personalizar-salsas {
+    margin-top: 10px;
+}
+.personalizar-salsas h4{
+    text-align: start;
+}
+
+.content-salsas {
+    display: flex;
+    justify-content: space-around;
+}
+
+.custom-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.manejador-item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+}
+.manejador-item button{
+    padding: 0 7px;
+    border-radius: 50%;
+    height: 100%;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-carrito {
+    padding: 0;
+}
+.button-carrito-contenedor{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    padding: 20px 0;
+}
+
+.button-carrito-cantidad {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+.button-agregar-carrito {
+    width: 100%;
+    justify-content: center;
+}
+.button-carrito-cantidad button {
+    border-radius: 50%;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+}
+
+@media(min-width: 600px) {
+    .button-carrito {
+        display: block;
+    }
+    .button-carrito-contenedor {
+        width: 60%;
+        margin: auto;
+    }
+}
+@media(min-width: 900px) {
+    .button-carrito-contenedor {
+        width: 40%;
+        margin: auto;
+    }
+}
