@@ -4,7 +4,6 @@ const shadow = document.querySelector('.shadow-close')
 document.addEventListener('DOMContentLoaded', () => {
     showMenu()
     closeMenu()
-    positionFixedHeader()
 })
 
 function showMenu() {
