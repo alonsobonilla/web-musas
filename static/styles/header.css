@@ -115,8 +115,8 @@
 }
 /* Desktop */
 @media (min-width: 600px) {
-    .main-top-left > svg {
-        display: none;
+    .main-top-left {
+        display: none !important;
     }
     .icono-carrito {
         display: block;

@@ -1,0 +1,112 @@
+{% extends "client/main.html" %}
+{% block contenido %}
+<section class="seccion-presentacion">
+    <div class="seccion-presentacion-content">
+        <div class="presentacion-logo">
+          <img src="{{url_for('static', filename = 'img/logo.jpg')}}" alt="Logo Musas">
+        </div>
+        <div class="presentacion-texto">
+          <h2>Las Musas</h2>
+          <p>6:00 p.m - 10:00 p.m</p>
+        </div>
+    </div>
+</section>
+<!-- Menú de categorias -->
+<div class="categorias-content">
+  <div class="categorias">
+    <div class="categorias-in">
+      <div class="categoria-item">
+        <div>
+          <img src="#" alt="Categoria" />
+        </div>
+        <p>Nombre categoria</p>
+      </div>
+      <div class="categoria-item">
+        <div>
+          <img src="#" alt="Categoria" />
+        </div>
+
+        <p>Nombre categoria</p>
+      </div>
+      <div class="categoria-item">
+        <div>
+          <img src="#" alt="Categoria" />
+        </div>
+        <p>Nombre categoria</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="productos">
+
+  <div>
+    <div class="cabecera">
+      <h2>Tipo de producto</h2>
+      <a href="{{url_for('cliente.verMas', tipo=simples)}}">
+        <button class="ver-mas">Ver más</button>
+      </a>
+    </div>
+    <div class="show-producto">
+      <!-- {% for producto in simples %} -->
+        <div class="img-producto">
+          <!-- <h4>{{producto[0]}}</h4> -->
+          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
+          <!-- <p>{{producto[2]}}</p> -->
+        </div>
+      <!-- {% endfor %} -->
+    </div>
+  </div>
+  <div>
+    <div class="cabecera">
+      <h2>Tipo de producto</h2>
+      <a href="{{url_for('cliente.verMas', tipo=mixtas)}}">
+        <button class="ver-mas">Ver más</button>
+      </a>
+    </div>
+    <div class="show-producto">
+      <!-- {% for producto in mixtas %} -->
+        <div class="img-producto">
+          <!-- <h4>{{producto[0]}}</h4> -->
+          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
+          <!-- <p>{{producto[2]}}</p> -->
+        </div>
+      <!-- {% endfor %} -->
+    </div>
+  </div>
+  <div>
+    <div class="cabecera">
+      <h2>Tipo de producto</h2>
+      <a href="{{url_for('cliente.verMas', tipo=alopobre)}}">
+        <button class="ver-mas">Ver más</button>
+      </a>
+    </div>
+    <div class="show-producto">
+      <!-- {% for producto in alopobres %} -->
+        <div class="img-producto">
+          <!-- <h4>{{producto[0]}}</h4> -->
+          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
+          <!-- <p>{{producto[2]}}</p> -->
+        </div>
+      <!-- {% endfor %} -->
+    </div>
+  </div>
+  <div>
+    <div class="cabecera">
+      <h2>Tipo de producto</h2>
+      <a href="{{url_for('cliente.verMas', tipo=especiales)}}">
+        <button class="ver-mas">Ver más</button>
+      </a>
+    </div>
+    <div class="show-producto">
+      <!-- {% for producto in especiales %} -->
+        <div class="img-producto">
+          <!-- <h4>{{producto[0]}}</h4> -->
+          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
+          <!-- <p>{{producto[2]}}</p> -->
+        </div>
+      <!-- {% endfor %} -->
+    </div>
+  </div>
+</main>
+{% endblock %}

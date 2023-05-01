@@ -1,0 +1,13 @@
+html {
+    min-height: 100vh;
+}
+body {
+    padding-top: 0;
+}
+
+.header {
+    position:relative;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+

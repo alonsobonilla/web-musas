@@ -1,0 +1,14 @@
+.productos div {
+    padding: 20px;
+}
+.productos .cabecera {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cabecera a {
+    font-size: 15px;
+}
+.ver-mas {
+    background-color: #fff;
+}
