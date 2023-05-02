@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash, jsonify
 from model.Producto import Producto
 
-admin = Blueprint('admin', __name__)
+admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin.route("/")
 def home():
