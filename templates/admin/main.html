@@ -62,6 +62,14 @@
             <img src="{{url_for('static', filename = 'img/logo.jpg')}}" alt="Logo" />
           </a>
         </div>
+        {% if usuario : %}
+        <div>
+          <p>{{usuario}}</p>
+          <a href="{{url_for('admin.auth.logout')}}">
+            <button>Cerrar sesión</button>
+          </a>
+        </div>
+        {% endif %}
       </div>
     </header>
     <!-- Menú deslizante para movil -->
