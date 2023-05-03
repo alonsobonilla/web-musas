@@ -2,16 +2,36 @@ from bd import obtener_conexion
 from werkzeug.security import check_password_hash, generate_password_hash
 
 class Autenticacion:
+
+    diccionario_tipo = {
+        "cliente.auth": {
+            "tabla": "usuario",
+            "columna": "dni"
+        },
+        "admin.auth": {
+            "tabla": "usuario_admin",
+            "columna": "usuario"
+        }
+    }
+
     @staticmethod
-    def login(usuario, contraseña):
+    def login(usuario, contraseña, tipo_blueprint):
         conexion = obtener_conexion()
         error = None
+        cursor = conexion.cursor()
 
-        user = "SELECT * FROM usuario WHERE username = ?", (usuario).fetchone()
+        tipo = Autenticacion.diccionario_tipo[tipo_blueprint]
+        tabla = tipo["tabla"]
+        columna = tipo["columna"]
+        
+        query = f"SELECT * FROM {tabla} WHERE {columna} = %s"
+        cursor.execute(query, (usuario))
+        user = cursor.fetchall()[0]
+        cursor.close()
 
         if user is None :
             error = "Usuario incorrecto"
-        elif not check_password_hash(user["contraseña"], contraseña):
+        elif ( tabla == "usuario" and not check_password_hash(user[2], contraseña) ) or user[2] != contraseña:
             error = "Contraseña incorrecta"
         else:
             error = user
@@ -27,11 +47,26 @@ class Autenticacion:
             error = "Campos obligatorios"
         else:
             try:
-                query = "INSERT INTO usuario (*) values (?, ?)"
-                conexion.execute(query, (dni, nombres, apellidos,correo, fechaNacimiento, generate_password_hash(contraseña)))
+                query = "INSERT INTO usuario (*) values (%s, %s, %s, %s, %s, %s)"
+                cursor = conexion.cursor()
+                cursor.execute(query, (dni, nombres, apellidos,correo, fechaNacimiento, generate_password_hash(contraseña)))
                 conexion.commit()
             except conexion.IntegrityError:
-                error = f"Dni: {dni} ya registrado"
+                error = f"Dni: {dni} ya registrado"            
         return error
 
+    @staticmethod
+    def sesionRegistrada(blueprint_name, id_sesion):
 
+        conexion = obtener_conexion()
+
+        tabla = Autenticacion.diccionario_tipo[blueprint_name]["tabla"]
+        columna = Autenticacion.diccionario_tipo[blueprint_name]["columna"]
+
+        query = f"SELECT * FROM {tabla} WHERE {columna} = %s"
+        cursor = conexion.cursor()
+        cursor.execute(query, (id_sesion))
+        user = cursor.fetchall()
+        cursor.close()
+
+        return user[0]
