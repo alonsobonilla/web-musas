@@ -5,9 +5,14 @@ from controllers.autenticacion import *
 
 app = Flask(__name__)
 
-app.register_blueprint(cliente)
+admin.register_blueprint(auth)
+cliente.register_blueprint(auth)
+
 app.register_blueprint(admin)
-app.register_blueprint(auth)
+app.register_blueprint(cliente)
+
+
+app.secret_key = "mysecretkey"
 
 # Iniciar el servidor
 
