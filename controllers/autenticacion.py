@@ -6,7 +6,7 @@ from flask import (
     Blueprint, 
     session, 
     url_for, 
-    flash, g, 
+    flash,
     current_app
 )
 from model.Autenticacion import Autenticacion
@@ -31,21 +31,15 @@ def login():
                 session[blueprint_name] = user[0]
                 return redirect(url_for("cliente.home"))
             elif blueprint_name == "admin.auth":
-                session[blueprint_name] = user[1]
+                session[blueprint_name] = user[0][1]
                 return redirect(url_for("admin.home"))
         else:
             flash(user)
     
     if blueprint_name == "cliente.auth":
-        if g.cliente == None:
-            return render_template("client/login.html")
-        else:
-            return render_template("client/index.html", cliente = g.cliente[0])
+        return render_template("client/index.html", cliente = g.cliente[0])
     elif blueprint_name == "admin.auth":
-        if g.admin == None:
-            return render_template("admin/login.html")
-        else:
-            return redirect(url_for("admin.home"))
+        return redirect(url_for("admin.home"))
         
     
 
@@ -84,20 +78,4 @@ def logout():
         return redirect(url_for("cliente.home"))
     else:
         return redirect(url_for("admin.home"))
-    
-
-@auth.before_app_request
-def load_logged_in_user():
-    blueprint_name = request.blueprint
-    user_id = session.get(blueprint_name)
-
-    if blueprint_name == "cliente.auth":
-        if user_id is None:
-            g.cliente = None
-        else:
-            g.cliente = Autenticacion.sesionRegistrada(blueprint_name, user_id)   
-    else:
-        if user_id is None:
-            g.admin = None
-        else:
-            g.admin = Autenticacion.sesionRegistrada(blueprint_name, user_id)       
+          
