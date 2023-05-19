@@ -9,7 +9,7 @@ class Autenticacion:
             "columna": "dni"
         },
         "admin.auth": {
-            "tabla": "usuario_admin",
+            "tabla": "usuarioAdmin",
             "columna": "usuario"
         }
     }
@@ -26,12 +26,12 @@ class Autenticacion:
         
         query = f"SELECT * FROM {tabla} WHERE {columna} = %s"
         cursor.execute(query, (usuario))
-        user = cursor.fetchall()[0]
+        user = cursor.fetchall()
         cursor.close()
 
-        if user is None :
+        if user is None or user.__len__() == 0:
             error = "Usuario incorrecto"
-        elif ( tabla == "usuario" and not check_password_hash(user[2], contraseña) ) or user[2] != contraseña:
+        elif ( tabla == "usuario" and not check_password_hash(user[0][2], contraseña) ) or user[0][2] != contraseña:
             error = "Contraseña incorrecta"
         else:
             error = user
