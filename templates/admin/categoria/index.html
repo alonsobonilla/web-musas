@@ -1,0 +1,55 @@
+{% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
+block contenido %}
+
+<section class="section">
+  <div class="columns">
+    <div class="column">
+      <h3 class="is-size-3">Categoria</h3>
+      <a href="{{url_for('admin.categoria.agregar')}}" class="btn btn-success"
+        >Agregar</a
+      >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id Categoria</th>
+            <th>Nombre Categoria</th>
+            <th>Descripcion</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for categoria in categorias %}
+          <tr>
+            <td>{{categoria[0]}}</td>
+            <td>{{categoria[1]}}</td>
+            <td>{{categoria[2]}}</td>
+            <td>
+              {# Pasar el id (lo que hay en categoria[0] )#}
+              <a
+                href="{{url_for('admin.categoria.editar', id=categoria[0])}}"
+                class="btn btn-info"
+                >Editar</a
+              >
+            </td>
+            <td>
+              <form
+                action="{{url_for('admin.categoria.eliminar')}}"
+                method="POST"
+              >
+                <input
+                  type="hidden"
+                  name="idCategoria"
+                  value="{{categoria[0]}}"
+                />
+                <button class="btn btn-danger">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
