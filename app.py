@@ -2,8 +2,12 @@ from flask import Flask, render_template
 from controllers.admin import *
 from controllers.cliente import *
 from controllers.autenticacion import *
-
+from controllers.admin_productos import *
+from controllers.admin_categoria_producto import *
 app = Flask(__name__)
+
+admin.register_blueprint(productos)
+admin.register_blueprint(categoria_producto)
 
 admin.register_blueprint(auth)
 cliente.register_blueprint(auth)
