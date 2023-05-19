@@ -1,5 +1,5 @@
 import pymysql, configparser
-from config import*
+from cfg import*
 
 def obtener_conexion():
     if port == '' :
