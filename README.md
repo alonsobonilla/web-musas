@@ -51,7 +51,7 @@ pip install pymysql
 <p>Cryptograph:</p>
 
 ```bash
-pip install cryptograph
+pip install cryptography
 ```
 
 4. Creamos un archivo de configuracion (cfg.py) para la conexión a la base de datos, agregando las siguientes variables:
