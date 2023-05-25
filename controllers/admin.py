@@ -10,4 +10,4 @@ def home():
         return render_template("admin/login.html")
     else:
         productos = Producto.obtener_productos()
-        return render_template("admin/productos/index.html", productos=productos, usuario = user_id)
+        return render_template("admin/main.html", productos=productos, usuario = user_id)
