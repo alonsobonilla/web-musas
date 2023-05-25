@@ -5,15 +5,6 @@
     <div class="column is-one-third">
       <h3 class="is-size-3">Agregar categoria</h3>
       <form action="{{url_for('admin.categoria.guardar')}}" method="post">
-        <label for="idCategoria">Id Categoria:</label>
-        <input
-          required
-          type="text"
-          class="input"
-          placeholder="idCategoria"
-          name="idCategoria"
-          id="idCategoria"
-        />
         <label for="nombreCategoria">nombreCategoria:</label>
         <input
           required
@@ -32,10 +23,10 @@
           name="descripcion"
           id="descripcion"
         />
-        <button type="submit" class="button is-success mt-2">Guardar</button>
+        <button type="submit" class="btn btn-success mt-2">Guardar</button>
         <a
           href="{{url_for('admin.categoria.home')}}"
-          class="button is-primary mt-2"
+          class="btn btn-primary mt-2"
           >Volver</a
         >
       </form>
