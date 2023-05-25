@@ -5,7 +5,7 @@ class CategoriaProducto:
     def insertar_categoria(nombreCategoria, descripcion):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO categoria(nombreCategoria, descripcion) VALUES (%s, %s)",
+            cursor.execute("INSERT INTO categoriaProducto(nombreCategoria, descripción) VALUES (%s, %s)",
             (nombreCategoria, descripcion))
         conexion.commit()
         conexion.close()
