@@ -1,15 +1,17 @@
-{% extends "client/main.html" %}
-{% block contenido %}
+{% extends "client/main.html" %} {% block contenido %}
 <section class="seccion-presentacion">
-    <div class="seccion-presentacion-content">
-        <div class="presentacion-logo">
-          <img src="{{url_for('static', filename = 'img/logo.jpg')}}" alt="Logo Musas">
-        </div>
-        <div class="presentacion-texto">
-          <h2>Las Musas</h2>
-          <p>6:00 p.m - 10:00 p.m</p>
-        </div>
+  <div class="seccion-presentacion-content">
+    <div class="presentacion-logo">
+      <img
+        src="{{url_for('static', filename = 'img/logo.jpg')}}"
+        alt="Logo Musas"
+      />
     </div>
+    <div class="presentacion-texto">
+      <h2>Las Musas</h2>
+      <p>6:00 p.m - 10:00 p.m</p>
+    </div>
+  </div>
 </section>
 <!-- Menú de categorias -->
 <div class="categorias-content">
@@ -39,72 +41,83 @@
 </div>
 
 <main class="productos">
-
   <div>
     <div class="cabecera">
       <h2>Tipo de producto</h2>
-      <a href="{{url_for('cliente.verMas', tipo=simples)}}">
+      <a href="">
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
     <div class="show-producto">
       <!-- {% for producto in simples %} -->
-        <div class="img-producto">
-          <!-- <h4>{{producto[0]}}</h4> -->
-          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
-          <!-- <p>{{producto[2]}}</p> -->
-        </div>
+      <div class="img-producto">
+        <!-- <h4>{{producto[0]}}</h4> -->
+        <img
+          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
+          alt=""
+        />
+        <!-- <p>{{producto[2]}}</p> -->
+      </div>
       <!-- {% endfor %} -->
     </div>
   </div>
   <div>
     <div class="cabecera">
       <h2>Tipo de producto</h2>
-      <a href="{{url_for('cliente.verMas', tipo=mixtas)}}">
+      <a href="">
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
     <div class="show-producto">
       <!-- {% for producto in mixtas %} -->
-        <div class="img-producto">
-          <!-- <h4>{{producto[0]}}</h4> -->
-          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
-          <!-- <p>{{producto[2]}}</p> -->
-        </div>
+      <div class="img-producto">
+        <!-- <h4>{{producto[0]}}</h4> -->
+        <img
+          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
+          alt=""
+        />
+        <!-- <p>{{producto[2]}}</p> -->
+      </div>
       <!-- {% endfor %} -->
     </div>
   </div>
   <div>
     <div class="cabecera">
       <h2>Tipo de producto</h2>
-      <a href="{{url_for('cliente.verMas', tipo=alopobre)}}">
+      <a href="">
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
     <div class="show-producto">
       <!-- {% for producto in alopobres %} -->
-        <div class="img-producto">
-          <!-- <h4>{{producto[0]}}</h4> -->
-          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
-          <!-- <p>{{producto[2]}}</p> -->
-        </div>
+      <div class="img-producto">
+        <!-- <h4>{{producto[0]}}</h4> -->
+        <img
+          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
+          alt=""
+        />
+        <!-- <p>{{producto[2]}}</p> -->
+      </div>
       <!-- {% endfor %} -->
     </div>
   </div>
   <div>
     <div class="cabecera">
       <h2>Tipo de producto</h2>
-      <a href="{{url_for('cliente.verMas', tipo=especiales)}}">
+      <a href="">
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
     <div class="show-producto">
       <!-- {% for producto in especiales %} -->
-        <div class="img-producto">
-          <!-- <h4>{{producto[0]}}</h4> -->
-          <img src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}" alt="">
-          <!-- <p>{{producto[2]}}</p> -->
-        </div>
+      <div class="img-producto">
+        <!-- <h4>{{producto[0]}}</h4> -->
+        <img
+          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
+          alt=""
+        />
+        <!-- <p>{{producto[2]}}</p> -->
+      </div>
       <!-- {% endfor %} -->
     </div>
   </div>
