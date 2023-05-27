@@ -1,20 +1,18 @@
 {% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
 block contenido %}
 
-<section class="section mt-3">
+<section class="section m-3">
   <div class="columns">
     <div class="column">
-      <h3 class="is-size-3">Usuarios</h3>
-      <a
-        href="{{url_for('admin.usuarios.form_agregar')}}"
-        class="btn btn-success"
-        >Agregar</a
-      >
+      <h3 class="m-3 fs-5 fw-bold">Usuarios</h3>
+
       <table class="table">
         <thead>
           <tr>
             <th>Usuario</th>
             <th>Contraseña</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +41,13 @@ block contenido %}
           {% endfor %}
         </tbody>
       </table>
+      <div class="text-end">
+        <a
+          href="{{url_for('admin.usuarios.form_agregar')}}"
+          class="btn btn-success"
+          >Agregar</a
+        >
+      </div>
     </div>
   </div>
 </section>

@@ -1,41 +1,52 @@
 {% extends "admin/main.html" %} {% block titulo %} Editar categoria {% endblock
 %} {% block contenido %}
-<section class="section">
-  <div class="columns">
-    <div class="column">
-      <h3 class="is-size-3">Editar Categoria</h3>
-      <form action="{{url_for('admin.categoria.actualizar')}}" method="post">
-        {# Enviar el id en un campo oculto #}
-        <input type="hidden" name="id" value="{{userUsuario[0]}}" />
-        <label for="usuario">Usuario:</label>
-        <input
-          value="{{userUsuario[1]}}"
-          required
-          type="text"
-          class="input"
-          placeholder="usuario"
-          name="usuario"
-          id="usuario"
-        />
-        <label for="n-contraseña">Nueva Contraseña:</label>
-        <input
-          required
-          type="text"
-          class="input"
-          placeholder="**********"
-          name="contraseña"
-          id="n-contraseña"
-        />
-        <label for="c-contraseña">Confirmar contraseña</label>
-        <input required type="text" class="input" placeholder="*********" />
-        <button type="submit" class="btn btn-success mt-2">Guardar</button>
-        <a
-          href="{{url_for('admin.categoria.home')}}"
-          class="btn btn-primary mt-2"
-          >Volver</a
-        >
-      </form>
+<section class="w-50 m-auto">
+  <h3 class="m-3 fs-5 fw-bold">Editar Usuario</h3>
+  <form
+    action="{{url_for('admin.categoria.actualizar')}}"
+    method="post"
+    class="d-flex flex-column justify-content-center"
+  >
+    {# Enviar el id en un campo oculto #}
+    <input type="hidden" name="id" value="{{userUsuario[0]}}" />
+    <div class="mb-3">
+      <label for="usuario" class="form-label">Usuario:</label>
+      <input
+        value="{{userUsuario[1]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="usuario"
+        name="usuario"
+        id="usuario"
+      />
     </div>
-  </div>
+    <div class="mb3">
+      <label for="n-contraseña" class="form-label">Nueva Contraseña:</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        placeholder="**********"
+        name="contraseña"
+        id="n-contraseña"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="c-contraseña" class="form-label">Confirmar contraseña</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        placeholder="*********"
+      />
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+      <button type="submit" class="btn btn-success mt-2">Guardar</button>
+      <a href="{{url_for('admin.categoria.home')}}" class="btn btn-primary mt-2"
+        >Volver</a
+      >
+    </div>
+  </form>
 </section>
 {% endblock %}

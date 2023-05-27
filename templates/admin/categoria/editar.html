@@ -1,43 +1,44 @@
 {% extends "admin/main.html" %} {% block titulo %} Editar categoria {% endblock
 %} {% block contenido %}
-<section class="section m-3">
-  <div class="columns">
-    <div class="column">
-      <h3 class="is-size-3 m-3 fs-5 fw-bold">Editar Categoria</h3>
-      <form action="{{url_for('admin.categoria.actualizar')}}" method="post">
-        {# Enviar el id en un campo oculto #}
-        <div>
-          
-        </div>
-        <input type="hidden" name="idCategoria" value="{{categoria[0]}}" />
-        <label for="nombreCategoria">Nombre Categoria:</label>
-        <input
-          value="{{categoria[1]}}"
-          required
-          type="text"
-          class="input"
-          placeholder="nombreCategoria"
-          name="nombreCategoria"
-          id="nombreCategoria"
-        />
-        <label for="descripcion">Descripcion</label>
-        <input
-          value="{{categoria[2]}}"
-          required
-          type="text"
-          class="input"
-          placeholder="descripcion"
-          name="descripcion"
-          id="descripcion"
-        />
-        <button type="submit" class="button is-success mt-2">Guardar</button>
-        <a
-          href="{{url_for('admin.categoria.home')}}"
-          class="button is-primary mt-2"
-          >Volver</a
-        >
-      </form>
+<section class="w-50 m-auto">
+  <h3 class="m-3 fs-5 fw-bold">Editar Categoria</h3>
+  <form
+    action="{{url_for('admin.categoria.actualizar')}}"
+    method="post"
+    class="d-flex flex-column justify-content-center"
+  >
+    {# Enviar el id en un campo oculto #}
+    <input type="hidden" name="idCategoria" value="{{categoria[0]}}" />
+    <div class="mb-3">
+      <label for="nombreCategoria">Nombre Categoria:</label>
+      <input
+        value="{{categoria[1]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="nombreCategoria"
+        name="nombreCategoria"
+        id="nombreCategoria"
+      />
     </div>
-  </div>
+    <div class="mb-3">
+      <label class="form-label" for="descripcion">Descripcion:</label>
+      <input
+        value="{{categoria[2]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="descripcion"
+        name="descripcion"
+        id="descripcion"
+      />
+    </div>
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="submit" class="btn btn-success mt-2">Guardar</button>
+      <a href="{{url_for('admin.categoria.home')}}" class="btn btn-primary mt-2"
+        >Volver</a
+      >
+    </div>
+  </form>
 </section>
 {% endblock %}
