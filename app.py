@@ -4,11 +4,12 @@ from controllers.cliente import *
 from controllers.autenticacion import *
 from controllers.admin_productos import *
 from controllers.admin_categoria_producto import *
+from controllers.admin_usuarios import *
 app = Flask(__name__)
 
 admin.register_blueprint(productos)
 admin.register_blueprint(categoria_producto)
-
+admin.register_blueprint(usuarios)
 admin.register_blueprint(auth)
 cliente.register_blueprint(auth)
 
