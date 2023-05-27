@@ -23,21 +23,22 @@ def guardar():
     descripcion = request.form["descripcion"]
     precio = request.form["precio"]
     existencias = request.form["existencias"]
-    Producto.insertar_producto( nombre, descripcion, precio, existencias)
-    # De cualquier modo, y si todo fue bien, redireccionar
-    return redirect("/")
+    idCategoria = request.form.get("categorias")
+    Producto.insertar_producto( nombre, descripcion, precio, existencias, idCategoria)
+
+    return redirect(url_for("admin.productos.home"))
 
 @productos.route("/eliminar_producto", methods=["POST"])
 def eliminar():
     Producto.eliminar_producto(request.form["id"])
-    return redirect("/")
+    return redirect(url_for("admin.productos.home"))
 
 
 @productos.route("/formulario_editar_producto/<int:id>")
 def editar(id):
-    # Obtener el disco por ID
     producto = Producto.obtener_producto_por_id(id)
-    return render_template("admin/productos/editar_producto.html", producto=producto)
+    categorias = CategoriaProducto.obtener_categorias()
+    return render_template("admin/productos/editar_producto.html", producto=producto, categorias=categorias)
 
 
 @productos.route("/actualizar_producto", methods=["POST"])
@@ -46,9 +47,10 @@ def actualizar():
     nombre = request.form["nombre"]
     descripcion = request.form["descripcion"]
     precio = request.form["precio"]
-    existencias = request.form["existencias"]
-    Producto.actualizar_producto(nombre, descripcion, precio, existencias, id)
-    return redirect("/")
+    existencias = request.form["existencias"] 
+    idCategoria = request.form.get("categorias")
+    Producto.actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria)
+    return redirect(url_for("admin.productos.home"))
 
 
 @productos.before_request

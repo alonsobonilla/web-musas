@@ -8,6 +8,7 @@ block contenido %}
       <table class="table">
         <thead>
           <tr>
+            <th>Categoría</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Precio</th>
@@ -19,16 +20,24 @@ block contenido %}
         <tbody>
           {% for producto in productos %}
           <tr>
-            <td>{{producto[1]}}</td>
+            <td>{{producto[6]}}</td>
             <td>{{producto[2]}}</td>
             <td>{{producto[3]}}</td>
             <td>{{producto[4]}}</td>
+            <td>{{producto[5]}}</td>
             <td>
               {# Pasar el id (lo que hay en producto[0]) #}
-              <a href="{{url_for('admin.productos.editar', id=producto[0])}}" class="btn btn-info">Editar</a>
+              <a
+                href="{{url_for('admin.productos.editar', id=producto[0])}}"
+                class="btn btn-info"
+                >Editar</a
+              >
             </td>
             <td>
-              <form action="{{url_for('admin.productos.eliminar')}}" method="POST">
+              <form
+                action="{{url_for('admin.productos.eliminar')}}"
+                method="POST"
+              >
                 <input type="hidden" name="id" value="{{producto[0]}}" />
                 <button class="btn btn-danger">Eliminar</button>
               </form>
@@ -38,7 +47,11 @@ block contenido %}
         </tbody>
       </table>
       <div class="text-end">
-        <a href="{{url_for('admin.productos.formulario_agregar')}}" class="btn btn-success">Agregar</a>
+        <a
+          href="{{url_for('admin.productos.formulario_agregar')}}"
+          class="btn btn-success"
+          >Agregar</a
+        >
       </div>
     </div>
   </div>

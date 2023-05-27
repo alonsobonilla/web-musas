@@ -13,11 +13,11 @@ class Producto:
         return productos
     
     @staticmethod
-    def insertar_producto( nombre, descripcion, precio, existencias):
+    def insertar_producto( nombre, descripcion, precio, existencias, idCategoria):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO producto( nombre, descripcion, precio, existencias) VALUES (%s, %s, %s, %s)",
-                        ( nombre, descripcion, precio, existencias))
+            cursor.execute("INSERT INTO producto( idCategoria, nombre, descripcion, precio, existencias) VALUES (%s, %s, %s, %s, %s)",
+                        ( idCategoria, nombre, descripcion, precio, existencias))
         conexion.commit()
         conexion.close()
 
@@ -25,8 +25,9 @@ class Producto:
     def obtener_productos():
         conexion = obtener_conexion()
         productos = []
+        query = "SELECT p.*, cp.nombreCategoria  FROM producto p INNER JOIN categoriaProducto cp ON p.idCategoria = cp.idCategoria"
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idProducto, nombre, descripcion, precio, existencias FROM producto")
+            cursor.execute(query)
             productos = cursor.fetchall()
         conexion.close()
         return productos
@@ -45,15 +46,15 @@ class Producto:
         seleccion = None
         with conexion.cursor() as cursor:
             cursor.execute(
-                "SELECT idProducto, nombre, descripcion, precio, existencias FROM producto WHERE idProducto = %s", (id))
+                "SELECT p.idProducto, p.nombre, p.descripcion, p.precio, p.existencias, cp.nombreCategoria FROM producto p INNER JOIN categoriaProducto cp ON p.idCategoria = cp.idCategoria WHERE idProducto = %s", (id))
             seleccion = cursor.fetchone()
         conexion.close()
         return seleccion
 
     @staticmethod
-    def actualizar_producto(nombre, descripcion, precio, existencias, id):
+    def actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, id))
+            cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s, idCategoria = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, idCategoria, id ))
         conexion.commit()
         conexion.close()

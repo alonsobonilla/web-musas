@@ -35,7 +35,7 @@ class CategoriaProducto:
             juego = cursor.fetchone()
         conexion.close()
         return juego
-
+    
     def actualizar_categoria(nombreCategoria, descripcion, id):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:

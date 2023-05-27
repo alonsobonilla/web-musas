@@ -1,38 +1,75 @@
-{% extends "admin/main.html" %}
-{% block titulo %}
-Editar disco
-{% endblock %}
+{% extends "admin/main.html" %} {% block titulo %} Editar disco {% endblock %}
 {% block contenido %}
 <section class="w-50 m-auto">
-    <h3 class="m-3 fs-5 fw-bold">Editar Producto</h3>
-    <form action="{{url_for('admin.productos.actualizar')}}" method="post">
-        {# Enviar el id en un campo oculto #}
-        <input type="hidden" name="id" value="{{producto[0]}}">
-        <div class="mb-3">
-            <label for="codigo">Nombre:</label>
-        <input value="{{producto[1]}}" required type="text" class="form-control" placeholder="Nombre" name="nombre"
-            id="nombre">
-        </div>
-        <div class="mb-3">
-            <label for="artista">Descripción:</label>
-        <input value="{{producto[2]}}" required type="text" class="form-control" placeholder="Descripcion" name="descripcion"
-            id="descripcion">
-        </div>
-        <div class="mb-3">
-            <label for="precio">Precio:</label>
-        <input value="{{producto[3]}}" required type="number" class="form-control" placeholder="Precio" name="precio"
-            id="precio">
-        </div>
-        <div class="mb-3">
-            <label for="genero">Existencias:</label>
-        <input value="{{producto[4]}}" required type="text" class="form-control" placeholder="Existencias" name="existencias"
-            id="existencias">
-        </div>
-        <div class="d-flex gap-2 justify-content-end">
-            <button type="submit" class="btn btn-success mt-2">Guardar</button>
-        <a href="{{url_for('admin.productos.home')}}" class="btn btn-primary mt-2">Volver</a>
-        </div>
-        
-    </form>
+  <h3 class="m-3 fs-5 fw-bold">Editar Producto</h3>
+  <form action="{{url_for('admin.productos.actualizar')}}" method="post">
+    {# Enviar el id en un campo oculto #}
+    <input type="hidden" name="id" value="{{producto[0]}}" />
+    <div class="mb-3">
+      <select class="form-select" name="categorias">
+        {% for categoria in categorias %} {% if categoria[1] == producto[5]: %}
+        <option value="{{categoria[0]}}" selected>{{categoria[1]}}</option>
+        {% else: %}
+        <option value="{{categoria[0]}}">{{categoria[1]}}</option>
+        {% endif %} {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="codigo">Nombre:</label>
+      <input
+        value="{{producto[1]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        name="nombre"
+        id="nombre"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="artista">Descripción:</label>
+      <input
+        value="{{producto[2]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="Descripcion"
+        name="descripcion"
+        id="descripcion"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="precio">Precio:</label>
+      <input
+        value="{{producto[3]}}"
+        required
+        type="number"
+        class="form-control"
+        placeholder="Precio"
+        name="precio"
+        id="precio"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="genero">Existencias:</label>
+      <input
+        value="{{producto[4]}}"
+        required
+        type="text"
+        class="form-control"
+        placeholder="Existencias"
+        name="existencias"
+        id="existencias"
+      />
+    </div>
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="submit" class="btn btn-success mt-2">Guardar</button>
+      <a href="{{url_for('admin.productos.home')}}" class="btn btn-primary mt-2"
+        >Volver</a
+      >
+    </div>
+  </form>
 </section>
 {% endblock %}
