@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from controllers.admin import *
 from controllers.cliente import *
 from controllers.autenticacion import *
@@ -25,4 +25,3 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 # print(app.url_map)
-

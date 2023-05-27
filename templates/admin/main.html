@@ -90,67 +90,9 @@
         </div>
         {% endif %}
       </div>
-      <div class="menu-body">
-        <div class="menu-body-list">
-          <ul>
-            <li class="list-item">
-              <a href="">
-                <span class="item-icon"></span>
-                <span>Nombre item</span>
-              </a>
-            </li>
-            <li class="list-item">
-              <a href="">
-                <span class="item-icon"></span>
-                <span>Nombre item</span>
-              </a>
-            </li>
-            <li class="list-item">
-              <a href="">
-                <span class="item-icon"></span>
-                <span>Nombre item</span>
-              </a>
-            </li>
-            <li class="list-item">
-              <a href="">
-                <span class="item-icon"></span>
-                <span>Nombre item</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="list-group col-2 custom-list-item">
-      <a href="" class="list-group-item list-group-item-action active" aria-current="true">
-        <h3>Pedidos</h3>
-      </a>
-      <a href="{{url_for('admin.productos.home')}}" class="list-group-item list-group-item-action active"
-        aria-current="true">
-        <h3>Productos</h3>
-      </a>
-      <a href="{{url_for('admin.categoria.home')}}" class="list-group-item list-group-item-action active"
-        aria-current="true">
-        <h3>Categoria productos</h3>
-      </a>
-      <a href="{{url_for('admin.usuarios.home')}}" class="list-group-item list-group-item-action active"
-        aria-current="true">
-        <h3>Usuarios</h3>
-      </a>
-      <a href="" class="list-group-item list-group-item-action active" aria-current="true">
-        <h3>Ventas</h3>
-      </a>
-    </div>
-    <div class="col-10">
-      {%block contenido %} {% endblock %}
-    </div>
-  </div>
-
-
+      <div>{%block contenido %} {% endblock %}</div>
+    </main>
+    <a>Hola</a>
     <script src="{{url_for('static', filename = 'js/header.js')}}"></script>
     <script src="{{url_for('static', filename = 'js/categorias.js')}}"></script>
     <script
