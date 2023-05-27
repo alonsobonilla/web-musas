@@ -27,16 +27,7 @@
 
   <link rel="stylesheet" href="{{url_for('static', filename = 'styles/admin/global.css')}}" />
   <title>Musas</title>
-  <style>
-    .content {
-      min-height: calc(100% - 60px);
-      /* Ajusta el valor para dejar espacio para el footer */
-    }
-
-    .footerS {
-      margin-top: auto;
-    }
-  </style>
+  
 </head>
 
 <body>
@@ -128,8 +119,8 @@
     </div>
   </div>
 
-  <div class="row content">
-    <div class="list-group col-2 custom-list-item">
+  <div class="d-flex">
+    <div class="list-group custom-list-item">
       <a href="" class="list-group-item list-group-item-action active" aria-current="true">
         <h3>Pedidos</h3>
       </a>
@@ -149,12 +140,12 @@
         <h3>Ventas</h3>
       </a>
     </div>
-    <div class="col-10">
+    <div class="container text-center">
       {%block contenido %} {% endblock %}
     </div>
   </div>
 
-  <footer class="footer footerS">
+  <footer class="footer">
     <div class="footer-top">
       <a href="{{url_for('admin.home')}}">
         <img src="{{url_for('static', filename = 'img/logo.jpg')}}" alt="logo" />

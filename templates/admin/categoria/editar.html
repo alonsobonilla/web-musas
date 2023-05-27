@@ -1,11 +1,14 @@
 {% extends "admin/main.html" %} {% block titulo %} Editar categoria {% endblock
 %} {% block contenido %}
-<section class="section">
+<section class="section m-3">
   <div class="columns">
     <div class="column">
-      <h3 class="is-size-3">Editar Categoria</h3>
+      <h3 class="is-size-3 m-3 fs-5 fw-bold">Editar Categoria</h3>
       <form action="{{url_for('admin.categoria.actualizar')}}" method="post">
         {# Enviar el id en un campo oculto #}
+        <div>
+          
+        </div>
         <input type="hidden" name="idCategoria" value="{{categoria[0]}}" />
         <label for="nombreCategoria">Nombre Categoria:</label>
         <input

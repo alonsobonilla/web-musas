@@ -1,13 +1,11 @@
 {% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
 block contenido %}
 
-<section class="section">
+<section class="section m-3">
   <div class="columns">
     <div class="column">
-      <h3 class="is-size-3">Categoria</h3>
-      <a href="{{url_for('admin.categoria.agregar')}}" class="btn btn-success"
-        >Agregar</a
-      >
+      <h3 class="is-size-3 m-3 fs-5 fw-bold">Categoria</h3>
+      
       <table class="table">
         <thead>
           <tr>
@@ -48,7 +46,13 @@ block contenido %}
           </tr>
           {% endfor %}
         </tbody>
+        
       </table>
+      <div class="text-end">
+        <a href="{{url_for('admin.categoria.agregar')}}" class="btn btn-success"
+        >Agregar</a>
+      </div>
+      
     </div>
   </div>
 </section>

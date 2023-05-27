@@ -1,28 +1,39 @@
 {% extends "admin/main.html" %} {% block titulo %} Agregar categoria {% endblock
 %} {% block contenido %}
-<section class="section">
+<section class="section m-3">
   <div class="columns">
     <div class="column is-one-third">
-      <h3 class="is-size-3">Agregar categoria</h3>
+      <h3 class="is-size-3 m-3 fs-5 fw-bold">Agregar categoria</h3>
       <form action="{{url_for('admin.categoria.guardar')}}" method="post">
-        <label for="nombreCategoria">nombreCategoria:</label>
-        <input
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label text-end" for="nombreCategoria">Nombre Categoria:</label>
+          <div class="col-sm-8">
+            <input class="form-control"
+            required
+            type="text"
+            placeholder="Nombre Categoria"
+            name="nombreCategoria"
+            id="nombreCategoria"
+          />
+          </div>
+          
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label text-end" for="descripcion">Descripción:</label>
+          <div class="col-sm-8">
+            <input
           required
           type="text"
-          class="input"
-          placeholder="nombreCategoria"
-          name="nombreCategoria"
-          id="nombreCategoria"
-        />
-        <label for="descripcion">descripcion</label>
-        <input
-          required
-          type="text"
-          class="input"
-          placeholder="descripcion"
+          class="form-control"
+          placeholder="Descripción"
           name="descripcion"
           id="descripcion"
         />
+          </div>
+        
+        </div>
+
+        
         <button type="submit" class="btn btn-success mt-2">Guardar</button>
         <a
           href="{{url_for('admin.categoria.home')}}"
