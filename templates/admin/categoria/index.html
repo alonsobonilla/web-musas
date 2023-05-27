@@ -5,7 +5,7 @@ block contenido %}
   <div class="columns">
     <div class="column">
       <h3 class="is-size-3 m-3 fs-5 fw-bold">Categoría Productos</h3>
-      
+
       <table class="table">
         <thead>
           <tr>
@@ -46,14 +46,17 @@ block contenido %}
           </tr>
           {% endfor %}
         </tbody>
-        
       </table>
       <div class="text-end">
         <a href="{{url_for('admin.categoria.agregar')}}" class="btn btn-success"
-        >Agregar</a>
+          >Agregar</a
+        >
       </div>
-      
     </div>
+
+    {% if hecho: %}
+    <div>"No se puede borrar"</div>
+    {% endif %}
   </div>
 </section>
 {% endblock %}

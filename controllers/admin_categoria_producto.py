@@ -24,8 +24,10 @@ def guardar():
 
 @categoria_producto.route("/eliminar", methods=["POST"])
 def eliminar():
-    CategoriaProducto.eliminar_categoria(request.form["idCategoria"])
+    hecho = CategoriaProducto.eliminar_categoria(request.form["idCategoria"])
+
     return redirect(url_for("admin.categoria.home"))
+    
 
 @categoria_producto.route("/editar_categoria/<int:id>")
 def editar(id):
