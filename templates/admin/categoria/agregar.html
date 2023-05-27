@@ -1,14 +1,14 @@
 {% extends "admin/main.html" %} {% block titulo %} Agregar categoria {% endblock
 %} {% block contenido %}
 <section class="w-50 m-auto">
-  <h3 class="m-3 fs-5 fw-bold">Agregar categoria</h3>
+  <h3 class="m-3 fs-5 fw-bold">Agregar categoría</h3>
   <form
     action="{{url_for('admin.categoria.guardar')}}"
     method="post"
     class="d-flex flex-column justify-content-center"
   >
     <div class="mb-3">
-      <label class="" for="nombreCategoria">Nombre Categoria:</label>
+      <label class="" for="nombreCategoria">Nombre Categoría:</label>
       <div class="">
         <input
           class="form-control"
