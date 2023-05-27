@@ -1,20 +1,15 @@
 {% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
 block contenido %}
 
-<section class="section mt-3">
+<section class="section m-3">
   <div class="columns">
     <div class="column">
-      <h3 class="is-size-3">Productos</h3>
-      <a
-        href="{{url_for('admin.productos.formulario_agregar')}}"
-        class="btn btn-success"
-        >Agregar</a
-      >
+      <h3 class="is-size-3 m-3 fs-5 fw-bold">Productos</h3>
       <table class="table">
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Descripcion</th>
+            <th>Descripción</th>
             <th>Precio</th>
             <th>Existencias</th>
             <th>Editar</th>
@@ -30,17 +25,10 @@ block contenido %}
             <td>{{producto[4]}}</td>
             <td>
               {# Pasar el id (lo que hay en producto[0]) #}
-              <a
-                href="{{url_for('admin.productos.editar', id=producto[0])}}"
-                class="btn btn-info"
-                >Editar</a
-              >
+              <a href="{{url_for('admin.productos.editar', id=producto[0])}}" class="btn btn-info">Editar</a>
             </td>
             <td>
-              <form
-                action="{{url_for('admin.productos.eliminar')}}"
-                method="POST"
-              >
+              <form action="{{url_for('admin.productos.eliminar')}}" method="POST">
                 <input type="hidden" name="id" value="{{producto[0]}}" />
                 <button class="btn btn-danger">Eliminar</button>
               </form>
@@ -49,6 +37,9 @@ block contenido %}
           {% endfor %}
         </tbody>
       </table>
+      <div class="text-end">
+        <a href="{{url_for('admin.productos.formulario_agregar')}}" class="btn btn-success">Agregar</a>
+      </div>
     </div>
   </div>
 </section>
