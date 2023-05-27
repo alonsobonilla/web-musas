@@ -1,17 +1,43 @@
 html {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 body {
-    padding-top: 0;
+  padding-top: 0;
 }
 
-.header {
-    position:relative;
-    margin-bottom: 0;
-    box-shadow: none;
+.content-col {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  height: 100vh;
+  gap: 20px;
 }
-
-.list-item-color {
-    background-color: #fbd357;
-  }
-
+.lg {
+  background-color: #fbd357;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+.lg-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.item {
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  color: var(--color1);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.lg-items .item:hover {
+  background-color: #2333;
+  color: #fff;
+}
+.lg-items a img {
+  width: 80px;
+}
