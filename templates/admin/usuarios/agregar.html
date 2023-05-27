@@ -1,0 +1,36 @@
+{% extends "admin/main.html" %} {% block titulo %} Agregar categoria {% endblock
+%} {% block contenido %}
+<section class="section">
+  <div class="columns">
+    <div class="column is-one-third">
+      <h3 class="is-size-3">Crear usuarios administradores</h3>
+      <form action="{{url_for('admin.usuarios.guardar')}}" method="post">
+        <label for="nombreUsuario">Nombre usuario:</label>
+        <input
+          required
+          type="text"
+          class="input"
+          placeholder="usuario"
+          name="nombreUsuario"
+          id="nombreUsuario"
+        />
+        <label for="contraseña">Contraseña:</label>
+        <input
+          required
+          type="text"
+          class="input"
+          placeholder="contraseña"
+          name="contraseña"
+          id="contraseña"
+        />
+        <button type="submit" class="btn btn-success mt-2">Guardar</button>
+        <a
+          href="{{url_for('admin.usuarios.home')}}"
+          class="btn btn-primary mt-2"
+          >Volver</a
+        >
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

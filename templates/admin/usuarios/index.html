@@ -1,0 +1,49 @@
+{% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
+block contenido %}
+
+<section class="section mt-3">
+  <div class="columns">
+    <div class="column">
+      <h3 class="is-size-3">Usuarios</h3>
+      <a
+        href="{{url_for('admin.usuarios.form_agregar')}}"
+        class="btn btn-success"
+        >Agregar</a
+      >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for usuario in usuarios %}
+          <tr>
+            <td>{{usuario[1]}}</td>
+            <td>{{usuario[2]}}</td>
+            <td>
+              {# Pasar el id (lo que hay en producto[0]) #}
+              <a
+                href="{{url_for('admin.usuarios.form_editar', id = usuario[0])}}"
+                class="btn btn-info"
+                >Editar</a
+              >
+            </td>
+            <td>
+              <form
+                action="{{url_for('admin.usuarios.eliminar')}}"
+                method="POST"
+              >
+                <input type="hidden" name="id" value="{{usuario[0]}}" />
+                <button class="btn btn-danger">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
