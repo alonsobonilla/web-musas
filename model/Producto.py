@@ -16,7 +16,7 @@ class Producto:
     def insertar_producto( nombre, descripcion, precio, existencias):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO producto( nombre, descripción, precio, existencias) VALUES (%s, %s, %s, %s)",
+            cursor.execute("INSERT INTO producto( nombre, descripcion, precio, existencias) VALUES (%s, %s, %s, %s)",
                         ( nombre, descripcion, precio, existencias))
         conexion.commit()
         conexion.close()
@@ -26,7 +26,7 @@ class Producto:
         conexion = obtener_conexion()
         productos = []
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idProducto, nombre, descripción, precio, existencias FROM producto")
+            cursor.execute("SELECT idProducto, nombre, descripcion, precio, existencias FROM producto")
             productos = cursor.fetchall()
         conexion.close()
         return productos
