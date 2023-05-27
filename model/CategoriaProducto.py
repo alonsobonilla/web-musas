@@ -5,7 +5,7 @@ class CategoriaProducto:
     def insertar_categoria(nombreCategoria, descripcion):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO categoriaProducto(nombreCategoria, descripción) VALUES (%s, %s)",
+            cursor.execute("INSERT INTO categoriaProducto(nombreCategoria, descripcion) VALUES (%s, %s)",
             (nombreCategoria, descripcion))
         conexion.commit()
         conexion.close()
@@ -14,7 +14,7 @@ class CategoriaProducto:
         conexion = obtener_conexion()
         categoria = []
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idCategoria, nombreCategoria, descripción FROM categoriaProducto")
+            cursor.execute("SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto")
             categoria = cursor.fetchall()
         conexion.close()
         return categoria
@@ -36,7 +36,7 @@ class CategoriaProducto:
         juego = None
         with conexion.cursor() as cursor:
             cursor.execute(
-                "SELECT idCategoria, nombreCategoria, descripción FROM categoriaProducto WHERE idCategoria = %s", (idCategoria,))
+                "SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto WHERE idCategoria = %s", (idCategoria,))
             juego = cursor.fetchone()
         conexion.close()
         return juego
