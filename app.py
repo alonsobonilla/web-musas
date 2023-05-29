@@ -5,6 +5,13 @@ from controllers.autenticacion import *
 from controllers.admin_productos import *
 from controllers.admin_categoria_producto import *
 from controllers.admin_usuarios import *
+
+#Importando apis
+from APIS.productos import *
+from APIS.usuarios import *
+
+
+
 app = Flask(__name__)
 
 admin.register_blueprint(productos)
@@ -15,6 +22,11 @@ cliente.register_blueprint(auth)
 
 app.register_blueprint(admin)
 app.register_blueprint(cliente)
+
+#Registrando apis
+app.register_blueprint(api_productos)
+app.register_blueprint(api_usuariosCliente)
+
 
 
 app.secret_key = "mysecretkey"
