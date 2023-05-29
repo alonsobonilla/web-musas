@@ -10,8 +10,7 @@ def api_obtenerusuarios():
         for usuario in usuarios:
             miobj = Usuario_cliente(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5])
             listaserializable.append(miobj.midic.copy())
-            return jsonify(listaserializable)
-        
+        return jsonify(listaserializable)
     except:
         return jsonify ({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"}) 
     
