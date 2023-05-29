@@ -1,0 +1,1 @@
+#insertar, eliminar, obtener, actualizar

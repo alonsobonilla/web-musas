@@ -1,0 +1,1 @@
+#insertar, obtener por (idpedido, idproducto, idcrema
