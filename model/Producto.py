@@ -26,6 +26,16 @@ class Producto:
     
     @staticmethod
     def insertar_producto( nombre, descripcion, precio, existencias, idCategoria):
+        
+        if nombre == "" or descripcion == "" or precio == "" or existencias == "" or idCategoria == "":
+            return False
+        
+        nombre = nombre.strip()
+        descripcion = descripcion.strip()
+        precio = float(precio.strip()) if type(precio) == str else precio
+        existencias = int(existencias.strip()) if type(existencias) == str else existencias
+        idCategoria = int(idCategoria.strip()) if type(idCategoria) == str else idCategoria
+
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             cursor.execute("INSERT INTO producto( idCategoria, nombre, descripcion, precio, existencias) VALUES (%s, %s, %s, %s, %s)",
@@ -91,19 +101,25 @@ class Producto:
     @staticmethod
     def actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria):
         
+        id = int(id)
         nombre = nombre.strip()
         descripcion = descripcion.strip()
-        producto = Producto.obtener_producto_por_id(id)
-        if nombre == "":
-            nombre = producto["nombre"]
-        if descripcion == "":
-            descripcion = producto["descripcion"]
-        if type(precio) == str:
-            precio = producto["precio"]
-        if type(existencias) == str:
-            existencias = producto["existencias"]
-        if type(idCategoria) == str:
-            idCategoria = producto["idCategoria"]
+        precio = float(precio.strip()) if type(precio) == str else precio
+        existencias = int(existencias.strip()) if type(existencias) == str else existencias
+        idCategoria = int(idCategoria.strip()) if type(idCategoria) == str else idCategoria
+
+        if nombre == "" or descripcion == "" or precio == "" or existencias == "" or idCategoria == "":
+            producto = Producto.obtener_producto_por_id(id)
+            if nombre == "":
+                nombre = producto["nombre"]
+            if descripcion == "":
+                descripcion = producto["descripcion"]
+            if precio == "":
+                precio = producto["precio"]
+            if existencias == "":
+                existencias = producto["existencias"]
+            if idCategoria == "":
+                idCategoria = producto["idCategoria"]
         
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
