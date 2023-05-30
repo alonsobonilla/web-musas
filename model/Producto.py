@@ -1,6 +1,26 @@
 from bd import obtener_conexion
 
-class Producto:   
+class Producto:
+    nombre = None
+    descripcion = None
+    precio = 0.0    
+    existencias = 0
+    idCategoria = None
+    diccionario = dict()
+
+    def __init__(self, nombre, descripcion, precio, existencias, idCategoria):
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.precio = precio
+        self.existencias = existencias
+        self.idCategoria = idCategoria
+        self.diccionario["idProducto"] = idProducto
+        self.diccionario["nombre"] = nombre
+        self.diccionario["descripcion"] = descripcion
+        self.diccionario["precio"] = precio
+        self.diccionario["existencias"] = existencias
+        self.diccionario["idCategoria"] = idCategoria
+
     @staticmethod
     def getProductosTipo(id):
         conexion = obtener_conexion()
