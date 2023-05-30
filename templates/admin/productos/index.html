@@ -20,15 +20,15 @@ block contenido %}
         <tbody>
           {% for producto in productos %}
           <tr>
-            <td>{{producto[6]}}</td>
-            <td>{{producto[2]}}</td>
-            <td>{{producto[3]}}</td>
-            <td>{{producto[4]}}</td>
-            <td>{{producto[5]}}</td>
+            <td>{{producto['nombreCategoria']}}</td>
+            <td>{{producto['nombre']}}</td>
+            <td>{{producto['descripcion']}}</td>
+            <td>{{producto['precio']}}</td>
+            <td>{{producto['existencias']}}</td>
             <td>
               {# Pasar el id (lo que hay en producto[0]) #}
               <a
-                href="{{url_for('admin.productos.editar', id=producto[0])}}"
+                href="{{url_for('admin.productos.editar', id=producto['idProducto'])}}"
                 class="btn btn-info"
                 >Editar</a
               >
@@ -38,7 +38,11 @@ block contenido %}
                 action="{{url_for('admin.productos.eliminar')}}"
                 method="POST"
               >
-                <input type="hidden" name="id" value="{{producto[0]}}" />
+                <input
+                  type="hidden"
+                  name="id"
+                  value="{{producto['idProducto']}}"
+                />
                 <button class="btn btn-danger">Eliminar</button>
               </form>
             </td>
