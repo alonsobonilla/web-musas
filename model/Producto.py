@@ -91,16 +91,18 @@ class Producto:
     @staticmethod
     def actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria):
         
+        nombre = nombre.strip()
+        descripcion = descripcion.strip()
         producto = Producto.obtener_producto_por_id(id)
         if nombre == "":
             nombre = producto["nombre"]
         if descripcion == "":
             descripcion = producto["descripcion"]
-        if precio == "":
+        if type(precio) == str:
             precio = producto["precio"]
-        if existencias == "":
+        if type(existencias) == str:
             existencias = producto["existencias"]
-        if idCategoria == "":
+        if type(idCategoria) == str:
             idCategoria = producto["idCategoria"]
         
         conexion = obtener_conexion()
