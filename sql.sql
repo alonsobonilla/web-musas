@@ -44,7 +44,7 @@ CREATE TABLE producto (
   idProducto  int(11) NOT NULL, 
   idCategoria smallint(6) NOT NULL, 
   nombre      varchar(100) NOT NULL, 
-  descripción varchar(255) NOT NULL, 
+  descripcion varchar(255) NOT NULL, 
   precio      float, 
   existencias smallint(6), 
   PRIMARY KEY (idProducto));
