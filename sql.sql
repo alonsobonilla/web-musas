@@ -1,7 +1,7 @@
 CREATE TABLE categoriaProducto (
   idCategoria     smallint(6) NOT NULL, 
   nombreCategoria varchar(50) NOT NULL, 
-  descripción     varchar(255), 
+  descripcion     varchar(255), 
   PRIMARY KEY (idCategoria));
 CREATE TABLE comprobante (
   idComprobante     int(11) NOT NULL, 
