@@ -1,36 +1,28 @@
 from bd import obtener_conexion
 
 class Producto:
-    nombre = None
-    descripcion = None
-    precio = 0.0    
-    existencias = 0
-    idCategoria = None
-    diccionario = dict()
-
-    def __init__(self, nombre, descripcion, precio, existencias, idCategoria):
-        self.nombre = nombre
-        self.descripcion = descripcion
-        self.precio = precio
-        self.existencias = existencias
-        self.idCategoria = idCategoria
-        self.diccionario["idProducto"] = idProducto
-        self.diccionario["nombre"] = nombre
-        self.diccionario["descripcion"] = descripcion
-        self.diccionario["precio"] = precio
-        self.diccionario["existencias"] = existencias
-        self.diccionario["idCategoria"] = idCategoria
-
     @staticmethod
-    def getProductosTipo(id):
+    def getProductosCategoria(id):
         conexion = obtener_conexion()
         productos = []
-        query = "select nombre, descripcion, precio from producto where id_categoria = " + id
         with conexion.cursor() as cursor:
-            cursor.execute(query)  
+            cursor.execute("select * from producto where idCategoria = %s", id)  
             productos = cursor.fetchall()
         conexion.close()
-        return productos
+
+        if productos is None:
+            return productos
+        
+        lista_diccionarios = []
+        for producto in productos:
+            diccionario = dict()
+            diccionario["idProducto"] = producto[0]
+            diccionario["nombre"] = producto[2]
+            diccionario["descripcion"] = producto[3]
+            diccionario["precio"] = producto[4]
+            diccionario["existencias"] = producto[5]
+            lista_diccionarios.append(diccionario)
+        return lista_diccionarios
     
     @staticmethod
     def insertar_producto( nombre, descripcion, precio, existencias, idCategoria):
@@ -46,11 +38,24 @@ class Producto:
         conexion = obtener_conexion()
         productos = []
         query = "SELECT p.*, cp.nombreCategoria  FROM producto p INNER JOIN categoriaProducto cp ON p.idCategoria = cp.idCategoria"
+        
         with conexion.cursor() as cursor:
             cursor.execute(query)
             productos = cursor.fetchall()
         conexion.close()
-        return productos
+
+        lista_diccionarios = []
+        for producto in productos:
+            diccionario = dict()
+            diccionario["idProducto"] = producto[0]
+            diccionario["idCategoria"] = producto[1]
+            diccionario["nombre"] = producto[2]    
+            diccionario["descripcion"] = producto[3]
+            diccionario["precio"] = producto[4]
+            diccionario["existencias"] = producto[5]
+            diccionario["nombreCategoria"] = producto[6]
+            lista_diccionarios.append(diccionario)
+        return lista_diccionarios
         
     @staticmethod
     def eliminar_producto(id):
@@ -66,10 +71,22 @@ class Producto:
         seleccion = None
         with conexion.cursor() as cursor:
             cursor.execute(
-                "SELECT p.idProducto, p.nombre, p.descripcion, p.precio, p.existencias, cp.nombreCategoria FROM producto p INNER JOIN categoriaProducto cp ON p.idCategoria = cp.idCategoria WHERE idProducto = %s", (id))
+                "SELECT p.idProducto, p.nombre, p.descripcion, p.precio, p.existencias, cp.nombreCategoria, p.idCategoria FROM producto p INNER JOIN categoriaProducto cp ON p.idCategoria = cp.idCategoria WHERE idProducto = %s", (id))
             seleccion = cursor.fetchone()
         conexion.close()
-        return seleccion
+
+        if seleccion is None:
+            return seleccion
+        
+        diccionario = dict()
+        diccionario["idProducto"] = seleccion[0]
+        diccionario["nombre"] = seleccion[1]
+        diccionario["descripcion"] = seleccion[2]
+        diccionario["precio"] = seleccion[3]
+        diccionario["existencias"] = seleccion[4]   
+        diccionario["nombreCategoria"] = seleccion[5]
+        diccionario["idCategoria"] = seleccion[6]
+        return diccionario
 
     @staticmethod
     def actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria):
