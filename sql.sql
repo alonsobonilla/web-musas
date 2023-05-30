@@ -1,10 +1,10 @@
 CREATE TABLE categoriaProducto (
-  idCategoria     smallint(6) NOT NULL AUTO_INCREMENT, 
+  idCategoria     smallint(6) NOT NULL, 
   nombreCategoria varchar(50) NOT NULL, 
   descripción     varchar(255), 
   PRIMARY KEY (idCategoria));
 CREATE TABLE comprobante (
-  idComprobante     int(11) NOT NULL AUTO_INCREMENT, 
+  idComprobante     int(11) NOT NULL, 
   idPedido          int(11) NOT NULL, 
   dniUsuario        char(8), 
   dniNoRegistrado   int(11) NOT NULL, 
@@ -31,15 +31,6 @@ CREATE TABLE detalleCremas (
   PRIMARY KEY (idPedido, 
   idProducto, 
   idCrema));
-CREATE TABLE detalleExtras (
-  idProducto int(11) NOT NULL, 
-  idPedido   int(11) NOT NULL, 
-  idExtra    int(11) NOT NULL, 
-  precio     float, 
-  cantidad   smallint(6), 
-  PRIMARY KEY (idProducto, 
-  idPedido, 
-  idExtra));
 CREATE TABLE detalleOrden (
   idProducto     int(11) NOT NULL, 
   idPedido       int(11) NOT NULL, 
@@ -50,7 +41,7 @@ CREATE TABLE detalleOrden (
   PRIMARY KEY (idProducto, 
   idPedido));
 CREATE TABLE producto (
-  idProducto  int(11) NOT NULL AUTO_INCREMENT, 
+  idProducto  int(11) NOT NULL, 
   idCategoria smallint(6) NOT NULL, 
   nombre      varchar(100) NOT NULL, 
   descripción varchar(255) NOT NULL, 
@@ -58,7 +49,7 @@ CREATE TABLE producto (
   existencias smallint(6), 
   PRIMARY KEY (idProducto));
 CREATE TABLE registroPedido (
-  idPedido         int(11) NOT NULL AUTO_INCREMENT, 
+  idPedido         int(11) NOT NULL, 
   dniUsuario       char(8), 
   dniNoRegistrado  char(8) NOT NULL, 
   numeroTelefono   char(9) NOT NULL, 
@@ -74,11 +65,12 @@ CREATE TABLE usuario (
   nombres         varchar(100) NOT NULL, 
   apellidos       varchar(100) NOT NULL, 
   correo          varchar(200) NOT NULL, 
+  numTel          char(9) NOT NULL, 
   fechaNacimiento date NOT NULL, 
   contraseña      varchar(100) NOT NULL, 
   PRIMARY KEY (dni));
 CREATE TABLE usuarioAdmin (
-  idAdmin    smallint(6) NOT NULL AUTO_INCREMENT, 
+  idAdmin    smallint(6) NOT NULL, 
   usuario    varchar(50) NOT NULL, 
   contraseña varchar(20) NOT NULL, 
   PRIMARY KEY (idAdmin));
@@ -86,11 +78,9 @@ ALTER TABLE detalleComprobante ADD CONSTRAINT FKdetalleCom998263 FOREIGN KEY (id
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd26951 FOREIGN KEY (idProducto) REFERENCES producto (idProducto);
 ALTER TABLE detalleCremas ADD CONSTRAINT FKdetalleCre204471 FOREIGN KEY (idProducto, idPedido) REFERENCES detalleOrden (idProducto, idPedido);
 ALTER TABLE producto ADD CONSTRAINT FKproducto802442 FOREIGN KEY (idCategoria) REFERENCES categoriaProducto (idCategoria);
-ALTER TABLE detalleExtras ADD CONSTRAINT FKdetalleExt953309 FOREIGN KEY (idProducto, idPedido) REFERENCES detalleOrden (idProducto, idPedido);
 ALTER TABLE registroPedido ADD CONSTRAINT FKregistroPe480639 FOREIGN KEY (dniUsuario) REFERENCES usuario (dni);
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd726046 FOREIGN KEY (idPedido) REFERENCES registroPedido (idPedido);
 ALTER TABLE comprobante ADD CONSTRAINT FKcomprobant592336 FOREIGN KEY (dniUsuario) REFERENCES usuario (dni);
 ALTER TABLE detalleComprobante ADD CONSTRAINT FKdetalleCom611488 FOREIGN KEY (idProducto) REFERENCES producto (idProducto);
 ALTER TABLE comprobante ADD CONSTRAINT FKcomprobant506863 FOREIGN KEY (idPedido) REFERENCES registroPedido (idPedido);
 ALTER TABLE detalleCremas ADD CONSTRAINT FKdetalleCre352772 FOREIGN KEY (idCrema) REFERENCES producto (idProducto);
-ALTER TABLE detalleExtras ADD CONSTRAINT FKdetalleExt938748 FOREIGN KEY (idExtra) REFERENCES producto (idProducto);
