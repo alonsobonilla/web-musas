@@ -43,7 +43,7 @@ def editar(id):
 
 @productos.route("/actualizar_producto", methods=["POST"])
 def actualizar():
-    id = request.form["id"]
+    id = request.form["idProducto"]
     nombre = request.form["nombre"]
     descripcion = request.form["descripcion"]
     precio = request.form["precio"]
