@@ -90,6 +90,19 @@ class Producto:
 
     @staticmethod
     def actualizar_producto(nombre, descripcion, precio, existencias, id, idCategoria):
+        
+        producto = Producto.obtener_producto_por_id(id)
+        if nombre == "":
+            nombre = producto["nombre"]
+        if descripcion == "":
+            descripcion = producto["descripcion"]
+        if precio == "":
+            precio = producto["precio"]
+        if existencias == "":
+            existencias = producto["existencias"]
+        if idCategoria == "":
+            idCategoria = producto["idCategoria"]
+        
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s, idCategoria = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, idCategoria, id ))

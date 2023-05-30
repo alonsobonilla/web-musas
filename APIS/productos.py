@@ -66,11 +66,16 @@ def actualizar_producto():
 
         validate_idProducto = Producto.obtener_producto_por_id(idProducto)
         if validate_idProducto is not None:
-            validate_idCategoria = CategoriaProducto.obtener_categoria_por_id(idCategoria)
-            if validate_idCategoria is not None:
+            
+            if idCategoria != "":
+                validate_idCategoria = CategoriaProducto.obtener_categoria_por_id(idCategoria)
+                if validate_idCategoria is not None:
+                    Producto.actualizar_producto(nombre, descripcion, precio, existencias,idProducto, idCategoria)
+                else:
+                    return jsonify({"Mensaje":"No existe la categoría", "status:":"0"})  
+            else:
                 Producto.actualizar_producto(nombre, descripcion, precio, existencias,idProducto, idCategoria)
-                return jsonify({"Mensaje":"Producto actualizado correctamente", "status:":"1"})
-            return jsonify({"Mensaje":"No existe la categoría", "status:":"0"})
+            return jsonify({"Mensaje":"Producto actualizado correctamente", "status:":"1"})
         return jsonify({"Mensaje":"No existe el producto", "status:":"0"})
     except Exception as ex:
         return jsonify({"Mensaje":"Error al actualizar el producto", "status:":"0", "errror":str(ex)})
