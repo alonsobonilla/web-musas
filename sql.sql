@@ -67,12 +67,12 @@ CREATE TABLE usuario (
   correo          varchar(200) NOT NULL, 
   numTel          char(9) NOT NULL, 
   fechaNacimiento date NOT NULL, 
-  contraseña      varchar(100) NOT NULL, 
+  contraseña      varchar(250) NOT NULL, 
   PRIMARY KEY (dni));
 CREATE TABLE usuarioAdmin (
   idAdmin    smallint(6) NOT NULL, 
   usuario    varchar(50) NOT NULL, 
-  contraseña varchar(20) NOT NULL, 
+  contraseña varchar(250) NOT NULL, 
   PRIMARY KEY (idAdmin));
 ALTER TABLE detalleComprobante ADD CONSTRAINT FKdetalleCom998263 FOREIGN KEY (idComprobante) REFERENCES comprobante (idComprobante);
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd26951 FOREIGN KEY (idProducto) REFERENCES producto (idProducto);
