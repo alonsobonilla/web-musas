@@ -9,7 +9,7 @@ from controllers.admin_usuarios import *
 #Importando apis
 from APIS.productos import *
 from APIS.usuarios import *
-
+from APIS.usuarioAdmin import api_admin
 
 
 app = Flask(__name__)
@@ -26,6 +26,7 @@ app.register_blueprint(cliente)
 #Registrando apis
 app.register_blueprint(api_productos)
 app.register_blueprint(api_usuariosCliente)
+app.register_blueprint(api_admin)
 
 
 
