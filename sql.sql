@@ -1,10 +1,10 @@
 CREATE TABLE categoriaProducto (
-  idCategoria     smallint(6) NOT NULL, 
+  idCategoria     smallint(6) AUTO_INCREMENT, 
   nombreCategoria varchar(50) NOT NULL, 
   descripcion     varchar(255), 
   PRIMARY KEY (idCategoria));
 CREATE TABLE comprobante (
-  idComprobante     int(11) NOT NULL, 
+  idComprobante     int(11) AUTO_INCREMENT, 
   idPedido          int(11) NOT NULL, 
   dniUsuario        char(8), 
   dniNoRegistrado   int(11) NOT NULL, 
@@ -41,7 +41,7 @@ CREATE TABLE detalleOrden (
   PRIMARY KEY (idProducto, 
   idPedido));
 CREATE TABLE producto (
-  idProducto  int(11) NOT NULL, 
+  idProducto  int(11) NOT NULL AUTO_INCREMENT, 
   idCategoria smallint(6) NOT NULL, 
   nombre      varchar(100) NOT NULL, 
   descripcion varchar(255) NOT NULL, 
@@ -49,7 +49,7 @@ CREATE TABLE producto (
   existencias smallint(6), 
   PRIMARY KEY (idProducto));
 CREATE TABLE registroPedido (
-  idPedido         int(11) NOT NULL, 
+  idPedido         int(11) AUTO_INCREMENT, 
   dniUsuario       char(8), 
   dniNoRegistrado  char(8) NOT NULL, 
   numeroTelefono   char(9) NOT NULL, 
@@ -70,7 +70,7 @@ CREATE TABLE usuario (
   contraseña      varchar(250) NOT NULL, 
   PRIMARY KEY (dni));
 CREATE TABLE usuarioAdmin (
-  idAdmin    smallint(6) NOT NULL, 
+  idAdmin    smallint(6) AUTO_INCREMENT, 
   usuario    varchar(50) NOT NULL, 
   contraseña varchar(250) NOT NULL, 
   PRIMARY KEY (idAdmin));
