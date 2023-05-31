@@ -17,5 +17,9 @@ def api_obtenerusuarios():
     except:
         return jsonify ({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
 
+#def 
 
+
+
+#def
  
