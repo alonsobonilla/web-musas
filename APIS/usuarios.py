@@ -18,11 +18,11 @@ def api_obtenerusuarios():
 @api_usuariosCliente.route("/api_guardarusuario", methods=["POST"])
 def api_guardarusuario():
     try:
-        DNI = request.form["DNI"]
-        nombres = request.form["nombres"]
-        apellidos = request.form["apellidos"]
-        correo = request.form["correo"]
-        numTel = request.form["numTel"]
+        DNI = request.json["DNI"]
+        nombres = request.json["nombres"]
+        apellidos = request.json["apellidos"]
+        correo = request.json["correo"]
+        numTel = request.json["numTel"]
         fechNacimiento = request.form["fechNacimiento"]
         Usuario_cliente.insertar_usuario(DNI, nombres, apellidos, correo, numTel,fechNacimiento)
         return jsonify({"Mensaje":"usuario registrado correctamente"})

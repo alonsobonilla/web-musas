@@ -47,9 +47,11 @@ class Usuario_cliente:
         with conexion.cursor() as cursor: 
             cursor.execute("SELECT DNI, correo, numTel FROM usuario WHERE DNI= %s",(dni,))
             modo = cursor.fetchone()
+             #SELECT * FROM? 
         conexion.close()
         return modo
 
+   
 
     def actualizar_usuario(correo, numTel, dni):
         conexion = obtener_conexion()

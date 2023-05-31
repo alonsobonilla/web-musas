@@ -7,7 +7,8 @@ from flask import (
     session, 
     url_for, 
     flash,
-    current_app
+    current_app,
+    g
 )
 from model.Autenticacion import Autenticacion
 
@@ -78,4 +79,3 @@ def logout():
         return redirect(url_for("cliente.home"))
     else:
         return redirect(url_for("admin.home"))
-          
