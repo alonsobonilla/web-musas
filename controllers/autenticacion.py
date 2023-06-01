@@ -51,10 +51,9 @@ def registro():
         nombres = request.form["nombres"]
         apellidos = request.form["apellido"]
         correo = request.form["correo"]
-        fechaNacimiento = request.form["fecha_nacimiento"]
         contraseña = request.form["contraseña"]
 
-        error = Autenticacion.registro(dni, nombres, apellidos, correo, fechaNacimiento, contraseña)
+        error = Autenticacion.registro(dni, nombres, apellidos, correo, contraseña)
 
         if error is None:
             redirect(url_for("client.login"))

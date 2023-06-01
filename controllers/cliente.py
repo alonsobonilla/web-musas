@@ -12,6 +12,14 @@ def home():
     return render_template("client/index.html")
 #     # , simples = simples, mixtas = mixtas, alopobres = alopobres, especiales = especiales)
 
+
+
+@cliente.route("/formulario_registro_cliente")
+def formulario_registro_cliente():
+     return render_template("client/registro.html")
+
+
+
 # @cliente.route("/<tipo>")
 # def verMas(tipo):
 #     productos = []

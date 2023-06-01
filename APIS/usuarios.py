@@ -23,8 +23,8 @@ def api_guardarusuario():
         apellidos = request.json["apellidos"]
         correo = request.json["correo"]
         numTel = request.json["numTel"]
-        fechNacimiento = request.form["fechNacimiento"]
-        Usuario_cliente.insertar_usuario(DNI, nombres, apellidos, correo, numTel,fechNacimiento)
+        contra = request.json["contra"]
+        Usuario_cliente.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra)
         return jsonify({"Mensaje":"usuario registrado correctamente"})
     except:
         return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})

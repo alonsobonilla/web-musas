@@ -1,1 +1,43 @@
-<h1>Desde registro</h1>
+{% extends "main.html" %}
+{% block titulo %}
+Registrarse
+{% endblock %}
+{% block contenido %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="h3">Registro</h3>
+                <form action="{{url_for('guardar_usuario')}}" method="post">
+                    <div class="form-group">
+                        <label for="DNI">DNI:</label>
+                        <input required type="text" class="form-control" placeholder="DNI" name="DNI" id="DNI" maxlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombres">Nombres:</label>
+                        <input required type="text" class="form-control" placeholder="Nombres" name="nombres" id="nombres" pattern="[A-Za-z]+">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos:</label>
+                        <input required type="text" class="form-control" placeholder="Apellidos" name="apellidos" id="apellidos" pattern="[A-Za-z]+">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo:</label>
+                        <input required type="text" class="form-control" placeholder="Correo" name="correo" id="correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="numTel">numTel:</label>
+                        <input required type="number" class="form-control" placeholder="numTel" name="numTel" id="numTel">
+                    </div>
+                    <div class="form-group">
+                        <label for="contra">Contraseña:</label>
+                        <input required type="******" class="form-control" placeholder="Contraseña" name="Contraseña" id="contra">
+                    </div>
+                    <button type="submit" class="btn btn-success mt-2">Guardar</button>
+                    <a href="{{url_for('cliente.home')}}" class="btn btn-primary mt-2">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
