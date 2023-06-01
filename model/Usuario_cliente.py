@@ -6,11 +6,11 @@ class Usuario_cliente:
     apellidos = ""
     correo = ""
     numTel = ""
-    contra = ""
+    contraseña = ""
     midic   = dict()
 
 
-    def __init__(self,p_DNI,p_nombres,p_apellidos,p_correo,p_numTel,p_contra):
+    def __init__(self,p_DNI,p_nombres,p_apellidos,p_correo,p_numTel,p_contraseña):
         self.DNI = p_DNI
         self.nombres = p_nombres
         self.apellidos = p_apellidos
@@ -21,13 +21,13 @@ class Usuario_cliente:
         self.midic["apellidos"] = p_apellidos
         self.midic["correo"] = p_correo
         self.midic["numTel"] = p_numTel
-        self.midic["contra"] = p_contra
+        self.midic["contraseña"] = p_contraseña
 
 
     def insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTel,contra) VALUES (%s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra))
+            cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTel,contraseña) VALUES (%s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra))
         conexion.commit()
         conexion.close()
 
@@ -55,7 +55,7 @@ class Usuario_cliente:
     def actualizar_usuario(correo, numTel,contra,dni):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE usuario SET correo = %s, numTel= %s, contra= %s  WHERE DNI=%s",(correo, numTel,contra,dni))
+            cursor.execute("UPDATE usuario SET correo = %s, numTel= %s, contraseña= %s  WHERE DNI=%s",(correo, numTel,contra,dni))
         conexion.commit()
         conexion.close()
 

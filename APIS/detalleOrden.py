@@ -35,7 +35,7 @@ def api_guardardetalleOrden():
 
 
 @api_detalleOrden.route("/api_obtenerdetalleorden/<int:idproducto>/<int:idpedido>")
-def api_obtenerdetalleorden(idproducto,idpedido):
+def api_obtenedetalleorden(idproducto,idpedido):
     try:
         deO = DetalleOrden.obtener_detalleOrden_id(idproducto,idpedido)
         listaserializable = []
