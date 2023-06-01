@@ -10,7 +10,7 @@ from controllers.admin_usuarios import *
 from APIS.productos import *
 from APIS.usuarios import *
 from APIS.usuarioAdmin import api_admin
-
+from APIS.registro_pedidos import api_registro_pedidos
 
 app = Flask(__name__)
 
@@ -27,7 +27,7 @@ app.register_blueprint(cliente)
 app.register_blueprint(api_productos)
 app.register_blueprint(api_usuariosCliente)
 app.register_blueprint(api_admin)
-
+app.register_blueprint(api_registro_pedidos)
 
 
 app.secret_key = "mysecretkey"
