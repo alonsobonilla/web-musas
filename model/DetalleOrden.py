@@ -1,7 +1,7 @@
 from bd import obtener_conexion
 from werkzeug.security import check_password_hash, generate_password_hash
 from model.Producto import Producto
-
+from model.Pedido import Pedido
 #obtener, insertar, obtener por id
 class DetalleOrden:
     idProducto = 0
@@ -26,11 +26,13 @@ class DetalleOrden:
         self.midic["cantidad"] = p_cantidad
         self.midic["precioTotal"] = p_precioTotal
 
-    def insertar_detalleOrden(idproducto,idpedido,precioU,cantidad,precioT):
+    def insertar_detalleOrden(idproducto,idpedido,cantidad):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            query = "INSERT INTO detalleOrden VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO detalleOrden VALUES (%s, %s, %s, %s, %s, %s)"
             nomP =Producto.obtener_producto_por_id(idproducto)["nombre"]
+            precioU = Producto.obtener_producto_por_id(idproducto)["precio"]
+            precioT = cantidad * precioU
             values = (idproducto,idpedido,nomP,precioU,cantidad,precioT)
             cursor.execute(query, values)
         conexion.commit()

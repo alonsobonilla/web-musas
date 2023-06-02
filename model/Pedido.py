@@ -96,3 +96,18 @@ class Pedido:
             diccionario["keyPedido"] = pedido[9]
             list.append(diccionario)
         return list
+    
+
+    def validar_idPedido_existente(idPedido):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            consulta = "SELECT COUNT(*) FROM registropedido WHERE idPedido = %s"
+            cursor.execute(consulta, (idPedido,))
+            resultado = cursor.fetchone()
+        if resultado[0] > 0:
+            return True
+        else:
+            return False
+        
+
+
