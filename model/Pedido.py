@@ -101,7 +101,7 @@ class Pedido:
     def validar_idPedido_existente(idPedido):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            consulta = "SELECT COUNT(*) FROM registropedido WHERE idPedido = %s"
+            consulta = "SELECT COUNT(*) FROM registroPedido WHERE idPedido = %s"
             cursor.execute(consulta, (idPedido,))
             resultado = cursor.fetchone()
         if resultado[0] > 0:
