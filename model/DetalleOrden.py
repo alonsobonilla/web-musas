@@ -53,7 +53,10 @@ class DetalleOrden:
         conexion = obtener_conexion()
         modo=None
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT * FROM detalleOrden WHERE idproducto= %s AND idpedido=%s",(idpedido,idproducto,))
+            cursor.execute("SELECT idProducto,idPedido,nombreProducto,precioUnidad,cantidad,precioTotal FROM detalleOrden WHERE idproducto=%s AND idpedido=%s",(idpedido,idproducto))
             modo = cursor.fetchone()
         conexion.close()
         return modo
+
+    
+    
