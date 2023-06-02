@@ -44,7 +44,7 @@ def api_obtenerusuario(DNI):
     try:
         usuario = Usuario_cliente.obtener_usuario_dni(DNI)
         listaserializable = []
-        miobj = Usuario_cliente(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4])
+        miobj = Usuario_cliente(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5])
         listaserializable.append(miobj.midic.copy())
         return jsonify(listaserializable)
     except Exception as e:

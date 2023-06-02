@@ -45,7 +45,7 @@ class Usuario_cliente:
         conexion = obtener_conexion()
         modo = None
         with conexion.cursor() as cursor: 
-            cursor.execute("SELECT DNI,nombres,apellidos,correo, numTel FROM usuario WHERE DNI= %s",(dni,))
+            cursor.execute("SELECT DNI,nombres,apellidos,correo, numTel, contraseña FROM usuario WHERE DNI= %s",(dni,))
             modo = cursor.fetchone()
         conexion.close()
         return modo
