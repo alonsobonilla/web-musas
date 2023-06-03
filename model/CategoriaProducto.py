@@ -42,7 +42,7 @@ class CategoriaProducto:
                 return True
             except:
                 return False
-        
+
 
     def obtener_categoria_por_id(idCategoria):
         conexion = obtener_conexion()
