@@ -39,7 +39,7 @@ def api_insertarcategoria():
     except:
         return jsonify({"Mensaje":"Error al registrar categoria"})
    
-@api_categoriaProducto.route("/api_actualizarcategoria")
+@api_categoriaProducto.route("/api_actualizarcategoria", methods=["POST"])
 def api_actualizarcategoria():
     try:
         idCategoria = request.json["idCategoria"]
