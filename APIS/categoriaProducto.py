@@ -14,7 +14,8 @@ def api_obtenercategorias():
         for categoria in categorias:
             miobj = CategoriaProducto(categoria[0],categoria[1],categoria[2])
             listaserializable.append(miobj.midic.copy())
-        return jsonify(listaserializable)
+        return jsonify({"Mensaje":"Categorias obtenidas correctamente", "status:":"1", "Categoria":listaserializable})
+    
     except:
         return jsonify ({"Mensaje":"Error al obtener categoria"})
    
