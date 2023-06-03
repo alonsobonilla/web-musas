@@ -1,6 +1,19 @@
 from bd import obtener_conexion
 class CategoriaProducto:
-    
+    idCategoria = 0
+    nombreCategoria = ""
+    descripcion = ""
+    midic = dict()
+
+    def __init__(self,p_idCategoria,p_nombreCategoria,p_descripcion):
+        self.idCategoria = p_idCategoria
+        self.nombreCategoria = p_nombreCategoria
+        self.descripcion = p_descripcion
+        self.midic["idCategoria"] = p_idCategoria
+        self.midic["nombreCategoria"] = p_nombreCategoria
+        self.midic["descripcion"] = p_descripcion
+
+
     @staticmethod
     def insertar_categoria(nombreCategoria, descripcion):
         conexion = obtener_conexion()
