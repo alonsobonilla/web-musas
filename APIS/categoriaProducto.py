@@ -20,10 +20,10 @@ def api_obtenercategorias():
         return jsonify ({"Mensaje":"Error al obtener categoria"})
 
 
-@api_categoriaProducto.route("/api_eliminarcategoria")
-def api_eliminarcategoria():
+@api_categoriaProducto.route("/api_eliminarcategoria/<int:idCategoria>")
+def api_eliminarcategoria(idCategoria):
     try:
-        CategoriaProducto.eliminar_categoria(request.json["idCategoria"])
+        CategoriaProducto.eliminar_categoria(idCategoria)
         return jsonify({"Mensaje": "Categoria elimada correctamente", "status:":"1"})
         return
     except:
