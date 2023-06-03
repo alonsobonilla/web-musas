@@ -11,5 +11,3 @@ class comprobante:
     montoTotal = 0 
     igv = 0       
     numeroComprobante = 0
-    @staticmethod
-    def insertar_comprobante()
