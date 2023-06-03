@@ -8,7 +8,7 @@ class User(object):
         return "User(id='%s')" % self.id
     
 users = [
-    User(1, 'alonso', '123')
+    User(1, 'grupo5', 'grupo5')
 ]
 
 username_table = {u.username: u for u in users}
