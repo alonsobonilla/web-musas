@@ -29,7 +29,7 @@ def api_eliminarcategoria():
     except:
         return jsonify({"Mensaje":"Error al eliminar categoria"})
    
-@api_categoriaProducto.route("/api_insertarcategoria")
+@api_categoriaProducto.route("/api_insertarcategoria", methods=["POST"])
 def api_insertarcategoria():
     try:
         nombre = request.json["nombreCategoria"]
