@@ -37,7 +37,7 @@ def api_insertarcategoria():
         CategoriaProducto.insertar_categoria(nombre,descripcion)
         return jsonify({"Mensaje":"Categoria registrada correctamente", "status:":"1"})
     except:
-        return jsonify({"Mensaje":"Error al registrar categoria"})
+        return jsonify({"Mensaje":"Error al registrar categoria", "Status":"0"})
    
 @api_categoriaProducto.route("/api_actualizarcategoria", methods=["POST"])
 def api_actualizarcategoria():
@@ -47,8 +47,8 @@ def api_actualizarcategoria():
         descripcion = request.json["descripcion"]
         CategoriaProducto.actualizar_categoria(nombre,descripcion,idCategoria)    
         return jsonify({"Mensaje":"Categoria actualizada correctamente", "status:":"1"})
-    except:
-        return jsonify({"Mensaje":"Error al actualizar categoria", "status:":"0"})
+    except Exception as ex:
+        return jsonify({"Mensaje":"Error al actualizar categoria", "status:":"0", "errror":str(ex)})
 
 
 @api_categoriaProducto.route("/api_obtenercategoriaid/<int:idCategoria>")
