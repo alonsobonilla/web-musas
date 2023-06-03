@@ -49,7 +49,7 @@ class CategoriaProducto:
         juego = None
         with conexion.cursor() as cursor:
             cursor.execute(
-                "SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto WHERE idCategoria = %s", (idCategoria,))
+                "SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto WHERE idCategoria = %s", (idCategoria))
             juego = cursor.fetchone()
         conexion.close()
         return juego
