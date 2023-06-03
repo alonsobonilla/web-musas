@@ -12,6 +12,7 @@ from APIS.usuarios import *
 from APIS.usuarioAdmin import api_admin
 from APIS.registro_pedidos import api_registro_pedidos
 from APIS.detalleOrden import api_detalleOrden
+from APIS.categoriaProducto import api_categoriaProducto
 
 app = Flask(__name__)
 
@@ -30,6 +31,7 @@ app.register_blueprint(api_usuariosCliente)
 app.register_blueprint(api_admin)
 app.register_blueprint(api_registro_pedidos)
 app.register_blueprint(api_detalleOrden)
+app.register_blueprint(api_categoriaProducto)
 
 
 app.secret_key = "mysecretkey"

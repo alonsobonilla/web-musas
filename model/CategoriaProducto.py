@@ -1,6 +1,6 @@
 from bd import obtener_conexion
 class CategoriaProducto:
-
+    
     @staticmethod
     def insertar_categoria(nombreCategoria, descripcion):
         conexion = obtener_conexion()

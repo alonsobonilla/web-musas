@@ -6,8 +6,8 @@ from model.CategoriaProducto import CategoriaProducto
 api_categoriaProducto = Blueprint('api_categoriaProducto',__name__)
 
 
-@api_categoriaProducto.route("/api_obtenercategoria")
-def api_obtenercategoria():
+@api_categoriaProducto.route("/api_obtenercategorias")
+def api_obtenercategorias():
     try:
       categorias=CategoriaProducto.obtener_categorias()
       listaserializable = []
