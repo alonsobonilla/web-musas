@@ -1,4 +1,5 @@
 from bd import obtener_conexion
+
 class CategoriaProducto:
     idCategoria = 0
     nombreCategoria = ""
