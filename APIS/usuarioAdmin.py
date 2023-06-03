@@ -1,10 +1,12 @@
 #insertar, eliminar, obtener, actualizar
 from flask import Blueprint, jsonify, request
 from model.Usuario import Usuario
+from flask_jwt import jwt_required
 
 api_admin = Blueprint('api_admin', __name__)
 
 @api_admin.route('/delete_usuario_admin', methods=['POST'])
+@jwt_required()
 def delete():
     try:
         idAdmin = request.json["idAdmin"]
@@ -18,6 +20,7 @@ def delete():
         return jsonify({"mensaje": "Error al eliminar usuario", "error": str(e)})
 
 @api_admin.route('/get_usuario_admin/<int:idAdmin>')
+@jwt_required()
 def get_usuario_id(idAdmin):
     try:
         usuario = Usuario.get_usuario(idAdmin)
@@ -29,6 +32,7 @@ def get_usuario_id(idAdmin):
         return jsonify({"mensaje": "Error al obtener usuario", "error": str(e)})
 
 @api_admin.route('/get_usuario_admin/<string:username>')
+@jwt_required()
 def get_usuario_username(username):
     try:
         usuario = Usuario.get_username(username)
@@ -40,6 +44,7 @@ def get_usuario_username(username):
         return jsonify({"mensaje": "Error al obtener usuario", "error": str(e)})
     
 @api_admin.route('/get_usuarios_admin')
+@jwt_required()
 def get_usuarios():
     try:
         usuarios = Usuario.get_usuarios()
@@ -51,6 +56,7 @@ def get_usuarios():
         return jsonify({"mensaje": "Error al obtener usuarios", "error": str(e)})
 
 @api_admin.route('/insert_usuario_admin', methods=['POST'])
+@jwt_required()
 def insert():
     try:
         usuario = request.json["usuario"]
@@ -66,6 +72,7 @@ def insert():
         return jsonify({"mensaje": "Error al registrar usuario", "error": str(e)})
 
 @api_admin.route('/update_usuario_admin', methods=['POST'])
+@jwt_required()
 def update():
     try:
         usuario = request.json["usuario"]

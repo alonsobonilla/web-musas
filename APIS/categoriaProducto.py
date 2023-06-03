@@ -1,5 +1,6 @@
 #insertar, eliminar, obtener, actualizar, obtener por id
 from flask import jsonify, Blueprint, request
+from flask_jwt import jwt_required
 from model.CategoriaProducto import CategoriaProducto
 
 
@@ -7,6 +8,7 @@ api_categoriaProducto = Blueprint('api_categoriaProducto',__name__)
 
 
 @api_categoriaProducto.route("/api_obtenercategorias")
+@jwt_required()
 def api_obtenercategorias():
     try:
         categorias=CategoriaProducto.obtener_categorias()
@@ -21,6 +23,7 @@ def api_obtenercategorias():
 
 
 @api_categoriaProducto.route("/api_eliminarcategoria")
+@jwt_required()
 def api_eliminarcategoria():
     try:
         CategoriaProducto.eliminar_categoria(request.json["idCategoria"])
@@ -30,6 +33,7 @@ def api_eliminarcategoria():
         return jsonify({"Mensaje":"Error al eliminar categoria"})
    
 @api_categoriaProducto.route("/api_insertarcategoria", methods=["POST"])
+@jwt_required()
 def api_insertarcategoria():
     try:
         nombre = request.json["nombreCategoria"]
@@ -40,6 +44,7 @@ def api_insertarcategoria():
         return jsonify({"Mensaje":"Error al registrar categoria"})
    
 @api_categoriaProducto.route("/api_actualizarcategoria", methods=["POST"])
+@jwt_required()
 def api_actualizarcategoria():
     try:
         idCategoria = request.json["idCategoria"]
@@ -52,6 +57,7 @@ def api_actualizarcategoria():
 
 
 @api_categoriaProducto.route("/api_obtenercategoriaid/<int:idCategoria>")
+@jwt_required()
 def api_obtenercategoriaid(idCategoria):
     try:
         categorias=CategoriaProducto.obtener_categoria_por_id(idCategoria)

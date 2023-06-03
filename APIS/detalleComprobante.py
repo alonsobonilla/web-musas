@@ -1,11 +1,14 @@
 #insertar, obtener  (id comprobante , id producto)
 
 from flask import jsonify, Blueprint, request
+from flask_jwt import jwt_required
 from model.DetalleComprobante import detalleComprobante
 
 api_detalleComprobante = Blueprint('api_detalleComprobante',__name__)
-@api_detalleComprobante.route("/api_obtenerdetalleComprobante")
 
+
+@api_detalleComprobante.route("/api_obtenerdetalleComprobante")
+@jwt_required()
 def api_obtenerusuarios():
     try:
         detallesorden = detalleComprobante.obtener_detalleComprobante()
@@ -19,6 +22,7 @@ def api_obtenerusuarios():
 
 
 @api_detalleComprobante.route("/api_guardardetalleComprobante")
+@jwt_required()
 def api_guardardetalleComprobante():
 
     try:
@@ -35,6 +39,7 @@ def api_guardardetalleComprobante():
 
 
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idproducto>/<int:idpedido>")
+@jwt_required()
 def api_obtenerdetalleComprobante(idproducto,idpedido):
     try:
         deO = detalleComprobante.obtener_detalleComprobante_id(idproducto,idpedido)

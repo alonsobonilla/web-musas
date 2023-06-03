@@ -1,17 +1,20 @@
 #obtener, insertar, actualizar, eliminar, obtener por categoria, obtener por id
 
 from flask import Blueprint, request, jsonify
+from flask_jwt import jwt_required
 from model.Producto import Producto
 from model.CategoriaProducto import CategoriaProducto
 
 api_productos = Blueprint('api_productos', __name__)
 
 @api_productos.route("/get_productos")
+@jwt_required()
 def get_productos():
     productos = Producto.obtener_productos()
     return jsonify({"Mensaje":"Productos obtenidos correctamente", "status:":"1", "productos":productos})
 
 @api_productos.route("/get_producto/<int:id>")
+@jwt_required()
 def get_producto(id):
     try:
         producto = Producto.obtener_producto_por_id(id)
@@ -22,6 +25,7 @@ def get_producto(id):
         return jsonify({"Mensaje":"Error al obtener el producto", "status:":"0", "errror":str(ex)})
 
 @api_productos.route("/get_productos_categoria/<int:id>")
+@jwt_required()
 def get_productos_tipo(id):
     try:
         validate_idCategoria = CategoriaProducto.obtener_categoria_por_id(id)
@@ -36,6 +40,7 @@ def get_productos_tipo(id):
         return jsonify({"Mensaje":"Error al obtener los productos", "status:":"0", "errror":str(ex)})
 
 @api_productos.route("/insertar_producto", methods=["POST"])
+@jwt_required()
 def insertar_producto():
     try:
         nombre = request.json["nombre"]
@@ -57,6 +62,7 @@ def insertar_producto():
     
     
 @api_productos.route("/actualizar_producto", methods=["POST"])
+@jwt_required()
 def actualizar_producto():
     try:
         idProducto = request.json["idProducto"]
@@ -83,6 +89,7 @@ def actualizar_producto():
         return jsonify({"Mensaje":"Error al actualizar el producto", "status:":"0", "errror":str(ex)})
 
 @api_productos.route("/eliminar_producto/", methods=["POST"])
+@jwt_required()
 def eliminar_producto():
     try:
         idProducto = request.json["idProducto"]

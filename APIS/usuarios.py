@@ -1,8 +1,10 @@
 from flask import jsonify, Blueprint, request
+from flask_jwt import jwt_required
 from model.Usuario_cliente import Usuario_cliente
 
 api_usuariosCliente = Blueprint('api_usuariosCliente', __name__)
 @api_usuariosCliente.route("/api_obtenerusuarios")
+@jwt_required()
 def api_obtenerusuarios():
     try:
         usuarios= Usuario_cliente.obtener_usuario()
@@ -16,6 +18,7 @@ def api_obtenerusuarios():
     
 
 @api_usuariosCliente.route("/api_guardarusuario", methods=["POST"])
+@jwt_required()
 def api_guardarusuario():
     try:
         DNI = request.json["DNI"]
@@ -31,6 +34,7 @@ def api_guardarusuario():
     
 
 @api_usuariosCliente.route("/api_eliminarusuario", methods=["POST"])
+@jwt_required()
 def api_eliminarusuario():
     try:
         Usuario_cliente.eliminar_usuario(request.json["DNI"])
@@ -40,6 +44,7 @@ def api_eliminarusuario():
     
 
 @api_usuariosCliente.route("/api_obtenerusuario/<string:DNI>")
+@jwt_required()
 def api_obtenerusuario(DNI):
     try:
         usuario = Usuario_cliente.obtener_usuario_dni(DNI)
