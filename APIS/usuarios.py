@@ -11,8 +11,8 @@ def api_obtenerusuarios():
             miobj = Usuario_cliente(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5])
             listaserializable.append(miobj.midic.copy())
         return jsonify(listaserializable)
-    except:
-        return jsonify ({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"}) 
+    except Exception as e:
+        return jsonify({"mensaje": "Error al obtener usuarios", "error": str(e)}) 
     
 
 @api_usuariosCliente.route("/api_guardarusuario", methods=["POST"])
@@ -23,11 +23,11 @@ def api_guardarusuario():
         apellidos = request.json["apellidos"]
         correo = request.json["correo"]
         numTel = request.json["numTel"]
-        contra = request.json["contra"]
-        Usuario_cliente.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra)
+        contraseña = request.json["contraseña"]
+        Usuario_cliente.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contraseña)
         return jsonify({"Mensaje":"usuario registrado correctamente"})
-    except:
-        return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+    except Exception as e:
+        return jsonify({"mensaje": "Error al guardar usuario", "error": str(e)})
     
 
 @api_usuariosCliente.route("/api_eliminarusuario", methods=["POST"])
@@ -35,9 +35,8 @@ def api_eliminarusuario():
     try:
         Usuario_cliente.eliminar_usuario(request.json["DNI"])
         return jsonify({"Mensaje":"Usuario eliminado correctamente"})
-        return
-    except:
-        return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+    except Exception as e:
+        return jsonify({"mensaje": "Error al eliminar usuario", "error": str(e)})
     
 
 @api_usuariosCliente.route("/api_obtenerusuario/<string:DNI>")
@@ -48,5 +47,6 @@ def api_obtenerusuario(DNI):
         miobj = Usuario_cliente(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5])
         listaserializable.append(miobj.midic.copy())
         return jsonify(listaserializable)
-    except:
-        return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+    except Exception as e:
+        return jsonify({"mensaje": "Error al obtener usuario", "error": str(e)})
+    

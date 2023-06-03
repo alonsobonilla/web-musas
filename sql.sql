@@ -53,11 +53,11 @@ CREATE TABLE registroPedido (
   dniUsuario       char(8), 
   dniNoRegistrado  char(8) NOT NULL, 
   numeroTelefono   char(9) NOT NULL, 
-  estadoRecojo     bit(1) DEFAULT false NOT NULL, 
+  estadoRecojo     boolean DEFAULT false NOT NULL, 
   horaRecojo       time NOT NULL, 
-  fechaPedido      date DEFAULT (CURRENT_DATE) NOT NULL, 
-  estadoBoleta     bit(1) NOT NULL, 
-  billeteraDigital bit(1) NOT NULL, 
+  fechaPedido      datetime NOT NULL, 
+  estadoBoleta     boolean NOT NULL, 
+  billeteraDigital boolean NOT NULL, 
   keyPedido        smallint(6) NOT NULL, 
   PRIMARY KEY (idPedido));
 CREATE TABLE usuario (
@@ -66,7 +66,6 @@ CREATE TABLE usuario (
   apellidos       varchar(100) NOT NULL, 
   correo          varchar(200) NOT NULL, 
   numTel          char(9) NOT NULL, 
-  fechaNacimiento date NOT NULL, 
   contraseña      varchar(250) NOT NULL, 
   PRIMARY KEY (dni));
 CREATE TABLE usuarioAdmin (

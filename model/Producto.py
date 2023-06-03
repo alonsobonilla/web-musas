@@ -126,3 +126,6 @@ class Producto:
             cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s, idCategoria = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, idCategoria, id ))
         conexion.commit()
         conexion.close()
+
+
+   
