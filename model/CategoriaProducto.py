@@ -58,7 +58,7 @@ class CategoriaProducto:
     def actualizar_categoria(nombreCategoria, descripcion, id):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE categoria SET nombreCategoria = %s, descripcion = %s WHERE idCategoria = %s",
+            cursor.execute("UPDATE categoriaProducto SET nombreCategoria = %s, descripcion = %s WHERE idCategoria = %s",
                         ( nombreCategoria, descripcion, id))
         conexion.commit()
         conexion.close()
