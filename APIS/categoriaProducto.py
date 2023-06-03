@@ -9,12 +9,12 @@ api_categoriaProducto = Blueprint('api_categoriaProducto',__name__)
 @api_categoriaProducto.route("/api_obtenercategorias")
 def api_obtenercategorias():
     try:
-      categorias=CategoriaProducto.obtener_categorias()
-      listaserializable = []
-      for categoria in categorias:
-          miobj = CategoriaProducto(categoria[0],categoria[1],categoria[2])
-          listaserializable.append(miobj.midic.copy())
-          return jsonify(listaserializable)
+        categorias=CategoriaProducto.obtener_categorias()
+        listaserializable = []
+        for categoria in categorias:
+            miobj = CategoriaProducto(categoria[0],categoria[1],categoria[2])
+            listaserializable.append(miobj.midic.copy())
+        return jsonify(listaserializable)
     except:
         return jsonify ({"Mensaje":"Error al obtener categoria"})
    
