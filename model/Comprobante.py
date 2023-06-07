@@ -12,4 +12,16 @@ class comprobante:
     igv = 0       
     numeroComprobante = 0
     @staticmethod
-    def insertar_comprobante()
+   
+        
+
+    def validar_idComprobante_existente(idComprobante):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            consulta = "SELECT COUNT(*) FROM comprobante WHERE idComprobante = %s"
+            cursor.execute(consulta, (idComprobante,))
+            resultado = cursor.fetchone()
+        if resultado[0] > 0:
+            return True
+        else:
+            return False

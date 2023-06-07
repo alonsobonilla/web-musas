@@ -14,7 +14,7 @@ class CategoriaProducto:
         conexion = obtener_conexion()
         categoria = []
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto")
+            cursor.execute("SELECT * FROM categoriaProducto")
             categoria = cursor.fetchall()
         conexion.close()
         return categoria
