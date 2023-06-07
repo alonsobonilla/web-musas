@@ -1,11 +1,13 @@
 #insertar, obtener por dni, obtener todos
 from flask import Blueprint, request, jsonify
+from flask_jwt import jwt_required
 from model.Pedido import Pedido
 from model.Usuario_cliente import Usuario_cliente
 
 api_registro_pedidos = Blueprint('api_registro_pedidos', __name__)
 
 @api_registro_pedidos.route('/obtener_pedidos', methods=['GET'])
+@jwt_required()
 def obtener_pedidos():
     try:
         pedidos = Pedido.get_pedidos()
@@ -14,6 +16,7 @@ def obtener_pedidos():
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/obtener_pedidos_por_dni', methods=['POST'])
+@jwt_required()
 def obtener_pedidos_por_dni():
     try:
         dni = request.json['dni']
@@ -23,6 +26,7 @@ def obtener_pedidos_por_dni():
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/insertar_pedido', methods=['POST'])
+@jwt_required()
 def insertar_pedido():
     try:
         dniUsuario = request.json['dniUsuario']
@@ -43,6 +47,7 @@ def insertar_pedido():
         return jsonify({'message': 'Error al registrar el pedido', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/actualizar_estado_recojo', methods=['POST'])
+@jwt_required()
 def actualizar_estado_recojo():
     try:
         keyPedido = request.json['keyPedido']

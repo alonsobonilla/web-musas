@@ -58,5 +58,16 @@ class DetalleOrden:
         conexion.close()
         return modo
 
+    def obtener_subTotal(idPedido):
+        conexion = obtener_conexion()
+        juego = None
+        with conexion.cursor() as cursor:
+            cursor.execute("select precioTotal from detalleOrden where idPedido = %s", (idPedido))
+            juego = cursor.fetchone()
+        conexion.close()
+        subTotal = 0
+        for j in juego:
+            subTotal += j[0]
+        return subTotal
     
     

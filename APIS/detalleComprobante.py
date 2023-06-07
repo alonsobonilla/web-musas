@@ -1,12 +1,18 @@
 #insertar, obtener  (id comprobante , id producto)
 
 from flask import jsonify, Blueprint, request
+from flask_jwt import jwt_required
 from model.DetalleComprobante import detalleComprobante
 from model.Producto import Producto
 from model.Comprobante import comprobante
 
 api_detalleComprobante = Blueprint('api_detalleComprobante',__name__)
+
+
+
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante")
+@jwt_required()
+def api_obtenerusuarios():
 
 def api_obtenerdetallecomprobante():
     try:
@@ -21,6 +27,8 @@ def api_obtenerdetallecomprobante():
 
 
 @api_detalleComprobante.route("/api_guardardetalleComprobante", methods=["POST"])
+@api_detalleComprobante.route("/api_guardardetalleComprobante")
+@jwt_required()
 def api_guardardetalleComprobante():
     try:
         idcomprobante = request.json["idComprobante"]
@@ -38,8 +46,10 @@ def api_guardardetalleComprobante():
         return jsonify({"Mensaje":"Error al insertar detalle de comprobante"})
 
 
-@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idcomprobante>/<int:idproducto>")
-def api_obtenerdetalleComprobante(idcomprobante,idproducto):
+
+@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idproducto>/<int:idpedido>")
+@jwt_required()
+def api_obtenerdetalleComprobante(idproducto,idpedido):
     try:
         deC = detalleComprobante.obtener_detalleComprobante_id(idcomprobante,idproducto)
         validar_idProducto = Producto.obtener_producto_por_id(idproducto)

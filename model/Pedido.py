@@ -53,6 +53,7 @@ class Pedido:
                 conexion.commit()
 
     @classmethod
+    #mal escrito
     def insertar_peidido_usuario_registrado(cls, dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
         cls.cont += 1
         cont = str(cls.cont)
@@ -109,5 +110,11 @@ class Pedido:
         else:
             return False
         
-
-
+    def obtener_dni_pedido(idPedido):
+        conexion = obtener_conexion()
+        juego = None
+        with conexion.cursor() as cursor:
+            cursor.execute("select dniUsuario, dniNoRegistrado from registroPedido where idPedido = %s" ,(idPedido))
+            juego = cursor.fetchone()
+        conexion.close()
+        return juego

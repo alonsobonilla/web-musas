@@ -1,6 +1,20 @@
 from bd import obtener_conexion
+
 class CategoriaProducto:
-    
+    idCategoria = 0
+    nombreCategoria = ""
+    descripcion = ""
+    midic = dict()
+
+    def __init__(self,p_idCategoria,p_nombreCategoria,p_descripcion):
+        self.idCategoria = p_idCategoria
+        self.nombreCategoria = p_nombreCategoria
+        self.descripcion = p_descripcion
+        self.midic["idCategoria"] = p_idCategoria
+        self.midic["nombreCategoria"] = p_nombreCategoria
+        self.midic["descripcion"] = p_descripcion
+
+
     @staticmethod
     def insertar_categoria(nombreCategoria, descripcion):
         conexion = obtener_conexion()
@@ -29,14 +43,14 @@ class CategoriaProducto:
                 return True
             except:
                 return False
-        
+
 
     def obtener_categoria_por_id(idCategoria):
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
             cursor.execute(
-                "SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto WHERE idCategoria = %s", (idCategoria,))
+                "SELECT idCategoria, nombreCategoria, descripcion FROM categoriaProducto WHERE idCategoria = %s", (idCategoria))
             juego = cursor.fetchone()
         conexion.close()
         return juego
@@ -44,7 +58,7 @@ class CategoriaProducto:
     def actualizar_categoria(nombreCategoria, descripcion, id):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE categoria SET nombreCategoria = %s, descripcion = %s WHERE idCategoria = %s",
+            cursor.execute("UPDATE categoriaProducto SET nombreCategoria = %s, descripcion = %s WHERE idCategoria = %s",
                         ( nombreCategoria, descripcion, id))
         conexion.commit()
         conexion.close()
