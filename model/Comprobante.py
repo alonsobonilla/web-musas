@@ -56,9 +56,7 @@ class comprobante:
             cursor.execute(query, (idPedido,dniUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante))
         conexion.commit()
         conexion.close()
-   
-    
-   
+ 
     def obtener_comprobante():
         conexion = obtener_conexion()
         comprobantes = []
@@ -76,14 +74,6 @@ class comprobante:
             juego = cursor.fetchone()
         conexion.close()
         return juego
-   
-
-    montoTotal = 0 
-    igv = 0       
-    numeroComprobante = 0
-    @staticmethod
-   
-        
 
     def validar_idComprobante_existente(idComprobante):
         conexion = obtener_conexion()
