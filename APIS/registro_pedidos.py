@@ -2,7 +2,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt import jwt_required
 from model.Pedido import Pedido
-from model.Usuario_cliente import Usuario_cliente
+from model.Usuario import Usuario_cliente
 
 api_registro_pedidos = Blueprint('api_registro_pedidos', __name__)
 
