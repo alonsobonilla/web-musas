@@ -10,8 +10,7 @@ from controllers.admin_usuarios import *
 
 #Importando apis
 from APIS.productos import *
-from APIS.usuarios import *
-from APIS.usuarioAdmin import api_admin
+from APIS.usuarios import api_usuarios
 from APIS.registro_pedidos import api_registro_pedidos
 from APIS.detalleOrden import api_detalleOrden
 from APIS.categoriaProducto import api_categoriaProducto
@@ -49,8 +48,7 @@ app.register_blueprint(cliente)
 
 #Registrando apis
 app.register_blueprint(api_productos)
-app.register_blueprint(api_usuariosCliente)
-app.register_blueprint(api_admin)
+app.register_blueprint(api_usuarios)
 app.register_blueprint(api_registro_pedidos)
 app.register_blueprint(api_detalleOrden)
 app.register_blueprint(api_categoriaProducto)

@@ -2,8 +2,8 @@ from flask import jsonify, Blueprint, request
 from flask_jwt import jwt_required
 from model.Usuario import Usuario
 
-api_usuariosCliente = Blueprint('api_usuariosCliente', __name__)
-@api_usuariosCliente.route("/api_obtenerusuarios")
+api_usuarios = Blueprint('api_usuarios', __name__)
+@api_usuarios.route("/api_obtenerusuarios")
 @jwt_required()
 def api_obtenerusuarios():
     try:
@@ -17,7 +17,7 @@ def api_obtenerusuarios():
         return jsonify({"mensaje": "Error al obtener usuarios", "error": str(e)}) 
 
 
-@api_usuariosCliente.route("/api_guardarusuario", methods=["POST"])
+@api_usuarios.route("/api_guardarusuario", methods=["POST"])
 @jwt_required()
 def api_guardarusuario():
     try:
@@ -34,7 +34,7 @@ def api_guardarusuario():
         return jsonify({"mensaje": "Error al guardar usuario", "error": str(e)})
     
 
-@api_usuariosCliente.route("/api_eliminarusuario", methods=["POST"])
+@api_usuarios.route("/api_eliminarusuario", methods=["POST"])
 @jwt_required()
 def api_eliminarusuario():
     try:
@@ -47,7 +47,7 @@ def api_eliminarusuario():
         return jsonify({"mensaje": "Error al eliminar usuario", "error": str(e)})
     
 
-@api_usuariosCliente.route("/api_obtenerusuario")
+@api_usuarios.route("/api_obtenerusuario")
 @jwt_required()
 def api_obtenerusuario_por_dni_tipo():
     try:
