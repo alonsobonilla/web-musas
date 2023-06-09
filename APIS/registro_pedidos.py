@@ -36,7 +36,7 @@ def insertar_pedido():
         estadoBoleta = request.json['estadoBoleta']
         billeteraDigital = request.json['billeteraDigital']
         
-        validate_dni = Usuario_cliente.obtener_usuario_dni(dniUsuario)
+        validate_dni = Usuario.obtener_usuario_dni_tipo(dniUsuario, True)
         if validate_dni is not None:
             Pedido.insertar_peidido_usuario_registrado( dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         else:

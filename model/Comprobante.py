@@ -1,7 +1,7 @@
 from bd import obtener_conexion
 from model.Pedido import Pedido
 from model.DetalleOrden import DetalleOrden
-from model.Usuario import Usuario_cliente
+from model.Usuario import Usuario
 import datetime
 
 
