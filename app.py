@@ -16,6 +16,7 @@ from APIS.detalleOrden import api_detalleOrden
 from APIS.categoriaProducto import api_categoriaProducto
 from APIS.detalleComprobante import api_detalleComprobante
 from APIS.detalleCremas import api_detalleCremas
+from APIS.comprobante import api_comprobante
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret-key"
@@ -54,6 +55,7 @@ app.register_blueprint(api_detalleOrden)
 app.register_blueprint(api_categoriaProducto)
 app.register_blueprint(api_detalleComprobante)
 app.register_blueprint(api_detalleCremas)
+app.register_blueprint(api_comprobante)
 
 
 app.secret_key = "mysecretkey"
