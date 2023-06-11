@@ -3,7 +3,7 @@ from model.Pedido import Pedido
 from model.Usuario import Usuario
 import datetime
 
-class comprobante:
+class Comprobante:
     idComprobante = 0
     idPedido = 0 
     dniUsuario = ""
