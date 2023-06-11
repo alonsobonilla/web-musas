@@ -14,7 +14,6 @@ def insertar_comprobante():
         idPedido = request.json["idPedido"]
         numComprobante = request.json["numComprobante"]
 
-
         Comprobante.insertar(idPedido, numComprobante)
         return jsonify({"Mensaje":"Comprobante registrado correctamente", "status:":"1"})
     except Exception as ex:
@@ -34,7 +33,14 @@ def obtener_comprobante():
     except Exception as e:
         return jsonify({"Mensaje": "Error al obtener comprobante", "errror": str(e)})
 
-@api_comprobante.route('/obtener_comprobante_id')
-def obtener_comprobante():
+@api_comprobante.route('/obtener_comprobante_cliente/<int:id>')
+def obtener_comprobante_cliente(idUsuario):
     try:
-        comprobante
+        comprobante = Comprobante.obtener_comprobante_dni(idUsuario)
+        lista = []
+        miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4], comprobante[5], comprobante[6], comprobante[7], comprobante[8], comprobante[9])
+        lista.append(miobj.midic.copy())
+        return jsonify({"Mensaje":"Comprobante obtenido correctamente", "status:":"1","Comprobante:": lista})
+    except Exception as e:
+        return jsonify({"Mensaje":"Error al obtener comprobante","status": "0", "errror": str(e)})
+
