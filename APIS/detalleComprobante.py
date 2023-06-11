@@ -2,46 +2,62 @@
 
 from flask import jsonify, Blueprint, request
 from model.DetalleComprobante import detalleComprobante
+from model.Producto import Producto
+from model.Comprobante import comprobante
 
 api_detalleComprobante = Blueprint('api_detalleComprobante',__name__)
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante")
 
-def api_obtenerusuarios():
+def api_obtenerdetallecomprobante():
     try:
-        detallesorden = detalleComprobante.obtener_detalleComprobante()
+        detalleC = detalleComprobante.obtener_detalleComprobante()
         listaserializable = []
-        for deO in detallesorden:
-            miobj = detalleComprobante(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
+        for deC in detalleC:
+            miobj = detalleComprobante(deC[0],deC[1],deC[2],deC[3],deC[4],deC[5])
             listaserializable.append(miobj.midic.copy())
         return jsonify(listaserializable)
     except:
-        return jsonify ({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+        return jsonify ({"Mensaje":"Error al obtener detalle de comprobante"})
 
 
-@api_detalleComprobante.route("/api_guardardetalleComprobante")
+@api_detalleComprobante.route("/api_guardardetalleComprobante", methods=["POST"])
 def api_guardardetalleComprobante():
-
     try:
-        idproducto = request.json["idproducto"]
-        idpedido = request.json["idpedido"]
-        nomP = request.json["nombreProducto"]
-        precioU = request.json["precioUnidad"]
+        idcomprobante = request.json["idComprobante"]
+        idproducto = request.json["idProducto"]
         cantidad = request.json["cantidad"]
-        precioT = request.json["precioTotal"]
-        detalleComprobante.insertar_detalleComprobante(idproducto,idpedido,nomP,precioU,cantidad,precioT)
-        return jsonify({"Mensaje":"usuario registrado correctamente"})
+        validar_idProducto = Producto.obtener_producto_por_id(idproducto)
+        validar_idComprobante = comprobante.validar_idComprobante_existente(idcomprobante)
+
+        if validar_idProducto == None or validar_idComprobante == None:
+            return jsonify ({"Mensaje":"Error al guardar detalle de comprobante No existe el producto o el comprobante"})
+        
+        detalleComprobante.insertar_detalleComprobante(idcomprobante,idproducto,cantidad)
+        return jsonify({"Mensaje":"Detalle Comprobante registrado correctamente"})
     except:
-        return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+        return jsonify({"Mensaje":"Error al insertar detalle de comprobante"})
 
 
-@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idproducto>/<int:idpedido>")
-def api_obtenerdetalleComprobante(idproducto,idpedido):
+@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idcomprobante>/<int:idproducto>")
+def api_obtenerdetalleComprobante(idcomprobante,idproducto):
     try:
-        deO = detalleComprobante.obtener_detalleComprobante_id(idproducto,idpedido)
+        deC = detalleComprobante.obtener_detalleComprobante_id(idcomprobante,idproducto)
+        validar_idProducto = Producto.obtener_producto_por_id(idproducto)
+        validar_Comprobante = comprobante.validar_idComprobante_existente(idcomprobante)
         listaserializable = []
-        miobj = detalleComprobante(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
-        listaserializable.append(miobj.midic.copy())
-        return jsonify(listaserializable)
-    except:
-        return jsonify({"Mensaje":"Error interno. Llame al Administrador de sistemas (+51) 969 696 969"})
+
+        if validar_idProducto is None:
+            return jsonify({"Mensaje": "El producto no existe"})
+        elif not validar_Comprobante:
+            return jsonify({"Mensaje": "El Comprobante no existe"})
+        elif deC is None:
+              return jsonify({"Mensaje": "El detalle de comprobante no existe"})
+        else:
+            miobj = detalleComprobante(deC[0],deC[1],deC[2],deC[3],deC[4],deC[5])
+            listaserializable.append(miobj.midic.copy())
+            return jsonify(listaserializable)
+    except Exception as e:
+        return jsonify({"mensaje": "Error al obtener detalle orden", "error": str(e)})
+
+
 

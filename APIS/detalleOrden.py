@@ -1,12 +1,14 @@
 #obtener, insertar, obtener por id
 
 from flask import jsonify, Blueprint, request
+from flask_jwt import jwt_required
 from model.DetalleOrden import DetalleOrden
 from model.Producto import Producto
 from model.Pedido import Pedido
 
 api_detalleOrden = Blueprint('api_detalleOrden',__name__)
 @api_detalleOrden.route("/api_obtenerdetalleorden")
+@jwt_required()
 def api_obtenerdetalleorden():
     try:
         detallesorden = DetalleOrden.obtener_detalleOrden()
@@ -20,6 +22,7 @@ def api_obtenerdetalleorden():
 
 
 @api_detalleOrden.route("/api_guardardetalleorden", methods=["POST"])
+@jwt_required()
 def api_guardardetalleOrden():
     try:
         idproducto = request.json["idproducto"]
@@ -40,6 +43,7 @@ def api_guardardetalleOrden():
         return jsonify({"mensaje": "Error al guardar detalle orden", "error": str(e)})
 
 @api_detalleOrden.route("/api_obtenerdetalleorden/<int:idproducto>/<int:idpedido>")
+@jwt_required()
 def api_obtenedetalleorden(idproducto,idpedido):
     try:
         listaserializable = []
