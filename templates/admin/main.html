@@ -55,9 +55,12 @@
       href="{{url_for('static', filename = 'styles/mostrar-productos.css')}}"
     />
 
-  <link rel="stylesheet" href="{{url_for('static', filename = 'styles/admin/global.css')}}" />
-  <title>Musas</title>
-</head>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'styles/admin/global.css')}}"
+    />
+    <title>Musas</title>
+  </head>
   <body>
     <main class="content-col">
       <div class="lg">
@@ -87,6 +90,11 @@
 
         <div>
           <p>Nombre de usuario : {{usuario}}</p>
+        </div>
+        <div>
+          <a href="{{url_for('admin.auth.logout')}}">
+            <button>Cerrar sesión</button>
+          </a>
         </div>
         {% endif %}
       </div>
