@@ -24,10 +24,10 @@ def login():
         contraseña = request.form["contraseña"]
 
         user = Autenticacion.login(usuario, contraseña, blueprint_name)
-        nombre = user[0][2]
+        
         if not isinstance(user, str):
             session.pop(blueprint_name, None)
-
+            nombre = user[0][2]
             if blueprint_name == "cliente.auth":
                 session[blueprint_name] = nombre
                 return redirect(url_for("cliente.home"))
