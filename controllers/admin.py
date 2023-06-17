@@ -5,9 +5,9 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin.route("/")
 def home():
-    user_id = session.get("admin.auth")
-    if user_id is None:
+    nombre = session.get("admin.auth")
+    if nombre is None:
         return render_template("admin/login.html")
     else:
         productos = Producto.obtener_productos()
-        return render_template("admin/main.html", productos=productos, usuario = user_id)
+        return render_template("admin/main.html", productos=productos, usuario = nombre)
