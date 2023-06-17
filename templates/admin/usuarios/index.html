@@ -9,8 +9,11 @@ block contenido %}
       <table class="table">
         <thead>
           <tr>
-            <th>Usuario</th>
-            <th>Contraseña</th>
+            <th>Dni</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
             <th>Editar</th>
             <th>Eliminar</th>
           </tr>
@@ -20,6 +23,9 @@ block contenido %}
           <tr>
             <td>{{usuario[1]}}</td>
             <td>{{usuario[2]}}</td>
+            <td>{{usuario[3]}}</td>
+            <td>{{usuario[4]}}</td>
+            <td>{{usuario[5]}}</td>
             <td>
               {# Pasar el id (lo que hay en producto[0]) #}
               <a

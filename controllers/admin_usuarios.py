@@ -18,15 +18,17 @@ def form_agregar():
 def form_editar(id):
     usuario = session.get("admin.auth")
     userUsuario = Usuario.obtener_usuario_id(id)
-    return render_template("admin/usuarios/editar.html", usuario = usuario, userUsuario = userUsuario)
+    if userUsuario is not None:
+        return render_template("admin/usuarios/editar.html", usuario = usuario, userUsuario = userUsuario)
+    return redirect(url_for('admin.usuarios.home'))
 
 @usuarios.route("/actualizar", methods=["POST"])
 def actualizar():
-    dni = request.form["dni"]
+    id = request.form["id"]
     correo = request.form["correo"]
     numTel = request.form["telefono"]
     contra = request.form["contraseña"]
-    Usuario.actualizar_usuario(correo, numTel,contra,dni, False)
+    Usuario.actualizar_usuario(correo, numTel,contra,id, False)
     return redirect(url_for("admin.usuarios.home"))
 
 @usuarios.route("/eliminar", methods=["POST"])
@@ -43,5 +45,7 @@ def guardar():
     correo = request.form["correo"]
     numTel = request.form["telefono"]
     contra = request.form["contraseña"]
-    Usuario.insertar_usuario(dni, nombres, apellidos, correo, numTel, contra, False)
-    return redirect(url_for("admin.usuarios.home"))
+    if(Usuario.obtener_usuario_dni_tipo(dni, False) is None):
+        Usuario.insertar_usuario(dni, nombres, apellidos, correo, numTel, contra, False)
+        return redirect(url_for("admin.usuarios.home"))
+    return redirect(url_for("admin.usuarios.form_agregar"))

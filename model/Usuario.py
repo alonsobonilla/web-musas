@@ -32,7 +32,7 @@ class Usuario:
     def insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTel,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario))
+            cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTelf,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario))
         conexion.commit()
         conexion.close()
 
@@ -40,31 +40,37 @@ class Usuario:
         conexion = obtener_conexion()
         usuarios = []
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT * FROM usuario")
+            cursor.execute("SELECT * FROM usuario where tipoUsuario = %s", (False))
             usuarios = cursor.fetchall()
         conexion.close()
         return usuarios
 
-
-    def obtener_usuario_dni_tipo(dni, tipoUsuario):
+    def obtener_usuario_id(id):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM usuario WHERE idUsuario = %s", (id))
+            usuario = cursor.fetchone()
+        return usuario
+    
+    def obtener_usuario_id_tipo(id, tipoUsuario):
         conexion = obtener_conexion()
         modo = None
         with conexion.cursor() as cursor: 
-            cursor.execute("SELECT DNI,nombres,apellidos,correo, numTel, contraseña, tipoUsuario FROM usuario WHERE DNI= %s and tipoUsuario = %s",(dni,tipoUsuario))
+            cursor.execute("SELECT DNI,nombres,apellidos,correo, numTelf, contraseña, tipoUsuario FROM usuario WHERE idUsuario= %s and tipoUsuario = %s",(id,tipoUsuario))
             modo = cursor.fetchone()
         conexion.close()
         return modo
 
-    def actualizar_usuario(correo, numTel,contra,dni, tipo):
+    def actualizar_usuario(correo, numTel,contra,id, tipo):
         if correo is "":
-            correo = Usuario.obtener_usuario(dni)[3]
+            correo = Usuario.obtener_usuario_id_tipo(id,tipo)[4]
         elif numTel is "":
-            numTel = Usuario.obtener_usuario(dni)[4]
+            numTel = Usuario.obtener_usuario_id_tipo(id,tipo)[5]
         elif contra is "":
-            contra = Usuario.obtener_usuario(dni)[5]
+            contra = Usuario.obtener_usuario_id_tipo(id,tipo)[6]
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE usuario SET correo = %s, numTel= %s, contraseña= %s WHERE DNI=%s and tipoUsuario = %s",(correo, numTel,contra,dni, tipo))
+            cursor.execute("UPDATE usuario SET correo = %s, numTelf= %s, contraseña= %s WHERE idUsuario=%s and tipoUsuario = %s",(correo, numTel,contra,id, tipo))
         conexion.commit()
         conexion.close()
     
@@ -74,3 +80,17 @@ class Usuario:
             cursor.execute("DELETE FROM usuario WHERE DNI = %s and tipoUsuario = %s", (dni,tipoUsuario))
         conexion.commit()
         conexion.close() 
+
+    def eliminar_usuario_id(id):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("DELETE FROM usuario WHERE idUsuario = %s", (id))
+        conexion.commit()
+        conexion.close()
+    
+    def obtener_usuario_dni_tipo(dni, tipo):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM usuario WHERE DNI = %s and tipoUsuario = %s", (dni,tipo))
+            usuario = cursor.fetchone()
+        return usuario

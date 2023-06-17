@@ -4,16 +4,64 @@
   <h3 class="m-3 fs-5 fw-bold">Crear usuarios administradores</h3>
   <form action="{{url_for('admin.usuarios.guardar')}}" method="post">
     <div class="mb-3">
-      <label for="nombreUsuario">Nombre usuario:</label>
-    <input required type="text" class="form-control" placeholder="usuario" name="nombreUsuario" id="nombreUsuario" />
+      <label for="dni" class="form-label">Dni:</label>
+      <input required type="text" class="form-control" name="dni" id="dni" />
     </div>
     <div class="mb-3">
-      <label for="contraseña">Contraseña:</label>
-    <input required type="text" class="form-control" placeholder="contraseña" name="contraseña" id="contraseña" />
+      <label for="nombres" class="form-label">Nombres:</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        name="nombres"
+        id="nombres"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="apellidos" class="form-label">Apellidos:</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        name="apellidos"
+        id="apellidos"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo:</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        name="correo"
+        id="correo"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono:</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        name="telefono"
+        id="telefono"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="contraseña" class="form-label">Contraseña:</label>
+      <input
+        required
+        type="password"
+        class="form-control"
+        name="contraseña"
+        id="contraseña"
+      />
     </div>
     <div class="d-flex gap-2 justify-content-end">
       <button type="submit" class="btn btn-success mt-2">Guardar</button>
-    <a href="{{url_for('admin.usuarios.home')}}" class="btn btn-primary mt-2">Volver</a>
+      <a href="{{url_for('admin.usuarios.home')}}" class="btn btn-primary mt-2"
+        >Volver</a
+      >
     </div>
   </form>
 </section>
