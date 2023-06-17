@@ -62,13 +62,13 @@ CREATE TABLE registroPedido (
   PRIMARY KEY (idPedido));
 CREATE TABLE usuario (
   idUsuario   int(11) NOT NULL AUTO_INCREMENT, 
-  dni         char(8) NOT NULL UNIQUE, 
+  dni         char(8) NOT NULL, 
   nombres     varchar(100) NOT NULL, 
   apellidos   varchar(100) NOT NULL, 
   correo      varchar(200) NOT NULL, 
   numTelf     char(9) NOT NULL, 
   contraseña  varchar(100) NOT NULL, 
-  tipoUsuario tinyint(1) NOT NULL UNIQUE, 
+  tipoUsuario tinyint(1) NOT NULL, 
   PRIMARY KEY (idUsuario));
 ALTER TABLE detalleComprobante ADD CONSTRAINT FKdetalleCom998263 FOREIGN KEY (idComprobante) REFERENCES comprobante (idComprobante);
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd26951 FOREIGN KEY (idProducto) REFERENCES producto (idProducto);
