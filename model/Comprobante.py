@@ -4,8 +4,7 @@ from model.DetalleOrden import DetalleOrden
 from model.Usuario import Usuario
 import datetime
 
-
-class comprobante:
+class Comprobante:
     idComprobante = 0
     idPedido = 0
     dniUsuario = ""
