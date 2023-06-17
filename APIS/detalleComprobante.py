@@ -3,7 +3,7 @@
 from flask import jsonify, Blueprint, request
 from model.DetalleComprobante import detalleComprobante
 from model.Producto import Producto
-from model.Comprobante import comprobante
+from model.Comprobante import Comprobante
 
 api_detalleComprobante = Blueprint('api_detalleComprobante',__name__)
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante")
@@ -27,7 +27,7 @@ def api_guardardetalleComprobante():
         idproducto = request.json["idProducto"]
         cantidad = request.json["cantidad"]
         validar_idProducto = Producto.obtener_producto_por_id(idproducto)
-        validar_idComprobante = comprobante.validar_idComprobante_existente(idcomprobante)
+        validar_idComprobante = Comprobante.validar_idComprobante_existente(idcomprobante)
 
         if validar_idProducto == None or validar_idComprobante == None:
             return jsonify ({"Mensaje":"Error al guardar detalle de comprobante No existe el producto o el comprobante"})
@@ -43,7 +43,7 @@ def api_obtenerdetalleComprobante(idcomprobante,idproducto):
     try:
         deC = detalleComprobante.obtener_detalleComprobante_id(idcomprobante,idproducto)
         validar_idProducto = Producto.obtener_producto_por_id(idproducto)
-        validar_Comprobante = comprobante.validar_idComprobante_existente(idcomprobante)
+        validar_Comprobante = Comprobante.validar_idComprobante_existente(idcomprobante)
         listaserializable = []
 
         if validar_idProducto is None:
