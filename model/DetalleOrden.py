@@ -12,13 +12,14 @@ class DetalleOrden:
     precioTotal = 0.0
     midic = dict()
 
-    def __init__(self,p_idProducto,p_idPedido,p_nombreProducto,p_precioUnidad,p_cantidad,p_precioTotal):
+    def __init__(self,p_idDetalleOrden,p_idProducto,p_idPedido,p_nombreProducto,p_precioUnidad,p_cantidad,p_precioTotal):
         self.idProducto= p_idProducto
         self.idPedido = p_idPedido
         self.nombreProducto = p_nombreProducto
         self.precioUnidad = p_precioUnidad
         self.cantidad = p_cantidad
         self.precioTotal = p_precioTotal
+        self.midic["idDetalleOrden"] = p_idDetalleOrden
         self.midic["idProducto"] = p_idProducto
         self.midic["idPedido"] = p_idPedido
         self.midic["nombreProducto"] = p_nombreProducto
@@ -29,7 +30,7 @@ class DetalleOrden:
     def insertar_detalleOrden(idproducto,idpedido,cantidad):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            query = "INSERT INTO detalleOrden VALUES (%s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO detalleOrden(idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
             nomP =Producto.obtener_producto_por_id(idproducto)["nombre"]
             precioU = Producto.obtener_producto_por_id(idproducto)["precio"]
             precioT = cantidad * precioU
@@ -49,11 +50,11 @@ class DetalleOrden:
         return detalleOrden
 
 
-    def obtener_detalleOrden_id(idproducto,idpedido):
+    def obtener_detalleOrden_id(idDetalleOrden,idpedido):
         conexion = obtener_conexion()
         modo=None
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idProducto,idPedido,nombreProducto,precioUnidad,cantidad,precioTotal FROM detalleOrden WHERE idproducto=%s AND idpedido=%s",(idpedido,idproducto,))
+            cursor.execute("SELECT idProducto,idPedido,nombreProducto,precioUnidad,cantidad,precioTotal FROM detalleOrden WHERE idPedido = %s AND idDetalleOrden=%s",(idpedido,idDetalleOrden,))
             modo = cursor.fetchone()
         conexion.close()
         return modo

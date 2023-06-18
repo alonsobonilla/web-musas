@@ -14,7 +14,7 @@ def insertar_comprobante():
         idPedido = request.json["idPedido"]
         numComprobante = request.json["numComprobante"]
 
-        Comprobante.insertar(idPedido, numComprobante)
+        Comprobante.insertar_comprobante(idPedido, numComprobante)
         return jsonify({"Mensaje":"Comprobante registrado correctamente", "status:":"1"})
     except Exception as ex:
         return jsonify({"Mensaje":"Error al registrar el Comprobante", "status:":"0", "errror":str(ex)})
