@@ -16,7 +16,7 @@ CREATE TABLE comprobante (
   numeroComprobante varchar(25) NOT NULL, 
   PRIMARY KEY (idComprobante));
 CREATE TABLE detalleComprobante (
-  idComprobante  int(11) NOT NULL, 
+  idComprobante  int(11) NOT NULL AUTO_INCREMENT, 
   idProducto     int(11) NOT NULL, 
   nombreProducto varchar(100) NOT NULL, 
   precioUnidad   float NOT NULL, 
@@ -25,20 +25,21 @@ CREATE TABLE detalleComprobante (
   PRIMARY KEY (idComprobante, 
   idProducto));
 CREATE TABLE detalleCremas (
-  idPedido   int(11) NOT NULL, 
-  idProducto int(11) NOT NULL, 
-  idCrema    int(11) NOT NULL, 
-  PRIMARY KEY (idPedido, 
-  idProducto, 
-  idCrema));
-CREATE TABLE detalleOrden (
-  idProducto     int(11) NOT NULL, 
   idPedido       int(11) NOT NULL, 
+  idCrema        int(11) NOT NULL, 
+  idDetalleOrden int(11) NOT NULL, 
+  PRIMARY KEY (idPedido, 
+  idCrema, 
+  idDetalleOrden));
+CREATE TABLE detalleOrden (
+  idDetalleOrden int(11) NOT NULL AUTO_INCREMENT, 
+  idPedido       int(11) NOT NULL, 
+  idProducto     int(11) NOT NULL, 
   nombreProducto varchar(100) NOT NULL, 
   precioUnidad   float NOT NULL, 
   cantidad       smallint(6) NOT NULL, 
   precioTotal    float NOT NULL, 
-  PRIMARY KEY (idProducto, 
+  PRIMARY KEY (idDetalleOrden, 
   idPedido));
 CREATE TABLE producto (
   idProducto  int(11) NOT NULL AUTO_INCREMENT, 
@@ -72,7 +73,7 @@ CREATE TABLE usuario (
   PRIMARY KEY (idUsuario));
 ALTER TABLE detalleComprobante ADD CONSTRAINT FKdetalleCom998263 FOREIGN KEY (idComprobante) REFERENCES comprobante (idComprobante);
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd26951 FOREIGN KEY (idProducto) REFERENCES producto (idProducto);
-ALTER TABLE detalleCremas ADD CONSTRAINT FKdetalleCre204471 FOREIGN KEY (idProducto, idPedido) REFERENCES detalleOrden (idProducto, idPedido);
+ALTER TABLE detalleCremas ADD CONSTRAINT FKdetalleCre999352 FOREIGN KEY (idDetalleOrden, idPedido) REFERENCES detalleOrden (idDetalleOrden, idPedido);
 ALTER TABLE producto ADD CONSTRAINT FKproducto802442 FOREIGN KEY (idCategoria) REFERENCES categoriaProducto (idCategoria);
 ALTER TABLE registroPedido ADD CONSTRAINT FKregistroPe851289 FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario);
 ALTER TABLE detalleOrden ADD CONSTRAINT FKdetalleOrd726046 FOREIGN KEY (idPedido) REFERENCES registroPedido (idPedido);
