@@ -17,25 +17,19 @@
 <div class="categorias-content">
   <div class="categorias">
     <div class="categorias-in">
-      <div class="categoria-item">
-        <div>
-          <img src="#" alt="Categoria" />
+      {% for categoria in categorias %}
+      <a
+        href="{{url_for('cliente.productos_categoria', categoria = categoria[1])}}"
+        class="text-black"
+      >
+        <div class="categoria-item">
+          <!-- <div>
+            <img src="#" alt="Categoria" />
+          </div> -->
+          <p>{{categoria[1]}}</p>
         </div>
-        <p>Nombre categoria</p>
-      </div>
-      <div class="categoria-item">
-        <div>
-          <img src="#" alt="Categoria" />
-        </div>
-
-        <p>Nombre categoria</p>
-      </div>
-      <div class="categoria-item">
-        <div>
-          <img src="#" alt="Categoria" />
-        </div>
-        <p>Nombre categoria</p>
-      </div>
+      </a>
+      {% endfor %}
     </div>
   </div>
 </div>

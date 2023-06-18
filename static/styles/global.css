@@ -1,75 +1,80 @@
 :root {
-    --color1: #DB4200;
-    --color1-hover: #fd4e04;
-    --color2: #FBD357;
-    --color3: #3D80CC;
-    --blanco: #fff;
-    --negro: #000;
-    --fuente: 'Montserrat', sans-serif;
+  --color1: #db4200;
+  --color1-hover: #fd4e04;
+  --color2: #fbd357;
+  --color3: #3d80cc;
+  --blanco: #fff;
+  --negro: #000;
+  --fuente: "Montserrat", sans-serif;
 }
 html {
-    box-sizing: border-box;
-    height: 100vh;
+  box-sizing: border-box;
+  height: 100vh;
 }
-*, *:before, *:after {
-    box-sizing: inherit;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 body {
-    font-family: var(--fuente);
-    height: 100%;
-    padding-top: 50px;
+  font-family: var(--fuente);
+  height: 100%;
+  padding-top: 50px;
 }
-h1,h2,h3,h4 {
-    text-align: center;
-    margin: 0;
-    color: var(--color1);
-    text-transform: uppercase;
-    font-weight: 400;
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+  margin: 0;
+  color: var(--color1);
+  text-transform: uppercase;
+  font-weight: 400;
 }
 h1 {
-    font-size: 20px;
+  font-size: 20px;
 }
 h2 {
-    font-size: 18px;
+  font-size: 18px;
 }
 h3 {
-    font-size: 16px;
+  font-size: 16px;
 }
 h4 {
-    font-size: 14px;
+  font-size: 14px;
 }
 p {
-    font-weight: 400;
-    margin: 0;
-    font-size: 12px;
-    line-height: 2;
+  font-weight: 400;
+  margin: 0;
+  font-size: 12px;
+  line-height: 2;
 }
 span {
-    font-size: 12px;
-    font-weight:700;
+  font-size: 12px;
+  font-weight: 700;
 }
 a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
 }
 a:hover {
-    color: #fff;
+  color: #fff;
 }
 ul {
-    list-style: none;
-    list-style-position: inside;
-    padding: 0;
+  list-style: none;
+  list-style-position: inside;
+  padding: 0;
 }
-button{
-    border: 0;
-    background-color: var(--color2);
-    padding: 0;
+button {
+  border: 0;
+  background-color: var(--color2);
+  padding: 0;
 }
 iframe {
-    width: 100%;
-    height: 300px;
+  width: 100%;
+  height: 300px;
 }
 img {
-    width: 60px;
+  width: 60px;
 }

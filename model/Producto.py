@@ -6,7 +6,10 @@ class Producto:
         conexion = obtener_conexion()
         productos = []
         with conexion.cursor() as cursor:
-            cursor.execute("select * from producto where idCategoria = %s", id)  
+            if type(id) == str:
+                cursor.execute("select * from producto p inner join categoriaProducto cp on cp.idCategoria = p.idCategoria where cp.nombreCategoria = %s", (id))  
+            else:
+                cursor.execute("select * from producto where idCategoria = %s", id)
             productos = cursor.fetchall()
         conexion.close()
 
@@ -23,7 +26,7 @@ class Producto:
             diccionario["existencias"] = producto[5]
             lista_diccionarios.append(diccionario)
         return lista_diccionarios
-    
+
     @staticmethod
     def insertar_producto( nombre, descripcion, precio, existencias, idCategoria):
         
