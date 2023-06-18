@@ -1,5 +1,5 @@
 from bd import obtener_conexion
-
+from werkzeug.security import check_password_hash, generate_password_hash
 class Usuario:
     DNI = ""
     nombres = ""
@@ -30,11 +30,18 @@ class Usuario:
         self.midic["tipoUsuario"]=self.tipoUsuario
 
     def insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario):
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTelf,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario))
-        conexion.commit()
-        conexion.close()
+
+        user = Usuario.obtener_usuario_dni_tipo(DNI, tipoUsuario)
+        error = None
+        if user is None:
+            conexion = obtener_conexion()
+            with conexion.cursor() as cursor:
+                cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTelf,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,generate_password_hash(contra), tipoUsuario))
+            conexion.commit()
+            conexion.close()
+        else:
+            error = "Usuario ya registrado"
+        return error
 
     def obtener_usuario():
         conexion = obtener_conexion()

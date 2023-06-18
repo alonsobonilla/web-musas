@@ -39,19 +39,11 @@ class Autenticacion:
     @staticmethod
     def registro(dni, nombres, apellidos, correo, numTelf, contraseña):
         conexion = obtener_conexion()
-        error = None
 
         if not dni or not nombres or not apellidos or not correo or not numTelf or not contraseña:
             error = "Campos obligatorios"
         else:
-            user = Usuario.obtener_usuario_dni_tipo(dni, True)
-            if user is None:
-                with conexion.cursor() as cursor:
-                    query = "INSERT INTO usuario (dni,nombres,apellidos,correo,numTelf,contraseña,tipoUsuario) values (%s, %s, %s, %s, %s, %s,%s)"
-                    cursor.execute(query, (dni, nombres, apellidos,correo, numTelf, generate_password_hash(contraseña), True))
-                    conexion.commit()
-            else:
-                error = f"Dni: {dni} ya registrado"            
+            error = Usuario.insertar_usuario(dni, nombres, apellidos, correo, numTelf, contraseña, True)            
         return error
 
     @staticmethod
