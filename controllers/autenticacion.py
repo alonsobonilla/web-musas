@@ -38,7 +38,7 @@ def login():
             flash(user)
     
     if blueprint_name == "cliente.auth":
-        return render_template("client/index.html", cliente = nombre)
+        return render_template("client/login.html")
     elif blueprint_name == "admin.auth":
         return redirect(url_for("admin.home"))
         
@@ -49,7 +49,7 @@ def registro():
     if request.method == "POST":
         dni = request.form["dni"]
         nombres = request.form["nombres"]
-        apellidos = request.form["apellido"]
+        apellidos = request.form["apellidos"]
         correo = request.form["correo"]
         numTelf = request.form["telefono"]
         contraseña = request.form["contraseña"]
@@ -57,18 +57,18 @@ def registro():
         error = Autenticacion.registro(dni, nombres, apellidos, correo, numTelf, contraseña)
 
         if error is None:
-            redirect(url_for("client.login"))
+            return render_template("client/login.html")
         else:
             flash(error) 
 
     blueprint_name = request.blueprint
     user = session.get(blueprint_name, None)
 
-    if user == "cliente.auth":
-        if g.cliente == None:
+    if blueprint_name == "cliente.auth":
+        if user is None:
             return render_template("client/registro.html")
         else:
-            return render_template("client/index.html", cliente = g.cliente[0])
+            return render_template("client/index.html", cliente = user)
     else:
         return redirect(url_for("admin.home"))
 

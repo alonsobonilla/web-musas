@@ -1,6 +1,6 @@
 from bd import obtener_conexion
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from model.Usuario import Usuario
 class Autenticacion:
 
     diccionario_tipo = {
@@ -25,10 +25,11 @@ class Autenticacion:
             query = f"SELECT * FROM usuario WHERE dni = %s and tipoUsuario = %s"
             cursor.execute(query, (dni, tipoUsuario))
             user = cursor.fetchall()
+        conexion.close()
 
         if user is None or user.__len__() == 0:
             error = "Usuario incorrecto"
-        elif (check_password_hash(user[0][6], contraseña) ) or user[0][6] != contraseña:
+        elif (not check_password_hash(user[0][6], contraseña)):
             error = "Contraseña incorrecta"
         else:
             error = user
@@ -43,12 +44,13 @@ class Autenticacion:
         if not dni or not nombres or not apellidos or not correo or not numTelf or not contraseña:
             error = "Campos obligatorios"
         else:
-            try:
-                query = "INSERT INTO usuario (dni,nombres,apellidos,correo,numTelf,contraseña,tipoUsuario) values (%s, %s, %s, %s, %s, %s,%s)"
-                cursor = conexion.cursor()
-                cursor.execute(query, (dni, nombres, apellidos,correo, numTelf, generate_password_hash(contraseña), True))
-                conexion.commit()
-            except conexion.IntegrityError:
+            user = Usuario.obtener_usuario_dni_tipo(dni, True)
+            if user is None:
+                with conexion.cursor() as cursor:
+                    query = "INSERT INTO usuario (dni,nombres,apellidos,correo,numTelf,contraseña,tipoUsuario) values (%s, %s, %s, %s, %s, %s,%s)"
+                    cursor.execute(query, (dni, nombres, apellidos,correo, numTelf, generate_password_hash(contraseña), True))
+                    conexion.commit()
+            else:
                 error = f"Dni: {dni} ya registrado"            
         return error
 
