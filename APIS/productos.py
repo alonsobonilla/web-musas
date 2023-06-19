@@ -25,7 +25,6 @@ def get_producto(id):
         return jsonify({"Mensaje":"Error al obtener el producto", "status:":"0", "errror":str(ex)})
 
 @api_productos.route("/get_productos_categoria/<int:id>")
-@jwt_required()
 def get_productos_tipo(id):
     try:
         validate_idCategoria = CategoriaProducto.obtener_categoria_por_id(id)
@@ -100,15 +99,3 @@ def eliminar_producto():
         return jsonify({"Mensaje":"No existe el producto", "status:":"0"})
     except Exception as ex:
         return jsonify({"Mensaje":"Error al eliminar el producto", "status:":"0", "errror":str(ex)})
-
-@api_productos.route("/get_cremas")
-@jwt_required()
-def get_cremas():
-    try:
-        idCremas = request.args.getlist("cremas")
-        cremas = Producto.obtener_cremas(idCremas)
-        if cremas is not None:
-            return jsonify({"Mensaje":"Cremas obtenidas correctamente", "status:":"1", "cremas":cremas})
-        return jsonify({"Mensaje":"No existen cremas", "status:":"0"})
-    except Exception as ex:
-        return jsonify({"Mensaje":"Error al obtener las cremas", "status:":"0", "errror":str(ex)})

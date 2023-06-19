@@ -129,31 +129,3 @@ class Producto:
             cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s, idCategoria = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, idCategoria, id ))
         conexion.commit()
         conexion.close()
-
-    @staticmethod
-    def obtener_cremas(cremas):
-        conexion = obtener_conexion()
-        query = "SELECT * FROM producto WHERE"
-        for crema in cremas:
-            query += " idProducto = %s OR"
-        query = query[:-3]
-        productos = []
-        with conexion.cursor() as cursor:
-            cursor.execute(query, cremas)
-            productos = cursor.fetchall()
-        conexion.close()
-    
-        if productos is None:
-            return productos
-        listDiccionarios = []
-        for producto in productos: 
-            diccionario = dict()
-            diccionario["idProducto"] = producto[0]
-            diccionario["idCategoria"] = producto[1]
-            diccionario["nombre"] = producto[2]
-            diccionario["descripcion"] = producto[3]
-            diccionario["precio"] = producto[4]
-            diccionario["existencias"] = producto[5]  
-            listDiccionarios.append(diccionario) 
-        return listDiccionarios
-   
