@@ -7,7 +7,7 @@ import datetime
 class Comprobante:
     idComprobante = 0
     idPedido = 0
-    dniUsuario = ""
+    idUsuario = ""
     dniNoRegistrado = 0
     fechaComprobante = ""
     horaComprobante = ""
@@ -17,11 +17,10 @@ class Comprobante:
     numeroComprobante = ""
     midic = dict()
 
-
-    def __init__(self,p_idComprobante,p_idPedido,p_dniUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
+    def __init__(self,p_idComprobante,p_idPedido,p_idUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
         self.idComprobante=p_idComprobante
         self.idPedido=p_idPedido
-        self.dniUsuario=p_dniUsuario
+        self.idUsuario=p_idUsuario
         self.dniNoRegistrado=p_dniNoRegistrado
         self.fechaComprobante=p_fechaComprobante
         self.horaComprobante=p_horaComprobante
@@ -31,7 +30,7 @@ class Comprobante:
         self.numeroComprobante=p_numComprobante
         self.midic["idComprobante"]=p_idComprobante
         self.midic["idPedido"]=p_idPedido
-        self.midic["dniUsuario"]=p_dniUsuario
+        self.midic["idUsuario"]=p_idUsuario
         self.midic["dniNoRegistrado"]=p_dniNoRegistrado
         self.midic["fechaComprobante"]=p_fechaComprobante
         self.midic["horaComprobante"]=p_horaComprobante
@@ -44,15 +43,15 @@ class Comprobante:
     def insertar_comprobante(idPedido,numComprobante):
         fecha_actual = datetime.date.today()
         hora_actual = datetime.datetime.now().time()
-        dniUsuario = Pedido.obtener_dni_pedido(idPedido)[0]
+        idUsuario = Pedido.obtener_dni_pedido(idPedido)[0]
         dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)[1]
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            query = "insert into comprobante(idPedido,dniUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            cursor.execute(query, (idPedido,dniUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante))
+            query = "insert into comprobante(idPedido,idUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            cursor.execute(query, (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante))
         conexion.commit()
         conexion.close()
  
