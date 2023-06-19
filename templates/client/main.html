@@ -127,7 +127,7 @@
           </a>
           {% endif %}
           <button class="icono-carrito">
-            <a href="pag-carrito-compras.html">
+            <a href="{{url_for('cliente.pag_carrito')}}">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="icon icon-tabler icon-tabler-shopping-cart"
@@ -335,5 +335,7 @@
     ></script> -->
     <script src="{{url_for('static', filename = 'js/header.js')}}"></script>
     <script src="{{url_for('static', filename = 'js/categorias.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/guardarProductos.js')}}"></script>
+    <script src="{{url_for('static', filename = 'js/mostrarProductos.js')}}"></script>
   </body>
 </html>

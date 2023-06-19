@@ -35,85 +35,43 @@
 </div>
 
 <main class="productos">
+  {% for categoria in categorias %} {% if categoria[1] != "Cremas" %}
   <div>
     <div class="cabecera">
-      <h2>Tipo de producto</h2>
-      <a href="">
+      <h2>Productos {{categoria[1]}}</h2>
+      <a
+        href="{{url_for('cliente.productos_categoria', categoria=categoria[1])}}"
+      >
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
-    <div class="show-producto">
-      <!-- {% for producto in simples %} -->
-      <div class="img-producto">
-        <!-- <h4>{{producto[0]}}</h4> -->
+    <div class="show-producto d-flex">
+      {% for producto in productos %} {% if producto["idCategoria"] ==
+      categoria[0] %}
+      <div class="card">
         <img
-          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
+          class="card-img-top"
+          src="{{url_for('static', filename = 'img/hamburguesas/ha-1')}}"
           alt=""
         />
-        <!-- <p>{{producto[2]}}</p> -->
+        <div class="card-body">
+          <h4 class="card-title">{{producto["nombre"]}}</h4>
+          <div>
+            <p class="card-text">{{producto["descripcion"]}}</p>
+            <p class="card-text">Precio: {{producto["precio"]}}</p>
+          </div>
+
+          <a
+            href="{{url_for('cliente.comprar_producto', id=producto['idProducto'])}}"
+            class="btn btn-primary"
+            >Comprar</a
+          >
+        </div>
       </div>
-      <!-- {% endfor %} -->
+
+      {% endif %} {% endfor %}
     </div>
   </div>
-  <div>
-    <div class="cabecera">
-      <h2>Tipo de producto</h2>
-      <a href="">
-        <button class="ver-mas">Ver más</button>
-      </a>
-    </div>
-    <div class="show-producto">
-      <!-- {% for producto in mixtas %} -->
-      <div class="img-producto">
-        <!-- <h4>{{producto[0]}}</h4> -->
-        <img
-          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
-          alt=""
-        />
-        <!-- <p>{{producto[2]}}</p> -->
-      </div>
-      <!-- {% endfor %} -->
-    </div>
-  </div>
-  <div>
-    <div class="cabecera">
-      <h2>Tipo de producto</h2>
-      <a href="">
-        <button class="ver-mas">Ver más</button>
-      </a>
-    </div>
-    <div class="show-producto">
-      <!-- {% for producto in alopobres %} -->
-      <div class="img-producto">
-        <!-- <h4>{{producto[0]}}</h4> -->
-        <img
-          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
-          alt=""
-        />
-        <!-- <p>{{producto[2]}}</p> -->
-      </div>
-      <!-- {% endfor %} -->
-    </div>
-  </div>
-  <div>
-    <div class="cabecera">
-      <h2>Tipo de producto</h2>
-      <a href="">
-        <button class="ver-mas">Ver más</button>
-      </a>
-    </div>
-    <div class="show-producto">
-      <!-- {% for producto in especiales %} -->
-      <div class="img-producto">
-        <!-- <h4>{{producto[0]}}</h4> -->
-        <img
-          src="{{url_for('static', filename = 'img/hamburguesas/h-2')}}"
-          alt=""
-        />
-        <!-- <p>{{producto[2]}}</p> -->
-      </div>
-      <!-- {% endfor %} -->
-    </div>
-  </div>
+  {% endif %} {% endfor %}
 </main>
 {% endblock %}
