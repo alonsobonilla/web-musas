@@ -9,7 +9,7 @@ from model.Producto import Producto
 api_detalleCremas = Blueprint('api_detalleCremas', __name__)
 
 @api_detalleCremas.route("/insertar_detalleCrema", methods = ["POST"])
-@jwt_required()
+
 def insertar_detalleCremas():
     try:
         idPedido = request.json["idPedido"]
@@ -24,7 +24,7 @@ def insertar_detalleCremas():
         return jsonify({"Mensaje":"Error al registrar detalle crema", "Status":"0", "errror":str(ex)})
 
 @api_detalleCremas.route("/obtener_detalleCremas/<int:idPedido>/<int:idProducto>")
-@jwt_required()
+
 def obtener_detalleCremas(idPedido,idProducto):
     try:
         detalleCrema = DetalleCremas.obtener_detalleCremas_idPedido(idPedido,idProducto)

@@ -8,7 +8,7 @@ api_categoriaProducto = Blueprint('api_categoriaProducto',__name__)
 
 
 @api_categoriaProducto.route("/api_obtenercategorias")
-@jwt_required()
+
 def api_obtenercategorias():
     try:
         categorias=CategoriaProducto.obtener_categorias()
@@ -23,7 +23,7 @@ def api_obtenercategorias():
 
 
 @api_categoriaProducto.route("/api_eliminarcategoria/<int:idCategoria>")
-@jwt_required()
+
 def api_eliminarcategoria(idCategoria):
     try:
         CategoriaProducto.eliminar_categoria(idCategoria)
@@ -33,7 +33,7 @@ def api_eliminarcategoria(idCategoria):
         return jsonify({"Mensaje":"Error al eliminar categoria"})
    
 @api_categoriaProducto.route("/api_insertarcategoria", methods=["POST"])
-@jwt_required()
+
 def api_insertarcategoria():
     try:
         nombre = request.json["nombreCategoria"]
@@ -44,7 +44,7 @@ def api_insertarcategoria():
         return jsonify({"Mensaje":"Error al registrar categoria", "Status":"0"})
    
 @api_categoriaProducto.route("/api_actualizarcategoria", methods=["POST"])
-@jwt_required()
+
 def api_actualizarcategoria():
     try:
         idCategoria = request.json["idCategoria"]
@@ -57,7 +57,7 @@ def api_actualizarcategoria():
 
 
 @api_categoriaProducto.route("/api_obtenercategoriaid/<int:idCategoria>")
-@jwt_required()
+
 def api_obtenercategoriaid(idCategoria):
     try:
         categorias=CategoriaProducto.obtener_categoria_por_id(idCategoria)

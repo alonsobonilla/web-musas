@@ -4,7 +4,7 @@ from model.Usuario import Usuario
 
 api_usuarios = Blueprint('api_usuarios', __name__)
 @api_usuarios.route("/api_obtenerusuarios")
-@jwt_required()
+
 def api_obtenerusuarios():
     try:
         usuarios= Usuario.obtener_usuario()
@@ -18,7 +18,7 @@ def api_obtenerusuarios():
 
 
 @api_usuarios.route("/api_guardarusuario", methods=["POST"])
-@jwt_required()
+
 def api_guardarusuario():
     try:
         DNI = request.json["DNI"]
@@ -35,7 +35,7 @@ def api_guardarusuario():
     
 
 @api_usuarios.route("/api_eliminarusuario", methods=["POST"])
-@jwt_required()
+
 def api_eliminarusuario():
     try:
         dni = request.json["DNI"]
@@ -48,7 +48,7 @@ def api_eliminarusuario():
     
 
 @api_usuarios.route("/api_obtenerusuario")
-@jwt_required()
+
 def api_obtenerusuario_por_dni_tipo():
     try:
         dni = request.json["DNI"]
