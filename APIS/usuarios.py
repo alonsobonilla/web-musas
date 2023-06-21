@@ -56,7 +56,7 @@ def api_obtenerusuario_por_dni_tipo():
         usuario = Usuario.obtener_usuario_dni_tipo(dni, tipoUsuario)
         if usuario is not None:
             listaserializable = []
-            miobj = Usuario(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6])
+            miobj = Usuario(usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
             listaserializable.append(miobj.midic.copy())
             return jsonify({"mensaje":"Usuario encontrado", "usuario": listaserializable})
         return jsonify({"mensaje":"Usuario no encontrado"})
