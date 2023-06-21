@@ -7,10 +7,10 @@ api_usuarios = Blueprint('api_usuarios', __name__)
 
 def api_obtenerusuarios():
     try:
-        usuarios= Usuario.obtener_usuario()
+        usuarios= Usuario.obtener_usuarios()
         listaserializable = []
         for usuario in usuarios:
-            miobj = Usuario(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5], usuario[6])
+            miobj = Usuario(usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
             listaserializable.append(miobj.midic.copy())
         return jsonify({"mensaje": "Usuarios encontrados", "usuarios": listaserializable})
     except Exception as e:

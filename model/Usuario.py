@@ -43,7 +43,7 @@ class Usuario:
             error = "Usuario ya registrado"
         return error
 
-    def obtener_usuario():
+    def obtener_usuarios():
         conexion = obtener_conexion()
         usuarios = []
         with conexion.cursor() as cursor:
