@@ -28,7 +28,6 @@ def api_eliminarcategoria(idCategoria):
     try:
         CategoriaProducto.eliminar_categoria(idCategoria)
         return jsonify({"Mensaje": "Categoria elimada correctamente", "status:":"1"})
-        return
     except:
         return jsonify({"Mensaje":"Error al eliminar categoria"})
    
