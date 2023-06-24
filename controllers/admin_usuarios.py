@@ -5,7 +5,7 @@ usuarios = Blueprint('usuarios', __name__, url_prefix='/usuarios')
 
 @usuarios.route("/")
 def home():
-    usuarios = Usuario.obtener_usuario()
+    usuarios = Usuario.obtener_usuarios()
     usuario = session.get("admin.auth")
     return render_template("admin/usuarios/index.html", usuarios = usuarios, usuario = usuario)
 
