@@ -83,7 +83,7 @@ class Pedido:
         for pedido in pedidos:
             diccionario = dict()
             horaRecojo = str(timedelta(seconds=pedido[5].seconds))
-            fechaPedido = str(datetime(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day, hour=pedido[6].hour, minute=pedido[6].minute))
+            fechaPedido = str(datetime(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day, hour=pedido[5].hour, minute=pedido[5].minute))
 
             diccionario['idPedido'] = pedido[0]
             diccionario["dniusuario"] = pedido[1]
