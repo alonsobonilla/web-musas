@@ -59,7 +59,7 @@ class Pedido:
         cont = str(cls.cont)
         keyPedido = "2023" + cont
 
-        with obtener_conexion as conexion:
+        with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
                 cursor.execute("INSERT INTO registroPedido( idUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (idUsuario, dni, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
                 conexion.commit()
