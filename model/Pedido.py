@@ -54,14 +54,14 @@ class Pedido:
 
     @classmethod
     #mal escrito
-    def insertar_peidido_usuario_registrado(cls, dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
+    def insertar_peidido_usuario_registrado(cls, idUsuario,dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
         cls.cont += 1
         cont = str(cls.cont)
         keyPedido = "2023" + cont
 
         with obtener_conexion as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (dniUsuario, dniUsuario, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
+                cursor.execute("INSERT INTO registroPedido( idUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (idUsuario, dni, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
                 conexion.commit()
 
     @staticmethod

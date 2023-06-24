@@ -29,16 +29,17 @@ def obtener_pedidos_por_dni():
 
 def insertar_pedido():
     try:
-        dniUsuario = request.json['dniUsuario']
+        idUsuario = request.json['idUsuario']
         dniNoRegistrado = request.json['dniNoRegistrado'].strip()
         numeroTelefono = request.json['numeroTelefono']
         horaRecojo = request.json['horaRecojo']
         estadoBoleta = request.json['estadoBoleta']
         billeteraDigital = request.json['billeteraDigital']
         
-        validate_dni = Usuario.obtener_usuario_dni_tipo(dniUsuario, True)
+        validate_dni = Usuario.obtener_usuario_id_tipo(idUsuario, True)
         if validate_dni is not None:
-            Pedido.insertar_peidido_usuario_registrado( dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
+            dni = validate_dni[1]
+            Pedido.insertar_peidido_usuario_registrado( idUsuario, dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         else:
             Pedido.insertar_pedido_usuario_no_registrado( dniNoRegistrado, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         
