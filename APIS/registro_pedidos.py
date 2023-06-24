@@ -38,7 +38,7 @@ def insertar_pedido():
         
         validate_dni = Usuario.obtener_usuario_id_tipo(idUsuario, True)
         if validate_dni is not None:
-            dni = validate_dni[1]
+            dni = validate_dni[0]
             Pedido.insertar_peidido_usuario_registrado( idUsuario, dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         else:
             Pedido.insertar_pedido_usuario_no_registrado( dniNoRegistrado, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
