@@ -47,7 +47,7 @@ def api_eliminarusuario():
         return jsonify({"mensaje": "Error al eliminar usuario", "error": str(e)})
     
 
-@api_usuarios.route("/api_obtenerusuario")
+@api_usuarios.route("/api_obtenerusuario", methods=["POST"])
 
 def api_obtenerusuario_por_dni_tipo():
     try:
