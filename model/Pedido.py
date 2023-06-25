@@ -124,7 +124,7 @@ class Pedido:
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
-            cursor.execute("select dniUsuario, dniNoRegistrado from registroPedido where idPedido = %s" ,(idPedido))
+            cursor.execute("select idUsuario, dniNoRegistrado from registroPedido where idPedido = %s" ,(idPedido))
             juego = cursor.fetchone()
         conexion.close()
         return juego
