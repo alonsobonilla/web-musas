@@ -21,7 +21,17 @@ class Pedido:
     def get_pedidos_por_dni(dni):
         with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("SELECT * FROM registroPedido WHERE dniusuario = %s or dniNoRegistrado = %s", (dni, dni))
+                cursor.execute("SELECT * FROM registroPedido WHERE dniNoRegistrado = %s", (dni))
+                pedidos = cursor.fetchall()
+        if pedidos is None:
+            return pedidos
+        return Pedido.diccionario_pedidos(pedidos)
+    
+    @staticmethod
+    def get_pedidos_por_id(id):
+        with obtener_conexion() as conexion:
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT * FROM registroPedido WHERE idUsuario = %s", (id))
                 pedidos = cursor.fetchall()
         if pedidos is None:
             return pedidos
@@ -86,7 +96,7 @@ class Pedido:
             fechaPedido = str(date(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day))
 
             diccionario['idPedido'] = pedido[0]
-            diccionario["dniusuario"] = pedido[1]
+            diccionario["idUsuario"] = pedido[1]
             diccionario["dniNoRegistrado"] = pedido[2]
             diccionario["numeroTelefono"] = pedido[3]
             diccionario["estadoRecojo"] = "Recogido" if pedido[4] == 1 else "En proceso"

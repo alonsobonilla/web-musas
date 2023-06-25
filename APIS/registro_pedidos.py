@@ -20,8 +20,17 @@ def obtener_pedidos():
 def obtener_pedidos_por_dni():
     try:
         dni = request.json['dni']
-        pedidos = Pedido.get_pedidos_por_dni(dni)
-        return jsonify({'message': 'Pedidos obtenidos correctamente', 'status':'1','pedidos': pedidos})
+        usuario = Usuario.obtener_usuario_dni_tipo(dni, True)
+
+        if usuario is not None:
+            idUsuario = usuario[0]
+            pedidos = Pedido.get_pedidos_por_id(idUsuario)
+        else:
+            pedidos = Pedido.get_pedidos_por_dni(dni)
+        
+        if pedidos is not None:
+            return jsonify({'message': 'Pedidos obtenidos correctamente', 'status':'1','pedidos': pedidos})
+        return jsonify({'message': 'No se encontraron pedidos', 'status':'0'})
     except Exception as ex:
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
