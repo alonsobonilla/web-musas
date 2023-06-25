@@ -62,3 +62,13 @@ class CategoriaProducto:
                         ( nombreCategoria, descripcion, id))
         conexion.commit()
         conexion.close()
+
+
+    # def obtener_idcategoria_por_nombre(nombreCategoria):
+    #     conexion = obtener_conexion()   
+    #     Cat = None
+    #     with conexion.cursor() as cursor:
+    #         cursor.execute("Select idCategoria FROM categoriaProducto WHERE nombreCategoria=%s",(nombreCategoria))
+    #         Cat = cursor.fetchone()
+    #     conexion.close()
+    #     return Cat

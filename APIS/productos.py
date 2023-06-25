@@ -87,7 +87,7 @@ def actualizar_producto():
     except Exception as ex:
         return jsonify({"Mensaje":"Error al actualizar el producto", "status:":"0", "errror":str(ex)})
 
-@api_productos.route("/eliminar_producto/", methods=["POST"])
+@api_productos.route("/eliminar_producto", methods=["POST"])
 
 def eliminar_producto():
     try:

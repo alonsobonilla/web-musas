@@ -16,7 +16,8 @@ def api_obtenerdetalleorden():
         for deO in detallesorden:
             miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
             listaserializable.append(miobj.midic.copy())
-        return jsonify(listaserializable)
+
+        return jsonify({"Mensaje":"detalles obtenidos correctamente", "status:":"1", "detalles": listaserializable})
     except Exception as e:
         return jsonify({"mensaje": "Error al obtener detalles orden", "error": str(e)})
 
@@ -58,6 +59,6 @@ def api_obtenedetalleorden(idDetalleOrden,idpedido):
             listaserializable = []
             miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
             listaserializable.append(miobj.midic.copy())
-            return jsonify(listaserializable)
+            return jsonify({"Mensaje":"detalle de orden obtenido correctamente", "status:":"1", "detalle": listaserializable})
     except Exception as e:
         return jsonify({"mensaje": "Error al obtener detalle orden", "error": str(e)})
