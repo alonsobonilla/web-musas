@@ -1,5 +1,5 @@
 from bd import obtener_conexion
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 class Pedido:
 
@@ -49,7 +49,7 @@ class Pedido:
 
         with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
+                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, date.today(), estadoBoleta, billeteraDigital, False, keyPedido))
                 conexion.commit()
 
     @classmethod
@@ -83,7 +83,7 @@ class Pedido:
         for pedido in pedidos:
             diccionario = dict()
             horaRecojo = str(timedelta(seconds=pedido[5].seconds))
-            fechaPedido = str(datetime(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day, hour=pedido[5].hour, minute=pedido[5].minute))
+            fechaPedido = str(date(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day))
 
             diccionario['idPedido'] = pedido[0]
             diccionario["dniusuario"] = pedido[1]
