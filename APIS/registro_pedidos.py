@@ -15,11 +15,10 @@ def obtener_pedidos():
     except Exception as ex:
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
-@api_registro_pedidos.route('/obtener_pedidos_por_dni', methods=['POST'])
+@api_registro_pedidos.route('/obtener_pedidos_por_dni/<string:dni>')
 
-def obtener_pedidos_por_dni():
+def obtener_pedidos_por_dni(dni):
     try:
-        dni = request.json['dni']
         usuario = Usuario.obtener_usuario_dni_tipo(dni, True)
 
         if usuario is not None:
