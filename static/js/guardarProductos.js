@@ -10,7 +10,6 @@ let url;
 let cremasElegidas = [];
 if (agregarCarrito) {
   agregarCarrito.addEventListener("click", (e) => {
-    e.preventDefault();
     id = window.location.href.split("/").pop();
     url = `http://dawgrupo5.pythonanywhere.com/get_producto/${id}`;
 
