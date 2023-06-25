@@ -1,4 +1,5 @@
 const productos = document.querySelector(".productos-carrito");
+const IDCATEGORIACREMAS = 2;
 let mapCremas = new Map();
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -109,10 +110,10 @@ function limpiarHijos() {
 }
 
 async function obtenerCremas() {
-  const url = "http://127.0.0.1:5000/get_productos_categoria/3";
+  const url = `http://dawgrupo5.pythonanywhere.com/get_productos_categoria/${IDCATEGORIACREMAS}}`;
 
   try {
-    const accesToken = await fetch("http://127.0.0.1:5000/auth", {
+    const accesToken = await fetch("http://dawgrupo5.pythonanywhere.com/auth", {
       method: "POST",
       body: JSON.stringify(autorizacion),
       headers: {

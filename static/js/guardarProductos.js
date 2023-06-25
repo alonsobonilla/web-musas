@@ -12,7 +12,7 @@ if (agregarCarrito) {
   agregarCarrito.addEventListener("click", (e) => {
     e.preventDefault();
     id = window.location.href.split("/").pop();
-    url = `http://127.0.0.1:5000/get_producto/${id}`;
+    url = `http://dawgrupo5.pythonanywhere.com/get_producto/${id}`;
 
     //obtengo las cremas elegidas
     cremas.forEach((crema) => {
@@ -26,7 +26,7 @@ if (agregarCarrito) {
 
 async function obtener_data_producto() {
   try {
-    const accesToken = await fetch("http://127.0.0.1:5000/auth", {
+    const accesToken = await fetch("http://dawgrupo5.pythonanywhere.com/auth", {
       method: "POST",
       body: JSON.stringify(autorizacion),
       headers: {
