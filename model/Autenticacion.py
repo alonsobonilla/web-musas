@@ -29,7 +29,7 @@ class Autenticacion:
 
         if user is None or user.__len__() == 0:
             error = "Usuario incorrecto"
-        elif (not check_password_hash(user[0][6], contraseña)):
+        elif user[0][6] != contraseña:
             error = "Contraseña incorrecta"
         else:
             error = user

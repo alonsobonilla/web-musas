@@ -9,21 +9,14 @@ endblock %} {% block contenido %}
 
     <div class="productos-carrito mb-2 d-flex flex-column gap-3"></div>
 
-    <div class="btn-vaciar-carrito text-end mt-4">
-      <a href="" class="btn btn-primary border-0 w-auto">Vaciar carrito</a>
-    </div>
     <div id="precio-total" class="mt-4"></div>
 
-    <div class="botones-sec-carrito">
-      <div>
-        <a href="" class="btn btn-primary border-0 w-auto">Seguir comprando</a>
+    <div class="d-flex justify-content-end gap-2">
+      <div class="btn-vaciar-carrito">
+        <a class="btn btn-danger" id="vaciar-carrito">Vaciar carrito</a>
       </div>
       <div>
-        <a
-          href="pag-forma-entrega-deli.html"
-          class="btn btn-primary border-0 w-auto"
-          >Comprar</a
-        >
+        <a href="#" class="btn btn-success">Comprar</a>
       </div>
     </div>
   </main>

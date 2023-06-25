@@ -15,13 +15,21 @@ def obtener_pedidos():
     except Exception as ex:
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
-@api_registro_pedidos.route('/obtener_pedidos_por_dni', methods=['POST'])
+@api_registro_pedidos.route('/obtener_pedidos_por_dni/<string:dni>')
 
-def obtener_pedidos_por_dni():
+def obtener_pedidos_por_dni(dni):
     try:
-        dni = request.json['dni']
-        pedidos = Pedido.get_pedidos_por_dni(dni)
-        return jsonify({'message': 'Pedidos obtenidos correctamente', 'status':'1','pedidos': pedidos})
+        usuario = Usuario.obtener_usuario_dni_tipo(dni, True)
+
+        if usuario is not None:
+            idUsuario = usuario[0]
+            pedidos = Pedido.get_pedidos_por_id(idUsuario)
+        else:
+            pedidos = Pedido.get_pedidos_por_dni(dni)
+        
+        if pedidos is not None:
+            return jsonify({'message': 'Pedidos obtenidos correctamente', 'status':'1','pedidos': pedidos})
+        return jsonify({'message': 'No se encontraron pedidos', 'status':'0'})
     except Exception as ex:
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
@@ -29,16 +37,17 @@ def obtener_pedidos_por_dni():
 
 def insertar_pedido():
     try:
-        dniUsuario = request.json['dniUsuario']
+        idUsuario = request.json['idUsuario']
         dniNoRegistrado = request.json['dniNoRegistrado'].strip()
         numeroTelefono = request.json['numeroTelefono']
         horaRecojo = request.json['horaRecojo']
         estadoBoleta = request.json['estadoBoleta']
         billeteraDigital = request.json['billeteraDigital']
         
-        validate_dni = Usuario.obtener_usuario_dni_tipo(dniUsuario, True)
+        validate_dni = Usuario.obtener_usuario_id_tipo(idUsuario, True)
         if validate_dni is not None:
-            Pedido.insertar_peidido_usuario_registrado( dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
+            dni = validate_dni[0]
+            Pedido.insertar_peidido_usuario_registrado( idUsuario, dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         else:
             Pedido.insertar_pedido_usuario_no_registrado( dniNoRegistrado, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital)
         

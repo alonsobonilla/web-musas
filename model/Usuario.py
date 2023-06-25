@@ -36,7 +36,7 @@ class Usuario:
         if user is None:
             conexion = obtener_conexion()
             with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTelf,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,generate_password_hash(contra), tipoUsuario))
+                cursor.execute("INSERT INTO usuario(DNI, nombres, apellidos, correo, numTelf,contraseña, tipoUsuario) VALUES (%s, %s, %s, %s, %s, %s, %s)", (DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario))
             conexion.commit()
             conexion.close()
         else:

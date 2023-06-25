@@ -17,7 +17,7 @@
 <div class="categorias-content">
   <div class="categorias">
     <div class="categorias-in">
-      {% for categoria in categorias %}
+      {% for categoria in categorias %} {% if categoria[1] != "Cremas" %}
       <a
         href="{{url_for('cliente.productos_categoria', categoria = categoria[1])}}"
         class="text-black"
@@ -29,7 +29,7 @@
           <p>{{categoria[1]}}</p>
         </div>
       </a>
-      {% endfor %}
+      {% endif %} {% endfor %}
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 from bd import obtener_conexion
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 class Pedido:
 
@@ -21,7 +21,17 @@ class Pedido:
     def get_pedidos_por_dni(dni):
         with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("SELECT * FROM registroPedido WHERE dniusuario = %s or dniNoRegistrado = %s", (dni, dni))
+                cursor.execute("SELECT * FROM registroPedido WHERE dniNoRegistrado = %s", (dni))
+                pedidos = cursor.fetchall()
+        if pedidos is None:
+            return pedidos
+        return Pedido.diccionario_pedidos(pedidos)
+    
+    @staticmethod
+    def get_pedidos_por_id(id):
+        with obtener_conexion() as conexion:
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT * FROM registroPedido WHERE idUsuario = %s", (id))
                 pedidos = cursor.fetchall()
         if pedidos is None:
             return pedidos
@@ -49,19 +59,19 @@ class Pedido:
 
         with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
+                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, date.today(), estadoBoleta, billeteraDigital, False, keyPedido))
                 conexion.commit()
 
     @classmethod
     #mal escrito
-    def insertar_peidido_usuario_registrado(cls, dniUsuario, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
+    def insertar_peidido_usuario_registrado(cls, idUsuario,dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
         cls.cont += 1
         cont = str(cls.cont)
         keyPedido = "2023" + cont
 
-        with obtener_conexion as conexion:
+        with obtener_conexion() as conexion:
             with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (dniUsuario, dniUsuario, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
+                cursor.execute("INSERT INTO registroPedido( idUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (idUsuario, dni, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
                 conexion.commit()
 
     @staticmethod
@@ -83,10 +93,10 @@ class Pedido:
         for pedido in pedidos:
             diccionario = dict()
             horaRecojo = str(timedelta(seconds=pedido[5].seconds))
-            fechaPedido = str(datetime(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day, hour=pedido[6].hour, minute=pedido[6].minute))
+            fechaPedido = str(date(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day))
 
             diccionario['idPedido'] = pedido[0]
-            diccionario["dniusuario"] = pedido[1]
+            diccionario["idUsuario"] = pedido[1]
             diccionario["dniNoRegistrado"] = pedido[2]
             diccionario["numeroTelefono"] = pedido[3]
             diccionario["estadoRecojo"] = "Recogido" if pedido[4] == 1 else "En proceso"
