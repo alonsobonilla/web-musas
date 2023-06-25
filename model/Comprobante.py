@@ -43,15 +43,16 @@ class Comprobante:
     def insertar_comprobante(idPedido,numComprobante):
         fecha_actual = datetime.date.today()
         hora_actual = datetime.datetime.now().time()
-        idUsuario = Pedido.obtener_dni_pedido(idPedido)[0]
-        dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)[1]
+        idUsuario = Pedido.obtener_dni_pedido(idPedido)["idUsuario"]
+        dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)["dniNoRegistrado"]
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             query = "insert into comprobante(idPedido,idUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            cursor.execute(query, (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante))
+            values = (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante)
+            cursor.execute(query, values)
         conexion.commit()
         conexion.close()
  
