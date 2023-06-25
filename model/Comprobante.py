@@ -40,8 +40,8 @@ class Comprobante:
     def insertar_comprobante(idPedido,numComprobante):
         fecha_actual = datetime.date.today()
         hora_actual = datetime.datetime.now().time()
-        idUsuario = Pedido.obtener_dni_pedido(idPedido)["idUsuario"]
-        dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)["dniNoRegistrado"]
+        idUsuario = Pedido.obtener_dni_pedido(idPedido)[0]
+        dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)[1]
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)

@@ -63,7 +63,7 @@ class DetalleOrden:
         juego = None
         with conexion.cursor() as cursor:
             cursor.execute("select precioTotal from detalleOrden where idPedido = %s", (idPedido))
-            juego = cursor.fetchone()
+            juego = cursor.fetchall()
         conexion.close()
         subTotal = 0
         for j in juego:
