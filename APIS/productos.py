@@ -89,7 +89,7 @@ def actualizar_producto():
 
 @api_productos.route("/eliminar_producto", methods=["POST"])
 
-def eliminar_producto():
+def eliminar_producto(id):
     try:
         producto = Producto.obtener_producto_por_id(id)
         if producto is not None:
