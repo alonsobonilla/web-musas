@@ -110,7 +110,7 @@ function limpiarHijos() {
 }
 
 async function obtenerCremas() {
-  const url = `http://dawgrupo5.pythonanywhere.com/get_productos_categoria/${IDCATEGORIACREMAS}}`;
+  const url = `http://dawgrupo5.pythonanywhere.com/get_productos_categoria/${IDCATEGORIACREMAS}`;
 
   try {
     const accesToken = await fetch("http://dawgrupo5.pythonanywhere.com/auth", {
