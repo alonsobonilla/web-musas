@@ -30,11 +30,11 @@ class DetalleOrden:
     def insertar_detalleOrden(idproducto,idpedido,cantidad):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            query = "INSERT INTO detalleOrden(idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
-            nomP =Producto.obtener_producto_por_id(idproducto)["nombre"]
-            precioU = Producto.obtener_producto_por_id(idproducto)["precio"]
+            nomP =Producto.obtener_producto_por_id(idproducto)["p.nombre"]
+            precioU = Producto.obtener_producto_por_id(idproducto)["p.precio"]
             precioT = cantidad * precioU
-            values = (idproducto,idpedido,nomP,precioU,cantidad,precioT)
+            query = "INSERT INTO detalleOrden(idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (idpedido,idproducto,nomP,precioU,cantidad,precioT)
             cursor.execute(query, values)
         conexion.commit()
         conexion.close()

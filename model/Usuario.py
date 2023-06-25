@@ -30,7 +30,6 @@ class Usuario:
         self.midic["tipoUsuario"]=self.tipoUsuario
 
     def insertar_usuario(DNI, nombres, apellidos, correo, numTel,contra, tipoUsuario):
-
         user = Usuario.obtener_usuario_dni_tipo(DNI, tipoUsuario)
         error = None
         if user is None:

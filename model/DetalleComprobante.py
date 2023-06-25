@@ -31,8 +31,8 @@ class detalleComprobante:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             query = "INSERT INTO detalleComprobante VALUES (%s, %s, %s,%s, %s, %s)"
-            nomP =Producto.obtener_producto_por_id(idproducto)["nombre"]
-            precioU = Producto.obtener_producto_por_id(idproducto)["precio"]
+            nomP =Producto.obtener_producto_por_id(idproducto)["p.nombre"]
+            precioU = Producto.obtener_producto_por_id(idproducto)["p.precio"]
             precioT = cantidad * precioU
             values = (idcomprobante,idproducto,nomP,precioU,cantidad,precioT)
             cursor.execute(query,values)

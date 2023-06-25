@@ -29,9 +29,10 @@ def api_guardardetalleOrden():
         idproducto = request.json["idproducto"]
         idpedido = request.json["idpedido"]
         cantidad = request.json["cantidad"]
-
-        validar_idPedido = Pedido.validar_idPedido_existente(idpedido)
+        
         validar_idProducto = Producto.obtener_producto_por_id(idproducto)
+        validar_idPedido = Pedido.validar_idPedido_existente(idpedido)
+        
 
         if validar_idProducto is None:
             return jsonify({"Mensaje": "El producto no existe"})
