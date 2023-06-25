@@ -45,6 +45,7 @@ class Comprobante:
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)
+        igv = subTotal*igv
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             query = "insert into comprobante(idPedido,idUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
@@ -62,7 +63,7 @@ class Comprobante:
         conexion.close()
         return comprobantes
    
-    def obtener_comprobante_dni(idUsuario):
+    def obtener_comprobante_idUsuario(idUsuario):
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
