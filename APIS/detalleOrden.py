@@ -14,7 +14,7 @@ def api_obtenerdetalleorden():
         detallesorden = DetalleOrden.obtener_detalleOrden()
         listaserializable = []
         for deO in detallesorden:
-            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
+            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
             listaserializable.append(miobj.midic.copy())
 
         return jsonify({"Mensaje":"detalles obtenidos correctamente", "status:":"1", "detalles": listaserializable})

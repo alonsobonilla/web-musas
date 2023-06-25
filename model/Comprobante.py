@@ -5,7 +5,6 @@ from model.Usuario import Usuario
 import datetime
 
 class Comprobante:
-    idComprobante = 0
     idPedido = 0
     idUsuario = ""
     dniNoRegistrado = 0
@@ -17,8 +16,7 @@ class Comprobante:
     numeroComprobante = ""
     midic = dict()
 
-    def __init__(self,p_idComprobante,p_idPedido,p_idUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
-        self.idComprobante=p_idComprobante
+    def __init__(self,p_idPedido,p_idUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
         self.idPedido=p_idPedido
         self.idUsuario=p_idUsuario
         self.dniNoRegistrado=p_dniNoRegistrado
@@ -28,7 +26,6 @@ class Comprobante:
         self.montoTotal=p_montoTotal
         self.igv=p_igv
         self.numeroComprobante=p_numComprobante
-        self.midic["idComprobante"]=p_idComprobante
         self.midic["idPedido"]=p_idPedido
         self.midic["idUsuario"]=p_idUsuario
         self.midic["dniNoRegistrado"]=p_dniNoRegistrado
