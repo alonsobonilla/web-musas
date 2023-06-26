@@ -1,5 +1,5 @@
+import { IDCATEGORIACREMAS, SERVER, mapCremas } from "./config.js";
 import { obtenerCremas } from "./fetchApis.js";
-import { IDCATEGORIACREMAS, SERVER, mapCremas } from "./variables.js";
 const containerProductos = document.querySelector(".productos-comprar");
 
 document.addEventListener("DOMContentLoaded", async () => {

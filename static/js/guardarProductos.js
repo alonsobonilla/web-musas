@@ -1,4 +1,4 @@
-import { SERVER } from "./variables.js";
+import { SERVER } from "./config.js";
 const agregarCarrito = document.querySelector("#agregar-carrito");
 const cremas = document.querySelectorAll("input[type=checkbox]");
 const autorizacion = {

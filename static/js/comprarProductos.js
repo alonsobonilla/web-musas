@@ -1,5 +1,5 @@
+import { SERVER } from "./config.js";
 import { transaccionCompra } from "./fetchApis.js";
-import { SERVER } from "./variables.js";
 const btnComprar = document.querySelector("#comprar-producto");
 btnComprar.addEventListener("click", comprarProductos);
 
