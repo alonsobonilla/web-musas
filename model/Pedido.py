@@ -92,19 +92,20 @@ class Pedido:
         list = []
         for pedido in pedidos:
             diccionario = dict()
-            horaRecojo = str(timedelta(seconds=pedido[5].seconds))
-            fechaPedido = str(date(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day))
+            horaRecojo = str(timedelta(seconds=pedido[6].seconds))
+            fechaPedido = str(date(year=pedido[7].year, month=pedido[7].month, day=pedido[7].day))
 
             diccionario['idPedido'] = pedido[0]
             diccionario["idUsuario"] = pedido[1]
             diccionario["dniNoRegistrado"] = pedido[2]
-            diccionario["numeroTelefono"] = pedido[3]
-            diccionario["estadoRecojo"] = "Recogido" if pedido[4] == 1 else "En proceso"
+            diccionario["nombres"] = pedido[3]
+            diccionario["numeroTelefono"] = pedido[4]
+            diccionario["estadoRecojo"] = "Recogido" if pedido[5] == 1 else "En proceso"
             diccionario["horaRecojo"] = horaRecojo
             diccionario["fechaPedido"] = fechaPedido
-            diccionario["estadoBoleta"] = "Si" if pedido[7] == 1 else "No"
-            diccionario["billeteraDigital"] = "Si" if pedido[8] == 1 else "No"
-            diccionario["keyPedido"] = pedido[9]
+            diccionario["estadoBoleta"] = "Si" if pedido[9] == 1 else "No"
+            diccionario["billeteraDigital"] = "Si" if pedido[10] == 1 else "No"
+            diccionario["keyPedido"] = pedido[11]
             list.append(diccionario)
         return list
     
