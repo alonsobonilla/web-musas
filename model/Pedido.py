@@ -103,9 +103,9 @@ class Pedido:
             diccionario["estadoRecojo"] = "Recogido" if pedido[5] == 1 else "En proceso"
             diccionario["horaRecojo"] = horaRecojo
             diccionario["fechaPedido"] = fechaPedido
-            diccionario["estadoBoleta"] = "Si" if pedido[9] == 1 else "No"
-            diccionario["billeteraDigital"] = "Si" if pedido[10] == 1 else "No"
-            diccionario["keyPedido"] = pedido[11]
+            diccionario["estadoBoleta"] = "Si" if pedido[8] == 1 else "No"
+            diccionario["billeteraDigital"] = "Si" if pedido[9] == 1 else "No"
+            diccionario["keyPedido"] = pedido[10]
             list.append(diccionario)
         return list
     
