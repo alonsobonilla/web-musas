@@ -138,3 +138,12 @@ class Pedido:
         conexion.close()
         return idPedido[0]
     
+    def validate_key_pedido(idPedido, keyPedido):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT keyPedido FROM registroPedido WHERE idPedido = %s and keyPedido = %s", (idPedido, keyPedido))
+            key = cursor.fetchone()
+        conexion.close()
+        if key is None:
+            return False
+        return True

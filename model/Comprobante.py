@@ -93,3 +93,11 @@ class Comprobante:
             idComprobante = cursor.fetchone()
         conexion.close()
         return idComprobante[0]
+    
+    def obtener_numero_comprobante():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT coalesce(MAX(numeroComprobante),0)+1 as numeroComprobante FROM comprobante")
+            numeroComprobante = cursor.fetchone()
+        conexion.close()
+        return numeroComprobante[0]

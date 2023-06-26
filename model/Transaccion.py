@@ -60,7 +60,7 @@ class Transaccion:
             raise e
         finally:
             conexion.close()
-    def insertarComprobante(idPedido):
+    def insertarComprobante(idPedido, keyPedido):
         datosPedido = Pedido.obtener_dni_pedido(idPedido)
         idUsuario = datosPedido[0]
         dniNoRegistrado = datosPedido[1]
@@ -70,15 +70,19 @@ class Transaccion:
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = subTotal*0.18
         montoTotal = subTotal + igv
-
+        numComprobante = Comprobante.obtener_numero_comprobante()
         ordenes = DetalleOrden.obtener_detalle_orden_id_pedido(idPedido)
 
         queryComprobante = "INSERT INTO comprobante(idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, numeroComprobante) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        queryDetalleComprobante = "INSERT INTO detalleComprobante(idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s)"
+        queryDetalleComprobante = "INSERT INTO detalleComprobante(idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
+
+        validateKey = Pedido.validate_key_pedido(idPedido, keyPedido)
+        if not validateKey:
+            return False
         try:
             conexion = obtener_conexion()
             with conexion.cursor() as cursor:
-                cursor.execute(queryComprobante, (idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, idComprobante))
+                cursor.execute(queryComprobante, (idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, numComprobante))
                 
             with conexion.cursor() as cursor:
                 for orden in ordenes:
@@ -88,6 +92,8 @@ class Transaccion:
                     cantidad = orden[5]
                     precioTotal = orden[6]
                     cursor.execute(queryDetalleComprobante, (idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
+            with conexion.cursor() as cursor:
+                cursor.execute("UPDATE registroPedido SET estadoRecojo = %s WHERE idPedido = %s", (True, idPedido))
             conexion.commit()
             return True
         except Exception as e:
