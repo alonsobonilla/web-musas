@@ -37,25 +37,6 @@ class Comprobante:
         self.midic["montoTotal"]=p_montoTotal
         self.midic["igv"]=p_igv
         self.midic["numComprobante"]=p_numComprobante
-
-
-    def insertar_comprobante(idPedido,numComprobante):
-        fecha_actual = date.today()
-        hora_actual = datetime.now().time()
-        datosUsuarioPedido = Pedido.obtener_dni_pedido(idPedido)
-        idUsuario = datosUsuarioPedido[0]
-        dniNoRegistrado = datosUsuarioPedido[1]
-        subTotal = DetalleOrden.obtener_subTotal(idPedido)
-        igv = 0.18
-        montoTotal = subTotal + (subTotal*igv)
-        igv = subTotal*igv
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            query = "insert into comprobante(idPedido,idUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            values = (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante)
-            cursor.execute(query, values)
-        conexion.commit()
-        conexion.close()
  
     def obtener_comprobante():
         conexion = obtener_conexion()

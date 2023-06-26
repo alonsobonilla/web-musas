@@ -36,43 +36,6 @@ class Pedido:
         if pedidos is None:
             return pedidos
         return Pedido.diccionario_pedidos(pedidos)
-    
-    @classmethod
-    def insertar_pedido_usuario_no_registrado( cls, dniNoRegistrado, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
-
-        # with open("keyPedidos.txt", "r") as archivo:
-        #     ultimalinea = archivo.readlines()[-1].strip()
-        
-        # if ultimalinea != "":
-        #     digito = ultimalinea[4:]
-        #     cls.cont = int(digito)
-
-        cls.cont += 1
-        cont = str(cls.cont)
-        keyPedido = "2023" + cont
-
-        # with open("~/web-musas/keyPedidos.txt", "w") as archivo:
-        #     archivo.write(keyPedido + "\n")
-
-        if dniNoRegistrado == "":
-                return False
-
-        with obtener_conexion() as conexion:
-            with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, date.today(), estadoBoleta, billeteraDigital, False, keyPedido))
-                conexion.commit()
-
-    @classmethod
-    #mal escrito
-    def insertar_peidido_usuario_registrado(cls, idUsuario,dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
-        cls.cont += 1
-        cont = str(cls.cont)
-        keyPedido = "2023" + cont
-
-        with obtener_conexion() as conexion:
-            with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( idUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (idUsuario, dni, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
-                conexion.commit()
 
     @staticmethod
     def actualizar_estado_recojo(keyPedido):

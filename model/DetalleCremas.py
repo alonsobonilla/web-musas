@@ -15,15 +15,6 @@ class DetalleCremas:
         self.midic["idPedido"] = p_idPedido
         self.midic["idCrema"] = p_idCrema
         self.midic["idDetalleOrden"] = p_idDetalleOrden
-          
-    # def insertar_detalleCremas(idPedido,idCrema,idDetalleOrden):
-    #     conexion = obtener_conexion()
-    #     with conexion.cursor() as cursor:
-    #         query = "insert into detalleCremas values (%s,%s,%s)"
-    #         values = (idPedido,idCrema,idDetalleOrden)
-    #         cursor.execute(query,values)
-    #     conexion.commit()
-    #     conexion.close()
        
     def obtener_detalleCremas_idPedido(idPedido):
         conexion = obtener_conexion()
