@@ -1,65 +1,130 @@
-{% extends "client/main.html" %} {% block titulo %} Registrarse {% endblock %}
-{% block contenido %}
-<section class="mt-5 mb-3 container">
-  <h2 class="">{{producto["nombre"]}}</h2>
-  <div class="w-auto m-auto">
-    <div class="row align-items-center justify-content-md-center m-auto">
-      <div class="col-sm-6 text-center">
-        <img
-          src="{{url_for('static', filename = 'img/hamburguesas/h-2.jpg')}}"
-          alt=""
-          class="rounded"
-          style="width: 250px"
+{% extends "client/main.html" %} {% block titulo %} Comprar producto {% endblock
+%} {% block contenido %}
+
+<section class="mt-5 mb-3 row m-auto">
+  <div class="col-lg-6">
+    <h3 class="m-3 fs-5 fw-bold">Productos</h3>
+    <div class="productos-comprar"></div>
+  </div>
+  <div class="col-lg-6">
+    <h3 class="m-3 fs-5 fw-bold">Datos compra</h3>
+    <form
+      action=""
+      method="post"
+      class="d-flex flex-column justify-content-center m-5"
+    >
+      {% if sesion %}
+      <input
+        type="hidden"
+        name="idUsuario"
+        value="{{idCliente}}"
+        id="idUsuario"
+      />
+      {% endif %}
+      <div class="mb-3">
+        <label for="dni" class="form-label">Dni:</label>
+        {% if sesion %}
+        <input
+          required
+          disabled
+          type="number"
+          class="form-control"
+          name="dni"
+          id="dni"
+          value="{{dni}}"
+        />
+        {% else %}
+        <input
+          required
+          type="number"
+          class="form-control"
+          name="usuario"
+          id="dni"
+        />
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label for="nombres" class="form-label">Nombres:</label>
+        {% if sesion %}
+        <input
+          required
+          disabled
+          type="text"
+          class="form-control"
+          name="nombres"
+          id="nombres"
+          value="{{cliente + ' ' + apellidos}}"
+        />
+        {% else %}
+        <input
+          required
+          type="text"
+          class="form-control"
+          name="nombres"
+          id="nombres"
+        />
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Número telefono:</label>
+        {% if sesion %}
+        <input
+          disabled
+          type="number"
+          class="form-control"
+          name="telefono"
+          id="telefono"
+          value="{{telefono}}"
+        />
+        {% else %}
+        <input type="number" class="form-control" name="numTelf" id="numTelf" />
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label for="hora-recojo" class="form-label">Hora recojo:</label>
+        <input
+          type="time"
+          class="form-control"
+          name="hora-recojo"
+          id="hora-recojo"
         />
       </div>
-
-      <div class="col-sm-6 text-center">
-        <div class="informacion-producto-ingredientes">
-          <p>{{producto["descripcion"]}}</p>
-        </div>
-
-        <p class="informacion-producto-precio">
-          <span>S/.</span>{{producto["precio"]}}
-        </p>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="boleta"
+          name="boleta"
+        />
+        <label class="form-check-label" for="exampleCheck1">Boleta</label>
       </div>
-    </div>
-  </div>
-
-  <div class="main-content-personalizar">
-    <h3 class="text-start">Personaliza</h3>
-    <div class="personalizar-salsas">
-      <h4>Elegir salsas</h4>
-      <div class="d-flex justify-content-around">
-        {% for crema in cremas %}
-        <div class="custom-item">
-          <div class="custom-item__img">
-            <img
-              src="{{url_for('static', filename = 'img/personalizar/mayonesa.jpg')}}"
-              alt=""
-              width="68"
-              height="68"
-            />
-          </div>
-          <p>{{crema["nombre"]}}</p>
-          <p class="precio-agregar"><span>S/.</span>{{crema["precio"]}}</p>
-          <input
-            type="checkbox"
-            name="crema"
-            value="{{crema['idProducto']}}"
-            class="valores"
-          />
-        </div>
-        {% endfor %}
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="billetera-digital"
+          name="billeteraDigital"
+        />
+        <label class="form-check-label" for="exampleCheck1"
+          >Billetera digital</label
+        >
       </div>
-    </div>
-  </div>
-  <div class="text-end">
-    <a
-      id="agregar-carrito"
-      href="{{url_for('cliente.pag_carrito')}}"
-      class="btn btn-success text-center"
-      >Agregar al carrito</a
-    >
+
+      <div class="text-end mt-2">
+        <button id="comprar-producto" type="submit" class="btn btn-success">
+          Comprar
+        </button>
+      </div>
+    </form>
   </div>
 </section>
+
+<script
+  src="{{url_for('static', filename = 'js/mostrarProductosCompra.js')}}"
+  type="module"
+></script>
+<script
+  src="{{url_for('static', filename= 'js/comprarProductos.js')}}"
+  type="module"
+></script>
 {% endblock %}

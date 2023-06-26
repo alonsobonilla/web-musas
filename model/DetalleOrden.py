@@ -71,4 +71,10 @@ class DetalleOrden:
             subTotal += j[0]
         return subTotal
     
-    
+    def obtener_id_detalle_orden_registro():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("select coalesce(max(idDetalleOrden),0)+1 as iddetalleorden from detalleOrden")  
+            fila = cursor.fetchone()
+        conexion.close()
+        return fila[0]

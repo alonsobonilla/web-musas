@@ -45,9 +45,9 @@ def actualizar():
 
 @categoria_producto.before_request
 def verificacion_usuario_logueado():
-    user_id = session.get("admin.auth")
+    user = session.get("admin.auth")
 
-    if user_id is None:
+    if user is None:
         return redirect(url_for("admin.home"))
     else:
-        g.user = user_id
+        g.user = user["nombres"]

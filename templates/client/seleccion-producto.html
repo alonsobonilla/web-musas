@@ -1,0 +1,70 @@
+{% extends "client/main.html" %} {% block titulo %} Registrarse {% endblock %}
+{% block contenido %}
+<section class="mt-5 mb-3 container">
+  <h2 class="">{{producto["nombre"]}}</h2>
+  <div class="w-auto m-auto">
+    <div class="row align-items-center justify-content-md-center m-auto">
+      <div class="col-sm-6 text-center">
+        <img
+          src="{{url_for('static', filename = 'img/hamburguesas/h-2.jpg')}}"
+          alt=""
+          class="rounded"
+          style="width: 250px"
+        />
+      </div>
+
+      <div class="col-sm-6 text-center">
+        <div class="informacion-producto-ingredientes">
+          <p>{{producto["descripcion"]}}</p>
+        </div>
+
+        <p class="informacion-producto-precio">
+          <span>S/.</span>{{producto["precio"]}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content-personalizar">
+    <h3 class="text-start">Personaliza</h3>
+    <div class="personalizar-salsas">
+      <h4>Elegir salsas</h4>
+      <div class="d-flex justify-content-around">
+        {% for crema in cremas %}
+        <div class="custom-item">
+          <div class="custom-item__img">
+            <img
+              src="{{url_for('static', filename = 'img/personalizar/mayonesa.jpg')}}"
+              alt=""
+              width="68"
+              height="68"
+            />
+          </div>
+          <p>{{crema["nombre"]}}</p>
+          <p class="precio-agregar"><span>S/.</span>{{crema["precio"]}}</p>
+          <input
+            type="checkbox"
+            name="crema"
+            value="{{crema['idProducto']}}"
+            class="valores"
+          />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="text-end">
+    <a
+      id="agregar-carrito"
+      href="{{url_for('cliente.pag_carrito')}}"
+      class="btn btn-success text-center"
+      >Agregar al carrito</a
+    >
+  </div>
+
+  <script
+    src="{{url_for('static', filename = 'js/guardarProductos.js')}}"
+    type="module"
+  ></script>
+</section>
+{% endblock %}

@@ -128,3 +128,12 @@ class Pedido:
             juego = cursor.fetchone()
         conexion.close()
         return juego
+
+    def obtener_id_pedido_registro():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT coalesce(max(idPedido),0)+1 as idpedido FROM registroPedido")
+            idPedido = cursor.fetchone()
+        conexion.close()
+        return idPedido[0]
+    

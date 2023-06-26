@@ -6,17 +6,17 @@ usuarios = Blueprint('usuarios', __name__, url_prefix='/usuarios')
 @usuarios.route("/")
 def home():
     usuarios = Usuario.obtener_usuarios()
-    usuario = session.get("admin.auth")
+    usuario = session.get("admin.auth-nombre")
     return render_template("admin/usuarios/index.html", usuarios = usuarios, usuario = usuario)
 
 @usuarios.route("/agregar")
 def form_agregar():
-    usuario = session.get("admin.auth")
+    usuario = session.get("admin.auth-nombre")
     return render_template("admin/usuarios/agregar.html", usuario = usuario)
 
 @usuarios.route("/editar/<id>")
 def form_editar(id):
-    usuario = session.get("admin.auth")
+    usuario = session.get("admin.auth-nombre")
     userUsuario = Usuario.obtener_usuario_id(id)
     if userUsuario is not None:
         return render_template("admin/usuarios/editar.html", usuario = usuario, userUsuario = userUsuario)

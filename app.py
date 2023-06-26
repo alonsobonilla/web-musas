@@ -18,7 +18,7 @@ from APIS.categoriaProducto import api_categoriaProducto
 from APIS.detalleComprobante import api_detalleComprobante
 from APIS.detalleCremas import api_detalleCremas
 from APIS.comprobante import api_comprobante
-
+from APIS.transacciones import transaccion
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret-key"
 jwt = JWT(app, authenticate, identity)
@@ -78,7 +78,7 @@ app.register_blueprint(api_categoriaProducto)
 app.register_blueprint(api_detalleComprobante)
 app.register_blueprint(api_detalleCremas)
 app.register_blueprint(api_comprobante)
-
+app.register_blueprint(transaccion)
 
 app.secret_key = "mysecretkey"
 # Iniciar el servidor

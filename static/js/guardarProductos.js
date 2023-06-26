@@ -1,17 +1,18 @@
+import { SERVER } from "./variables.js";
 const agregarCarrito = document.querySelector("#agregar-carrito");
 const cremas = document.querySelectorAll("input[type=checkbox]");
 const autorizacion = {
   username: "grupo5",
   password: "grupo5",
 };
-
 let id;
 let url;
 let cremasElegidas = [];
 if (agregarCarrito) {
   agregarCarrito.addEventListener("click", (e) => {
+    e.preventDefault();
     id = window.location.href.split("/").pop();
-    url = `http://dawgrupo5.pythonanywhere.com/get_producto/${id}`;
+    url = `${SERVER}/get_producto/${id}`;
 
     //obtengo las cremas elegidas
     cremas.forEach((crema) => {
@@ -25,7 +26,7 @@ if (agregarCarrito) {
 
 async function obtener_data_producto() {
   try {
-    const accesToken = await fetch("http://dawgrupo5.pythonanywhere.com/auth", {
+    const accesToken = await fetch(`${SERVER}/auth`, {
       method: "POST",
       body: JSON.stringify(autorizacion),
       headers: {
@@ -67,4 +68,5 @@ function guardar_data_carrito(data) {
 
   localStorage.setItem(id, JSON.stringify(obj));
   cremasElegidas = [];
+  window.location.href = `${SERVER}/carrito`;
 }

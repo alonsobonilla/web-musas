@@ -16,10 +16,17 @@ endblock %} {% block contenido %}
         <a class="btn btn-danger" id="vaciar-carrito">Vaciar carrito</a>
       </div>
       <div>
-        <a href="#" class="btn btn-success">Comprar</a>
+        <a href="{{url_for('cliente.pag_compra')}}" class="btn btn-success"
+          >Comprar</a
+        >
       </div>
     </div>
   </main>
 </section>
+
+<script
+  src="{{url_for('static', filename = 'js/mostrarProductos.js')}}"
+  type="module"
+></script>
 
 {% endblock %}
