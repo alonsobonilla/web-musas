@@ -10,7 +10,7 @@ def api_obtenerusuarios():
         usuarios= Usuario.obtener_usuarios()
         listaserializable = []
         for usuario in usuarios:
-            miobj = Usuario(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
+            miobj = Usuario(usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
             listaserializable.append(miobj.midic.copy())
         return jsonify({"mensaje": "Usuarios encontrados", "usuarios": listaserializable})
     except Exception as e:
@@ -34,7 +34,7 @@ def api_guardarusuario():
             Usuario.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contraseña,tipoUsuario)
             return jsonify({"Mensaje":"usuario registrado correctamente"})
         else: 
-            return jsonify({"Mensaje":"usuario ya existe correctamente"})
+            return jsonify({"Mensaje":"usuario ya existe "})
         
     except Exception as e:
         return jsonify({"mensaje": "Error al guardar usuario", "error": str(e)})
@@ -67,7 +67,7 @@ def api_obtenerusuario_por_dni_tipo():
         usuario = Usuario.obtener_usuario_dni_tipo(dni, tipoUsuario)
         if usuario is not None:
             listaserializable = []
-            miobj = Usuario(usuario[0],usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
+            miobj = Usuario(usuario[1],usuario[2],usuario[3],usuario[4],usuario[5],usuario[6], usuario[7])
             listaserializable.append(miobj.midic.copy())
             return jsonify({"mensaje":"Usuario encontrado", "usuario": listaserializable})
         return jsonify({"mensaje":"Usuario no encontrado"})

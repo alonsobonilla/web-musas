@@ -28,7 +28,7 @@ def insertar_detalleCremas():
     except Exception as ex:
         return jsonify({"Mensaje":"Error al registrar detalle crema", "Status":"0", "errror":str(ex)})
 
-@api_detalleCremas.route("/obtener_detalleCremas/<int:idPedido>/<int:idProducto>")
+@api_detalleCremas.route("/obtener_detalleCremas/<int:idPedido>")
 
 def obtener_detalleCremas(idPedido):
     try:

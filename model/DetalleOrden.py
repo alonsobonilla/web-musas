@@ -12,14 +12,13 @@ class DetalleOrden:
     precioTotal = 0.0
     midic = dict()
 
-    def __init__(self,p_idDetalleOrden,p_idProducto,p_idPedido,p_nombreProducto,p_precioUnidad,p_cantidad,p_precioTotal):
+    def __init__(self,p_idProducto,p_idPedido,p_nombreProducto,p_precioUnidad,p_cantidad,p_precioTotal):
         self.idProducto= p_idProducto
         self.idPedido = p_idPedido
         self.nombreProducto = p_nombreProducto
         self.precioUnidad = p_precioUnidad
         self.cantidad = p_cantidad
         self.precioTotal = p_precioTotal
-        self.midic["idDetalleOrden"] = p_idDetalleOrden
         self.midic["idProducto"] = p_idProducto
         self.midic["idPedido"] = p_idPedido
         self.midic["nombreProducto"] = p_nombreProducto
@@ -30,8 +29,8 @@ class DetalleOrden:
     def insertar_detalleOrden(idproducto,idpedido,cantidad):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            nomP =Producto.obtener_producto_por_id(idproducto)["p.nombre"]
-            precioU = Producto.obtener_producto_por_id(idproducto)["p.precio"]
+            nomP =Producto.obtener_producto_por_id(idproducto)[1]
+            precioU = Producto.obtener_producto_por_id(idproducto)[3]
             precioT = cantidad * precioU
             query = "INSERT INTO detalleOrden(idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
             values = (idpedido,idproducto,nomP,precioU,cantidad,precioT)
@@ -54,7 +53,7 @@ class DetalleOrden:
         conexion = obtener_conexion()
         modo=None
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT idProducto,idPedido,nombreProducto,precioUnidad,cantidad,precioTotal FROM detalleOrden WHERE idPedido = %s AND idDetalleOrden=%s",(idpedido,idDetalleOrden,))
+            cursor.execute("SELECT idProducto,idPedido,nombreProducto,precioUnidad,cantidad,precioTotal FROM detalleOrden WHERE idPedido = %s AND idDetalleOrden=%s",(idpedido,idDetalleOrden))
             modo = cursor.fetchone()
         conexion.close()
         return modo
@@ -64,7 +63,7 @@ class DetalleOrden:
         juego = None
         with conexion.cursor() as cursor:
             cursor.execute("select precioTotal from detalleOrden where idPedido = %s", (idPedido))
-            juego = cursor.fetchone()
+            juego = cursor.fetchall()
         conexion.close()
         subTotal = 0
         for j in juego:

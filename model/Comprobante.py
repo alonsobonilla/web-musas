@@ -5,7 +5,6 @@ from model.Usuario import Usuario
 import datetime
 
 class Comprobante:
-    idComprobante = 0
     idPedido = 0
     idUsuario = ""
     dniNoRegistrado = 0
@@ -17,8 +16,7 @@ class Comprobante:
     numeroComprobante = ""
     midic = dict()
 
-    def __init__(self,p_idComprobante,p_idPedido,p_idUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
-        self.idComprobante=p_idComprobante
+    def __init__(self,p_idPedido,p_idUsuario,p_dniNoRegistrado,p_fechaComprobante,p_horaComprobante,p_subTotal,p_montoTotal,p_igv,p_numComprobante):
         self.idPedido=p_idPedido
         self.idUsuario=p_idUsuario
         self.dniNoRegistrado=p_dniNoRegistrado
@@ -28,7 +26,6 @@ class Comprobante:
         self.montoTotal=p_montoTotal
         self.igv=p_igv
         self.numeroComprobante=p_numComprobante
-        self.midic["idComprobante"]=p_idComprobante
         self.midic["idPedido"]=p_idPedido
         self.midic["idUsuario"]=p_idUsuario
         self.midic["dniNoRegistrado"]=p_dniNoRegistrado
@@ -48,10 +45,12 @@ class Comprobante:
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)
+        igv = subTotal*igv
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
             query = "insert into comprobante(idPedido,idUsuario,dniNoRegistrado,fechaComprobante,horaComprobante, subTotal,igv,montoTotal,numeroComprobante) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            cursor.execute(query, (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante))
+            values = (idPedido,idUsuario,dniNoRegistrado,fecha_actual,hora_actual, subTotal,igv,montoTotal,numComprobante)
+            cursor.execute(query, values)
         conexion.commit()
         conexion.close()
  
@@ -64,7 +63,7 @@ class Comprobante:
         conexion.close()
         return comprobantes
    
-    def obtener_comprobante_dni(idUsuario):
+    def obtener_comprobante_idUsuario(idUsuario):
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
