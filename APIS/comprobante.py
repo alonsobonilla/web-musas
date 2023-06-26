@@ -21,13 +21,13 @@ def insertar_comprobante():
    
 
 
-@api_comprobante.route("/obtener_comprobante")
+@api_comprobante.route("/obtener_comprobantes")
 def obtener_comprobante():
     try:
         comprobantes = Comprobante.obtener_comprobante()
         listaComprobante = []
         for comprobante in comprobantes:
-            miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4], comprobante[5], comprobante[6], comprobante[7], comprobante[8])
+            miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4], comprobante[5], comprobante[6], comprobante[7], comprobante[8], comprobante[9])
             listaComprobante.append(miobj.midic.copy())
         return jsonify({"Mensaje": "Comprobantes encontrados", "Comprobantes": listaComprobante})
     except Exception as e:
@@ -38,7 +38,7 @@ def obtener_comprobante_cliente(idUsuario):
     try:
         comprobante = Comprobante.obtener_comprobante_idUsuario(idUsuario)
         lista = []
-        miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4], comprobante[5], comprobante[6], comprobante[7], comprobante[8])
+        miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4], comprobante[5], comprobante[6], comprobante[7], comprobante[8], comprobante[9])
         lista.append(miobj.midic.copy())
         return jsonify({"Mensaje":"Comprobante obtenido correctamente", "status:":"1","Comprobante:": lista})
     except Exception as e:
