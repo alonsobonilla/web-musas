@@ -38,7 +38,7 @@
           required
           type="number"
           class="form-control"
-          name="usuario"
+          name="dni"
           id="dni"
         />
         {% endif %}
@@ -77,7 +77,12 @@
           value="{{telefono}}"
         />
         {% else %}
-        <input type="number" class="form-control" name="numTelf" id="numTelf" />
+        <input
+          type="number"
+          class="form-control"
+          name="telefono"
+          id="telefono"
+        />
         {% endif %}
       </div>
       <div class="mb-3">
