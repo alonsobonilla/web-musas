@@ -1357,6 +1357,47 @@ paths:
               aplication/json:
                 schema:
                   $ref: '#/components/schemas/Autenticacion'
+  
+  /transaccion_comprobante:
+    post:
+      tags:
+      - Transacciones
+      summary: "Transacción para insertar un Comprobante con su detalle y actualizar el pedido a estado recogido como verdadero"
+      parameters:
+       - $ref: '#/components/parameters/token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idPedido:
+                  type: integer
+                keyPedido:
+                  type: integer
+        required: True
+      responses:
+        200:
+          description: Operación completada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: "Comprobante registrado correctamente || keyPedido incorrecto"
+                  status:
+                    type: string
+                    example: "1 || 0"
+        401:
+            description: Falla de autenticación
+            content:
+              aplication/json:
+                schema:
+                  $ref: '#/components/schemas/Autenticacion'
+                
+                
 components:
   schemas:
     Autenticacion:
