@@ -19,25 +19,6 @@ def api_obtenerdetallecomprobante():
     except:
         return jsonify ({"Mensaje":"Error al obtener detalle de comprobante"})
 
-
-@api_detalleComprobante.route("/api_guardardetalleComprobante", methods=["POST"])
-def api_guardardetalleComprobante():
-    try:
-        idcomprobante = request.json["idComprobante"]
-        idproducto = request.json["idProducto"]
-        cantidad = request.json["cantidad"]
-        validar_idProducto = Producto.obtener_producto_por_id(idproducto)
-        validar_idComprobante = Comprobante.validar_idComprobante_existente(idcomprobante)
-
-        if validar_idProducto == None or validar_idComprobante == None:
-            return jsonify ({"Mensaje":"Error al guardar detalle de comprobante No existe el producto o el comprobante"})
-        
-        detalleComprobante.insertar_detalleComprobante(idcomprobante,idproducto,cantidad)
-        return jsonify({"Mensaje":"Detalle Comprobante registrado correctamente"})
-    except:
-        return jsonify({"Mensaje":"Error al insertar detalle de comprobante"})
-
-
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idcomprobante>/<int:idproducto>")
 def api_obtenerdetalleComprobante(idcomprobante,idproducto):
     try:

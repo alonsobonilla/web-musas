@@ -14,3 +14,13 @@ def transaccion_compra():
             return jsonify({"mensaje": "Compra registrada correctamente", "status":"1"})
     except Exception as e:
         return jsonify({"mensaje": "Error al registrar la compra", "status":"0", "error": str(e)})
+
+@transaccion.route('/transaccion_comprobante', methods=['POST'])
+def transaccion_comprobante():
+    idPedido = request.json["idPedido"]
+    try:
+        rpta = Transaccion.insertarComprobante(idPedido)
+        if rpta:
+            return jsonify({"mensaje": "Comprobante registrado correctamente", "status":"1"})
+    except Exception as e:
+        return jsonify({"mensaje": "Error al registrar el comprobante", "status":"0", "error": str(e)})

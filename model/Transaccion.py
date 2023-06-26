@@ -1,7 +1,9 @@
 from bd import obtener_conexion
 from model.Pedido import Pedido
 from model.DetalleOrden import DetalleOrden
-from datetime import time, datetime
+from model.Comprobante import Comprobante
+from model.Pedido import Pedido
+from datetime import time, datetime, date
 class Transaccion:
     conteo = 0
     @classmethod
@@ -58,3 +60,39 @@ class Transaccion:
             raise e
         finally:
             conexion.close()
+    def insertarComprobante(idPedido):
+        datosPedido = Pedido.obtener_dni_pedido(idPedido)
+        idUsuario = datosPedido[0]
+        dniNoRegistrado = datosPedido[1]
+        idComprobante = Comprobante.obtener_id_comprobante_registro()
+        fechaComprobante = date.today()
+        horaComprobante = datetime.now().time()
+        subTotal = DetalleOrden.obtener_subTotal(idPedido)
+        igv = subTotal*0.18
+        montoTotal = subTotal + igv
+
+        ordenes = DetalleOrden.obtener_detalle_orden_id_pedido(idPedido)
+
+        queryComprobante = "INSERT INTO comprobante(idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, numeroComprobante) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        queryDetalleComprobante = "INSERT INTO detalleComprobante(idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s)"
+        try:
+            conexion = obtener_conexion()
+            with conexion.cursor() as cursor:
+                cursor.execute(queryComprobante, (idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, idComprobante))
+                
+            with conexion.cursor() as cursor:
+                for orden in ordenes:
+                    idProducto = orden[2]
+                    nombreProducto = orden[3]
+                    precioUnidad = orden[4]
+                    cantidad = orden[5]
+                    precioTotal = orden[6]
+                    cursor.execute(queryDetalleComprobante, (idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
+            conexion.commit()
+            return True
+        except Exception as e:
+            conexion.rollback()
+            raise e
+        finally:
+            conexion.close()
+            

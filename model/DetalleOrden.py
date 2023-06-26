@@ -26,19 +26,6 @@ class DetalleOrden:
         self.midic["cantidad"] = p_cantidad
         self.midic["precioTotal"] = p_precioTotal
 
-    def insertar_detalleOrden(idproducto,idpedido,cantidad):
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            nomP =Producto.obtener_producto_por_id(idproducto)[1]
-            precioU = Producto.obtener_producto_por_id(idproducto)[3]
-            precioT = cantidad * precioU
-            query = "INSERT INTO detalleOrden(idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal) VALUES (%s, %s, %s, %s, %s, %s)"
-            values = (idpedido,idproducto,nomP,precioU,cantidad,precioT)
-            cursor.execute(query, values)
-        conexion.commit()
-        conexion.close()
-
-
     def obtener_detalleOrden():
         conexion = obtener_conexion()
         detalleOrden = []
@@ -77,3 +64,12 @@ class DetalleOrden:
             fila = cursor.fetchone()
         conexion.close()
         return fila[0]
+    
+    def obtener_detalle_orden_id_pedido(idPedido):
+        conexion = obtener_conexion()
+        detalleOrden = []
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM detalleOrden WHERE idPedido = %s",(idPedido))
+            detalleOrden = cursor.fetchall()
+        conexion.close()
+        return detalleOrden
