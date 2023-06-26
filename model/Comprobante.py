@@ -1,8 +1,7 @@
 from bd import obtener_conexion
 from model.Pedido import Pedido
 from model.DetalleOrden import DetalleOrden
-from model.Usuario import Usuario
-import datetime
+from datetime import date, datetime, timedelta
 
 class Comprobante:
     idPedido = 0
@@ -29,8 +28,8 @@ class Comprobante:
         self.midic["idPedido"]=p_idPedido
         self.midic["idUsuario"]=p_idUsuario
         self.midic["dniNoRegistrado"]=p_dniNoRegistrado
-        self.midic["fechaComprobante"]=p_fechaComprobante
-        self.midic["horaComprobante"]=p_horaComprobante
+        self.midic["fechaComprobante"]=str(date(year=p_fechaComprobante.year, month=p_fechaComprobante.month, day=p_fechaComprobante.day))
+        self.midic["horaComprobante"]=str(timedelta(seconds=p_horaComprobante.seconds))
         self.midic["subTotal"]=p_subTotal
         self.midic["montoTotal"]=p_montoTotal
         self.midic["igv"]=p_igv
@@ -38,10 +37,11 @@ class Comprobante:
 
 
     def insertar_comprobante(idPedido,numComprobante):
-        fecha_actual = datetime.date.today()
-        hora_actual = datetime.datetime.now().time()
-        idUsuario = Pedido.obtener_dni_pedido(idPedido)[0]
-        dniNoRegistrado = Pedido.obtener_dni_pedido(idPedido)[1]
+        fecha_actual = date.today()
+        hora_actual = datetime.now().time()
+        datosUsuarioPedido = Pedido.obtener_dni_pedido(idPedido)
+        idUsuario = datosUsuarioPedido[0]
+        dniNoRegistrado = datosUsuarioPedido[1]
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
         igv = 0.18
         montoTotal = subTotal + (subTotal*igv)
