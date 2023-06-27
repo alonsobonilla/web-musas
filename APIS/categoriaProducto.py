@@ -22,7 +22,7 @@ def api_obtenercategorias():
         return jsonify ({"Mensaje":"Error al obtener categoria"})
 
 
-@api_categoriaProducto.route("/api_eliminarcategoria/<int:idCategoria>")
+@api_categoriaProducto.route("/api_eliminarcategoria/<int:idCategoria>", methods=["POST"])
 
 def api_eliminarcategoria(idCategoria):
     try:
@@ -48,6 +48,7 @@ def api_actualizarcategoria():
     try:
         idCategoria = request.json["idCategoria"]
         nombre = request.json["nombreCategoria"]
+        # idCategoria = CategoriaProducto.obtener_idcategoria_por_nombre(nombre)
         descripcion = request.json["descripcion"]
         CategoriaProducto.actualizar_categoria(nombre,descripcion,idCategoria)    
         return jsonify({"Mensaje":"Categoria actualizada correctamente", "status:":"1"})

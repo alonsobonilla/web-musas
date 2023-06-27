@@ -1,9 +1,15 @@
+import { IDCATEGORIACREMAS, SERVER, mapCremas } from "./config.js";
+import { obtenerCremas } from "./fetchApis.js";
 const productos = document.querySelector(".productos-carrito");
-const IDCATEGORIACREMAS = 2;
-let mapCremas = new Map();
+const vaciar = document.querySelector("#vaciar-carrito");
 
 window.addEventListener("DOMContentLoaded", async () => {
-  await obtenerCremas();
+  await obtenerCremas(SERVER, IDCATEGORIACREMAS, mapCremas);
+  mostrarProductos();
+});
+
+vaciar.addEventListener("click", () => {
+  localStorage.clear();
   mostrarProductos();
 });
 
@@ -15,6 +21,8 @@ async function mostrarProductos() {
     const producto = JSON.parse(localStorage.getItem(key));
 
     const div = document.createElement("div");
+    const divImagen = document.createElement("div");
+    const img = document.createElement("img");
     const divInformacion = document.createElement("div");
     const divModificaciones = document.createElement("div");
     const divCremas = document.createElement("div");
@@ -29,7 +37,7 @@ async function mostrarProductos() {
     const botonResta = document.createElement("button");
 
     const idCremas = producto.cremas;
-    listaCremas.classList.add("d-flex", "gap-2");
+    listaCremas.classList.add("d-flex", "gap-2", "justify-content-center");
     const p = document.createElement("p");
     p.textContent = "Cremas: ";
     p.classList.add("fw-bold");
@@ -71,17 +79,28 @@ async function mostrarProductos() {
       mostrarProductos();
     };
 
-    divCantidades.classList.add("d-flex", "align-items-center", "gap-2");
-    div.classList.add(
+    divCantidades.classList.add(
       "d-flex",
+      "align-items-center",
       "gap-2",
+      "justify-content-center",
+      "mb-3"
+    );
+    div.classList.add(
+      "row",
       "align-items-center",
       "justify-content-around",
       `producto-carrito-${key}`
     );
+    divInformacion.classList.add("col-md-4", "text-center");
+    divModificaciones.classList.add("col-md-4", "text-center");
+    divImagen.classList.add("col-md-4", "text-center");
+    img.src = "/static/img/hamburguesas/h-2.jpg";
+    img.alt = "Imagen de la hamburguesa";
+    img.style.width = "200px";
 
     precio.classList.add("precio");
-    nombre.classList.add("nombre");
+    nombre.classList.add("nombre", "fw-bold", "fs-6");
     cantidad.classList.add("cantidad");
     precioTotal.classList.add("precioTotal");
 
@@ -89,6 +108,7 @@ async function mostrarProductos() {
     divInformacion.appendChild(precio);
     divInformacion.appendChild(precioTotal);
     divInformacion.appendChild(divCremas);
+    divImagen.appendChild(img);
 
     divCantidades.appendChild(botonResta);
     divCantidades.appendChild(cantidad);
@@ -97,8 +117,10 @@ async function mostrarProductos() {
     divInformacion.appendChild(divCantidades);
     divModificaciones.appendChild(botonEliminar);
 
+    div.appendChild(divImagen);
     div.appendChild(divInformacion);
     div.appendChild(divModificaciones);
+
     productos.appendChild(div);
   }
 }
@@ -106,33 +128,5 @@ async function mostrarProductos() {
 function limpiarHijos() {
   while (productos.firstChild) {
     productos.removeChild(productos.firstChild);
-  }
-}
-
-async function obtenerCremas() {
-  const url = `http://dawgrupo5.pythonanywhere.com/get_productos_categoria/${IDCATEGORIACREMAS}}`;
-
-  try {
-    const accesToken = await fetch("http://dawgrupo5.pythonanywhere.com/auth", {
-      method: "POST",
-      body: JSON.stringify(autorizacion),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const token = await accesToken.json();
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `JWT ${token.access_token}`,
-      },
-    });
-    const data = await response.json();
-
-    data.productos.forEach((crema) => {
-      mapCremas.set(crema.idProducto, crema.nombre);
-    });
-  } catch (error) {
-    console.log(error);
   }
 }

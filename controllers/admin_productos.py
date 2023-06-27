@@ -9,13 +9,13 @@ productos = Blueprint("productos", __name__, url_prefix='/productos')
 def home():
     usuario = session.get("admin.auth")
     productos = Producto.obtener_productos()
-    return render_template("admin/productos/index.html", productos = productos, usuario = usuario)
+    return render_template("admin/productos/index.html", productos = productos, usuario = usuario["nombres"])
 
 @productos.route("/agregar_producto")
 def formulario_agregar():
     usuario = session.get("admin.auth")
     nombreCategorias = CategoriaProducto.obtener_categorias()
-    return render_template("admin/productos/agregar_producto.html", categorias = nombreCategorias, usuario = usuario)
+    return render_template("admin/productos/agregar_producto.html", categorias = nombreCategorias, usuario = usuario["nombres"])
 
 @productos.route("/guardar_producto", methods=["POST"])
 def guardar():

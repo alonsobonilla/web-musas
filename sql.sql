@@ -16,7 +16,7 @@ CREATE TABLE comprobante (
   numeroComprobante varchar(25) NOT NULL, 
   PRIMARY KEY (idComprobante));
 CREATE TABLE detalleComprobante (
-  idComprobante  int(11) NOT NULL AUTO_INCREMENT, 
+  idComprobante  int(11) NOT NULL, 
   idProducto     int(11) NOT NULL, 
   nombreProducto varchar(100) NOT NULL, 
   precioUnidad   float NOT NULL, 
@@ -32,7 +32,7 @@ CREATE TABLE detalleCremas (
   idCrema, 
   idDetalleOrden));
 CREATE TABLE detalleOrden (
-  idDetalleOrden int(11) NOT NULL AUTO_INCREMENT, 
+  idDetalleOrden int(11) NOT NULL, 
   idPedido       int(11) NOT NULL, 
   idProducto     int(11) NOT NULL, 
   nombreProducto varchar(100) NOT NULL, 
@@ -50,8 +50,8 @@ CREATE TABLE producto (
   existencias smallint(6), 
   PRIMARY KEY (idProducto));
 CREATE TABLE registroPedido (
-  idPedido         int(11) NOT NULL AUTO_INCREMENT, 
-  idUsuario        int(11) NOT NULL, 
+  idPedido         int(11) NOT NULL, 
+  idUsuario        int(11), 
   dniNoRegistrado  char(8) NOT NULL, 
   numeroTelefono   char(9) NOT NULL, 
   estadoRecojo     tinyint(1) DEFAULT false NOT NULL, 

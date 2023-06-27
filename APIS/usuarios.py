@@ -28,8 +28,14 @@ def api_guardarusuario():
         numTel = request.json["numTel"]
         contraseña = request.json["contraseña"]
         tipoUsuario = request.json["tipoUsuario"]
-        Usuario.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contraseña,tipoUsuario)
-        return jsonify({"Mensaje":"usuario registrado correctamente"})
+        usuario = Usuario.obtener_usuario_dni_tipo(DNI,tipoUsuario)
+
+        if usuario is None:
+            Usuario.insertar_usuario(DNI, nombres, apellidos, correo, numTel,contraseña,tipoUsuario)
+            return jsonify({"Mensaje":"usuario registrado correctamente"})
+        else: 
+            return jsonify({"Mensaje":"usuario ya existe "})
+        
     except Exception as e:
         return jsonify({"mensaje": "Error al guardar usuario", "error": str(e)})
     
@@ -40,9 +46,14 @@ def api_eliminarusuario():
     try:
         dni = request.json["DNI"]
         tipoUsuario = request.json["tipoUsuario"]
+        usuario = Usuario.obtener_usuario_dni_tipo(dni,tipoUsuario)
 
-        Usuario.eliminar_usuario(dni, tipoUsuario)
-        return jsonify({"Mensaje":"Usuario eliminado correctamente"})
+        if usuario is None:
+            Usuario.eliminar_usuario(dni, tipoUsuario)
+            return jsonify({"Mensaje":"Usuario eliminado correctamente"})
+        else: 
+            return jsonify({"Mensaje":"El usuario no existe"})
+      
     except Exception as e:
         return jsonify({"mensaje": "Error al eliminar usuario", "error": str(e)})
     

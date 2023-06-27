@@ -36,43 +36,6 @@ class Pedido:
         if pedidos is None:
             return pedidos
         return Pedido.diccionario_pedidos(pedidos)
-    
-    @classmethod
-    def insertar_pedido_usuario_no_registrado( cls, dniNoRegistrado, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
-
-        # with open("keyPedidos.txt", "r") as archivo:
-        #     ultimalinea = archivo.readlines()[-1].strip()
-        
-        # if ultimalinea != "":
-        #     digito = ultimalinea[4:]
-        #     cls.cont = int(digito)
-
-        cls.cont += 1
-        cont = str(cls.cont)
-        keyPedido = "2023" + cont
-
-        # with open("~/web-musas/keyPedidos.txt", "w") as archivo:
-        #     archivo.write(keyPedido + "\n")
-
-        if dniNoRegistrado == "":
-                return False
-
-        with obtener_conexion() as conexion:
-            with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (dniNoRegistrado, numeroTelefono, horaRecojo, date.today(), estadoBoleta, billeteraDigital, False, keyPedido))
-                conexion.commit()
-
-    @classmethod
-    #mal escrito
-    def insertar_peidido_usuario_registrado(cls, idUsuario,dni, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital):
-        cls.cont += 1
-        cont = str(cls.cont)
-        keyPedido = "2023" + cont
-
-        with obtener_conexion() as conexion:
-            with conexion.cursor() as cursor:
-                cursor.execute("INSERT INTO registroPedido( idUsuario, dniNoRegistrado, numeroTelefono, horaRecojo, fechaPedido, estadoBoleta, billeteraDigital, estadoRecojo, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (idUsuario, dni, numeroTelefono, horaRecojo, datetime.now(), estadoBoleta, billeteraDigital, False, keyPedido))
-                conexion.commit()
 
     @staticmethod
     def actualizar_estado_recojo(keyPedido):
@@ -92,19 +55,20 @@ class Pedido:
         list = []
         for pedido in pedidos:
             diccionario = dict()
-            horaRecojo = str(timedelta(seconds=pedido[5].seconds))
-            fechaPedido = str(date(year=pedido[6].year, month=pedido[6].month, day=pedido[6].day))
+            horaRecojo = str(timedelta(seconds=pedido[6].seconds))
+            fechaPedido = str(date(year=pedido[7].year, month=pedido[7].month, day=pedido[7].day))
 
             diccionario['idPedido'] = pedido[0]
             diccionario["idUsuario"] = pedido[1]
             diccionario["dniNoRegistrado"] = pedido[2]
-            diccionario["numeroTelefono"] = pedido[3]
-            diccionario["estadoRecojo"] = "Recogido" if pedido[4] == 1 else "En proceso"
+            diccionario["nombres"] = pedido[3]
+            diccionario["numeroTelefono"] = pedido[4]
+            diccionario["estadoRecojo"] = "Recogido" if pedido[5] == 1 else "En proceso"
             diccionario["horaRecojo"] = horaRecojo
             diccionario["fechaPedido"] = fechaPedido
-            diccionario["estadoBoleta"] = "Si" if pedido[7] == 1 else "No"
-            diccionario["billeteraDigital"] = "Si" if pedido[8] == 1 else "No"
-            diccionario["keyPedido"] = pedido[9]
+            diccionario["estadoBoleta"] = "Si" if pedido[8] == 1 else "No"
+            diccionario["billeteraDigital"] = "Si" if pedido[9] == 1 else "No"
+            diccionario["keyPedido"] = pedido[10]
             list.append(diccionario)
         return list
     
@@ -124,7 +88,25 @@ class Pedido:
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
-            cursor.execute("select dniUsuario, dniNoRegistrado from registroPedido where idPedido = %s" ,(idPedido))
+            cursor.execute("select idUsuario, dniNoRegistrado from registroPedido where idPedido = %s" ,(idPedido))
             juego = cursor.fetchone()
         conexion.close()
         return juego
+
+    def obtener_id_pedido_registro():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT coalesce(max(idPedido),0)+1 as idpedido FROM registroPedido")
+            idPedido = cursor.fetchone()
+        conexion.close()
+        return idPedido[0]
+    
+    def validate_key_pedido(idPedido, keyPedido):
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT keyPedido FROM registroPedido WHERE idPedido = %s and keyPedido = %s", (idPedido, keyPedido))
+            key = cursor.fetchone()
+        conexion.close()
+        if key is None:
+            return False
+        return True

@@ -1,7 +1,8 @@
 from bd import obtener_conexion
 from werkzeug.security import check_password_hash, generate_password_hash
 from model.Producto import Producto
-
+from model.Comprobante import Comprobante
+from model.DetalleOrden import DetalleOrden
 #obtener, insertar, obtener por id
 class detalleComprobante:
     idComprobante = 0
@@ -25,19 +26,6 @@ class detalleComprobante:
         self.midic["precioUnidad"] = p_precioUnidad
         self.midic["cantidad"] = p_cantidad
         self.midic["precioTotal"] = p_precioTotal
-
-
-    def insertar_detalleComprobante(idcomprobante,idproducto,cantidad):
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            query = "INSERT INTO detalleComprobante VALUES (%s, %s, %s,%s, %s, %s)"
-            nomP =Producto.obtener_producto_por_id(idproducto)["nombre"]
-            precioU = Producto.obtener_producto_por_id(idproducto)["precio"]
-            precioT = cantidad * precioU
-            values = (idcomprobante,idproducto,nomP,precioU,cantidad,precioT)
-            cursor.execute(query,values)
-        conexion.commit()
-        conexion.close()
 
     def obtener_detalleComprobante_id(idcomprobante,idproducto):
         conexion = obtener_conexion()

@@ -20,6 +20,8 @@ tags:
     description: Apis para la tabla detalle Cremas
   - name: Categoria Producto
     description: Apis para la tabla categoria Producto
+  - name: Transacciones
+    description: Apis para las transacciones
 paths:
   #Productos
   /get_productos:
@@ -591,53 +593,6 @@ paths:
             aplication/json:
               schema:
                 $ref: '#/components/schemas/Autenticacion' 
-  /insertar_pedido:
-    post:
-      tags:
-      - Registro Pedidos
-      summary: Registrar pedidos
-      parameters:
-      - $ref: '#/components/parameters/token'
-      requestBody:
-        description: "EL dni no registrado se llena si el usuario que compra no tiene una cuenta registrada. Viceversa para el idUsuario, se llena si esta comprando desde una cuenta iniciada"
-        content:
-          aplication/json:
-            schema:
-              type: object
-              properties:
-                idUsuario:
-                  type: integer
-                dniNoRegistrado:
-                  type: string
-                numeroTelefono:
-                  type: string
-                horaRecojo:
-                  type: string
-                estadoBoleta:
-                  type: boolean
-                billeteraDigital:
-                  type: boolean
-        required: True
-      responses:
-        200:
-          description: Operación completada correctamente
-          content:
-            aplication/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    example: "Pedido registrado correctamente"
-                  status:
-                    type: string
-                    example: "1"
-        401:
-          description: Falla de autenticación
-          content:
-            aplication/json:
-              schema:
-                $ref: '#/components/schemas/Autenticacion'
   /actualizar_estado_recojo:
     post:
       tags:
@@ -790,6 +745,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Autenticacion'  
   
+  # Detalle Orden
   /api_obtenerdetalleorden:
     get:
       tags:
@@ -861,49 +817,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Autenticacion'
-                
-  /api_guardardetalleOrden:
-    post:
-      tags:
-        - Detalle Orden
-      summary: insertar un detalle Orden
-      parameters:
-        - $ref: '#/components/parameters/token'
-      requestBody:
-        content:
-          aplication/json:
-            schema:
-              type: object
-              properties:
-                idproducto:
-                  type: integer
-                idpedido:
-                  type: integer
-                cantidad:
-                  type: number
-                  example: 2
-        required: True
-      responses:
-        200:
-          description: Operación Completada
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  mensaje:
-                    type: string
-                    example: Detalle de orden registrado correctamente
-                  status:
-                    type: string
-                    example: "1"
-        401:
-          description: Falla de autenticación
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Autenticacion'               
   
+  #Detalle Cremas
   /obtener_detalleCremas/{idpedido}/{idproducto}:
    get:
       tags:
@@ -954,48 +869,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Autenticacion'
-                
-  /insertar_detalleCremas:
-    post:
-      tags:
-        - Detalle Cremas
-      summary: insertar un detalle Cremas
-      parameters:
-        - $ref: '#/components/parameters/token'
-      requestBody:
-        content:
-          aplication/json:
-            schema:
-              type: object
-              properties:
-                idpedido:
-                  type: integer
-                idproducto:
-                  type: integer
-                idcrema:
-                  type: integer
-        required: True
-      responses:
-        200:
-          description: Operación Completada
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  mensaje:
-                    type: string
-                    example: Detalle de crema registrado correctamente
-                  status:
-                    type: string
-                    example: "1"
-        401:
-          description: Falla de autenticación
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Autenticacion'                
-    
+  
+  #Categoria Producto
   /api_obtenercategorias:
     get:
       tags:
@@ -1179,7 +1054,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Autenticacion'
   
-  #gabo
+  #Comprobante
   /obtener_comprobante:
     get:
       tags:
@@ -1189,7 +1064,7 @@ paths:
       - $ref: '#/components/parameters/token'
       responses:
         200:
-          description: Operación completada
+          description: Operaci贸n completada
           content:
             aplication/json:
               schema:
@@ -1237,49 +1112,220 @@ paths:
                     type: string
                     example: 1  
         401:
-          description: Falla de autenticación
+          description: Falla de autenticaci贸n
           content:
             aplication/json:
               schema:
-                $ref: '#/components/schemas/Autenticacion'  
-                
-  #Falta generar el numero comprobante
-  /insertar_comprobante:
+                $ref: '#/components/schemas/Autenticacion'
+        402:
+          description: Error al obtener comprobante
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  mensaje: 
+                    type: string
+                    example: "Error al obtener comprobantes"
+                  status:
+                    type: string
+                    example: "0"
+                    
+  /obtener_comprobante_cliente/{idUsuario}:
     post:
       tags:
       - Comprobante
-      summary: Insertar comprobante
+      summary: Obtener comprobante por dni cliente
       parameters:
-          - $ref: '#/components/parameters/token'
+        - $ref: '#/components/parameters/token'
+        - name: idUsuario
+          in: path
+          description: Identificador del Cliente
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                idUsuario:
+                  type: integer
+      responses:
+        200:
+          description: Operacion completada
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: "Comprobante obtenido correctamente"
+                  status:
+                    type: string
+                    example: "0"
+                  comprobantes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          idComprobante: 
+                            type: integer
+                          idPedido: 
+                            type: integer
+                          idUsuario:
+                            type: integer
+                          dniNoRegistrado: 
+                            example: 
+                          fechaComprobante: 
+                            type: string
+                          horaComprobante: 
+                            type: string
+                          subTotal: 
+                            type: number
+                          montoTotal:
+                            type: number
+                          igv:
+                            type: number
+                          numeroComprobante:
+                            type: string
+        401:
+          description: Falla de autenticaci贸n
+          content:
+            aplication/json:
+              schema:
+                $ref: '#/components/schemas/Autenticacion'
+        402:
+          description: Error al obtener comprobante
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  mensaje: 
+                    type: string
+                    example: "Error al obtener comprobante"
+                  status:
+                    type: string
+                    example: "0"
+          
+  
+  #Transaccion
+  /transaccion_compra:
+    post:
+      tags: 
+      - Transacciones
+      summary: "Transacción de la compra. Registro de las tablas: registroPedido, detalleOrden y detalleCremas"
+      parameters:
+       - $ref: '#/components/parameters/token'
+      requestBody:
+        description: "Si no tienes el id del usuario se le agrega un string vacío. El arreglo de cremas debe contener los idProducto que corresponde a las cremas"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datosPedido:
+                  type: object
+                  properties:
+                    idUsuario:
+                      type: integer
+                    dniNoRegistrado:
+                      type: string
+                    numeroTelefono:
+                      type: string
+                    nombres:
+                      type: string
+                    horaRecojo:
+                      type: string
+                      example: "20:30"
+                    estadoBoleta:
+                      type: boolean
+                    billeteraDigital:
+                      type: boolean
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      idProducto:
+                        type: integer
+                      nombreProducto:
+                        type: string
+                      precioUnidad:
+                        type: number
+                      cantidad:
+                        type: integer
+                      precioTotal:
+                        type: number
+                      cremas:
+                        type: array
+                        items:
+                          type: integer
+        required: True
+      responses:
+        200:
+          description: Operación completada
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: "Compra registrada correctamente"
+                  status:
+                    type: string
+                    example: "1"
+        401:
+            description: Falla de autenticación
+            content:
+              aplication/json:
+                schema:
+                  $ref: '#/components/schemas/Autenticacion'
+  
+  /transaccion_comprobante:
+    post:
+      tags:
+      - Transacciones
+      summary: "Transacción para insertar un Comprobante con su detalle y actualizar el pedido a estado recogido como verdadero"
+      parameters:
+       - $ref: '#/components/parameters/token'
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                idPedido: 
-                  type: integer      
-        required: true
+                idPedido:
+                  type: integer
+                keyPedido:
+                  type: integer
+        required: True
       responses:
-          200:
-            description: Operacion completada
-            content:
-              aplication/json:
-                schema:
-                  type: object
-                  properties:
-                    mensaje: 
-                      type: string
-                      example: "Comprobante registrado correctamente"
-                    status:
-                      type: string
-                      example: "1"
-          401:
+        200:
+          description: Operación completada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: "Comprobante registrado correctamente || keyPedido incorrecto"
+                  status:
+                    type: string
+                    example: "1 || 0"
+        401:
             description: Falla de autenticación
             content:
               aplication/json:
                 schema:
                   $ref: '#/components/schemas/Autenticacion'
+                
+                
 components:
   schemas:
     Autenticacion:
@@ -1345,9 +1391,7 @@ components:
             type: string
           descripcion:
             type: string
-      
     
-          
   parameters:
     token:
         name: Token de autenticación

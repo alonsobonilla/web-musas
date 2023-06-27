@@ -2,3 +2,4 @@
 __pycache__
 cfg.py
 DigiCertGlobalRootCA.crt.pem
+static/js/config.js

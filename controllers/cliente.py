@@ -8,13 +8,17 @@ def home():
     user = session.get("cliente.auth", None)
     categorias = CategoriaProducto.obtener_categorias()
     productos = Producto.obtener_productos_limite()
-    return render_template("client/index.html", cliente = user, categorias = categorias, productos=productos)
+    if user:
+        return render_template("client/index.html", cliente = user["nombres"], categorias = categorias, productos=productos)
+    return render_template("client/index.html", categorias = categorias, productos=productos)
 
 @cliente.route("/productos/<string:categoria>")
 def productos_categoria(categoria):
     user = session.get("cliente.auth", None)
     productos = Producto.getProductosCategoria(categoria)
-    return render_template("client/productos.html", cliente = user, productos = productos, categoria = categoria)
+    if user:
+        return render_template("client/productos.html", cliente = user["nombres"], productos = productos, categoria = categoria)
+    return render_template("client/productos.html", productos = productos, categoria = categoria)
 
 @cliente.route("/formulario_registro_cliente")
 def formulario_registro_cliente():
@@ -27,12 +31,23 @@ def comprar_producto(id):
     cremas = Producto.getProductosCategoria("Cremas")
     if producto is None:
         return redirect(url_for("cliente.home"))
-    return render_template("client/compra.html", cliente = user, producto=producto, cremas = cremas)
+    if user:
+        return render_template("client/seleccion-producto.html", cliente = user["nombres"], producto=producto, cremas = cremas)
+    return render_template("client/seleccion-producto.html", producto=producto, cremas = cremas)
 
 @cliente.route("/carrito")
 def pag_carrito():
+    user = session.get("cliente.auth", None)
+    if user:
+        return render_template("client/carrito.html", cliente = user["nombres"])
     return render_template("client/carrito.html")
 
+@cliente.route("/compra")
+def pag_compra():
+    user = session.get("cliente.auth", None)
+    if user:
+        return render_template("client/compra.html", sesion = user, cliente = user["nombres"], apellidos = user["apellidos"], telefono = user["telefono"], dni= user["dni"], idUsuario = user["idUsuario"])
+    return render_template("client/compra.html")
 # @cliente.route("/<tipo>")
 # def verMas(tipo):
 #     productos = []

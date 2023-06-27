@@ -14,9 +14,10 @@ def api_obtenerdetalleorden():
         detallesorden = DetalleOrden.obtener_detalleOrden()
         listaserializable = []
         for deO in detallesorden:
-            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
+            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
             listaserializable.append(miobj.midic.copy())
-        return jsonify(listaserializable)
+
+        return jsonify({"Mensaje":"detalles obtenidos correctamente", "status:":"1", "detalles": listaserializable})
     except Exception as e:
         return jsonify({"mensaje": "Error al obtener detalles orden", "error": str(e)})
 
@@ -29,8 +30,9 @@ def api_guardardetalleOrden():
         idpedido = request.json["idpedido"]
         cantidad = request.json["cantidad"]
 
-        validar_idPedido = Pedido.validar_idPedido_existente(idpedido)
         validar_idProducto = Producto.obtener_producto_por_id(idproducto)
+        validar_idPedido = Pedido.validar_idPedido_existente(idpedido)
+        
 
         if validar_idProducto is None:
             return jsonify({"Mensaje": "El producto no existe"})
@@ -56,8 +58,8 @@ def api_obtenedetalleorden(idDetalleOrden,idpedido):
             return jsonify({"Mensaje": "El detalle de orden no existe"})
         else:
             listaserializable = []
-            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
+            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
             listaserializable.append(miobj.midic.copy())
-            return jsonify(listaserializable)
+            return jsonify({"Mensaje":"detalle de orden obtenido correctamente", "status:":"1", "detalle": listaserializable})
     except Exception as e:
         return jsonify({"mensaje": "Error al obtener detalle orden", "error": str(e)})

@@ -27,12 +27,25 @@ def login():
         
         if not isinstance(user, str):
             session.pop(blueprint_name, None)
-            nombre = user[0][2]
+            nombres = user[0][2]
+            dni = user[0][1]
+            apellidos = user[0][3]
+            id = user[0][0]
+            telefono = user[0][5]
+            idUsuario = user[0][0]
+            datos = {
+                "nombres": nombres, 
+                "apellidos": apellidos, 
+                "id": id, 
+                "telefono": telefono,
+                "dni": dni,
+                "idUsuario": idUsuario
+            }
             if blueprint_name == "cliente.auth":
-                session[blueprint_name] = nombre
+                session[blueprint_name] = datos
                 return redirect(url_for("cliente.home"))
             elif blueprint_name == "admin.auth":
-                session[blueprint_name] = nombre
+                session[blueprint_name] = datos
                 return redirect(url_for("admin.home"))
         else:
             flash(user)
