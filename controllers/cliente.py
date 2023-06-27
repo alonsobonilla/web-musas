@@ -7,7 +7,7 @@ cliente = Blueprint('cliente', __name__)
 def home():
     user = session.get("cliente.auth", None)
     categorias = CategoriaProducto.obtener_categorias()
-    productos = Producto.obtener_productos()
+    productos = Producto.obtener_productos_limite()
     return render_template("client/index.html", cliente = user, categorias = categorias, productos=productos)
 
 @cliente.route("/productos/<string:categoria>")

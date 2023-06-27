@@ -78,3 +78,19 @@ iframe {
 img {
   width: 60px;
 }
+.btn-primary {
+  background-color: var(--color1-hover);
+  border-color: var(--color1);
+}
+.btn-primary:hover {
+  background-color: var(--color1);
+  border-color: var(--color1-hover);
+}
+.btn-primary:active,
+.btn-primary:disabled {
+  background-color: var(--color1-hover) !important;
+  border-color: var(--color1);
+}
+.ver-mas:hover {
+  text-decoration: underline 2px var(--color1);
+}

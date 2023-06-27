@@ -129,3 +129,23 @@ class Producto:
             cursor.execute("UPDATE producto SET nombre = %s, descripcion = %s, precio = %s, existencias = %s, idCategoria = %s WHERE idProducto = %s", (nombre, descripcion, precio, existencias, idCategoria, id ))
         conexion.commit()
         conexion.close()
+
+    def obtener_productos_limite():
+        conexion = obtener_conexion()
+        productos = []
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM producto p WHERE (SELECT COUNT(*) FROM producto WHERE idCategoria = p.idCategoria AND idProducto <= p.idProducto) <= 3;")
+            productos = cursor.fetchall()
+        conexion.close()
+
+        lista_diccionarios = []
+        for producto in productos:
+            diccionario = dict()
+            diccionario["idProducto"] = producto[0]
+            diccionario["idCategoria"] = producto[1]
+            diccionario["nombre"] = producto[2]    
+            diccionario["descripcion"] = producto[3]
+            diccionario["precio"] = producto[4]
+            diccionario["existencias"] = producto[5]
+            lista_diccionarios.append(diccionario)
+        return lista_diccionarios  

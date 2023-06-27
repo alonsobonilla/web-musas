@@ -45,13 +45,13 @@
         <button class="ver-mas">Ver más</button>
       </a>
     </div>
-    <div class="show-producto d-flex">
+    <div class="show-producto d-flex justify-content-around">
       {% for producto in productos %} {% if producto["idCategoria"] ==
       categoria[0] %}
-      <div class="card">
+      <div class="card p-0" style="width: 300px">
         <img
           class="card-img-top"
-          src="{{url_for('static', filename = 'img/hamburguesas/ha-1')}}"
+          src="{{url_for('static', filename = 'img/hamburguesas/ha-1.jpg')}}"
           alt=""
         />
         <div class="card-body">
@@ -63,7 +63,7 @@
 
           <a
             href="{{url_for('cliente.comprar_producto', id=producto['idProducto'])}}"
-            class="btn btn-primary"
+            class="btn btn-primary w-100"
             >Comprar</a
           >
         </div>

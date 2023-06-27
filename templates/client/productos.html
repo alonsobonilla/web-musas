@@ -4,8 +4,30 @@
 <section class="mt-5 mb-3">
   <h3>Productos {{categoria}}</h3>
 
-  <div class="d-flex">
-    <div></div>
+  <div class="d-flex justify-content-around mt-3">
+    {% for producto in productos %}
+    <div class="card" style="width: 300px">
+      <img
+        class="card-img-top"
+        src="{{url_for('static', filename = 'img/hamburguesas/ha-1.jpg')}}"
+        alt=""
+      />
+      <div class="card-body">
+        <h4 class="card-title">{{producto["nombre"]}}</h4>
+        <div>
+          <p class="card-text">{{producto["descripcion"]}}</p>
+          <p class="card-text">Precio: {{producto["precio"]}}</p>
+        </div>
+
+        <a
+          href="{{url_for('cliente.comprar_producto', id=producto['idProducto'])}}"
+          class="btn btn-primary w-100"
+          >Comprar</a
+        >
+      </div>
+    </div>
+
+    {% endfor %}
   </div>
 </section>
 
