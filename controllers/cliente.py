@@ -15,10 +15,11 @@ def home():
 @cliente.route("/productos/<string:categoria>")
 def productos_categoria(categoria):
     user = session.get("cliente.auth", None)
+    categorias = CategoriaProducto.obtener_categorias()
     productos = Producto.getProductosCategoria(categoria)
     if user:
-        return render_template("client/productos.html", cliente = user["nombres"], productos = productos, categoria = categoria)
-    return render_template("client/productos.html", productos = productos, categoria = categoria)
+        return render_template("client/productos.html", cliente = user["nombres"], productos = productos, categoria = categoria, categorias = categorias)
+    return render_template("client/productos.html", productos = productos, categoria = categoria, categorias = categorias)
 
 @cliente.route("/formulario_registro_cliente")
 def formulario_registro_cliente():

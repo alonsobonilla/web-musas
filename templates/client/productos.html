@@ -1,7 +1,25 @@
 {% extends "client/main.html" %} {% block titulo %} Registrarse {% endblock %}
 {% block contenido %}
-
-<section class="mt-5 mb-3">
+<div class="categorias-content pt-5">
+  <div class="categorias">
+    <div class="categorias-in">
+      {% for categoria in categorias %} {% if categoria[1] != "Cremas" %}
+      <a
+        href="{{url_for('cliente.productos_categoria', categoria = categoria[1])}}"
+        class="text-black"
+      >
+        <div class="categoria-item">
+          <!-- <div>
+            <img src="#" alt="Categoria" />
+          </div> -->
+          <p>{{categoria[1]}}</p>
+        </div>
+      </a>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+<section class="mt-1 mb-3">
   <h3>Productos {{categoria}}</h3>
 
   <div class="d-flex justify-content-around mt-3">
