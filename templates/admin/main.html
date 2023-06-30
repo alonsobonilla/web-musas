@@ -89,7 +89,7 @@
         {% if usuario: %}
 
         <div>
-          <p>Nombre de usuario : {{usuario}}</p>
+          <p>Nombre de usuario : {{usuario["nombres"]}}</p>
         </div>
         <div>
           <a href="{{url_for('admin.auth.logout')}}">
