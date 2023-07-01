@@ -31,7 +31,6 @@ class Transaccion:
 
         idPedido = Pedido.obtener_id_pedido_registro()
         idDetalleOrden = DetalleOrden.obtener_id_detalle_orden_registro()
-        idDetalleOrdenCremas = idDetalleOrden
         try:
 
             conexion = obtener_conexion()
@@ -50,12 +49,12 @@ class Transaccion:
                     cremas = producto["cremas"]
     
                     cursor.execute(queryDetalleOrden, (idDetalleOrden, idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
+                    with conexion.cursor() as cursor:
+                        for crema in cremas:
+                            idCrema = crema
+                            cursor.execute(queryDetalleCremas,(idPedido, idCrema, idDetalleOrden))
                     idDetalleOrden += 1 
-                with conexion.cursor() as cursor:
-                    for crema in cremas:
-                        idCrema = crema
-                        cursor.execute(queryDetalleCremas,(idPedido, idCrema, idDetalleOrdenCremas))
-                        idDetalleOrdenCremas += 1
+                
             conexion.commit()
             return True   
         except Exception as e:
