@@ -1,4 +1,6 @@
+from model.Usuario import Usuario
 class User(object):
+
     def __init__(self, id, username, password):
         self.id = id
         self.username = username
@@ -7,9 +9,17 @@ class User(object):
     def __str__(self):
         return "User(id='%s')" % self.id
     
-users = [
-    User(1, 'grupo5', 'grupo5')
-]
+    @staticmethod
+    def obtener_usuarios():
+        listaUsuariosRpta = []
+        listaUsuarios = Usuario.obtener_usuarios_jwt()
+
+        for user in listaUsuarios:
+            obj = User(user[0], user[1], user[2])
+            listaUsuariosRpta.append(obj)
+        return listaUsuariosRpta
+    
+users = User.obtener_usuarios()
 
 username_table = {u.username: u for u in users}
 userid_table = {u.id: u for u in users}

@@ -8,7 +8,7 @@ from model.CategoriaProducto import CategoriaProducto
 api_productos = Blueprint('api_productos', __name__)
 
 @api_productos.route("/get_productos")
-
+@jwt_required()
 def get_productos():
     productos = Producto.obtener_productos()
     return jsonify({"Mensaje":"Productos obtenidos correctamente", "status:":"1", "productos":productos})

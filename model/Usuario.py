@@ -100,3 +100,11 @@ class Usuario:
             cursor.execute("SELECT * FROM usuario WHERE DNI = %s and tipoUsuario = %s", (dni,tipo))
             usuario = cursor.fetchone()
         return usuario
+    
+    def obtener_usuarios_jwt():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT idUsuario, dni, contraseña FROM usuario")
+            usuarios = cursor.fetchall()
+        conexion.close()
+        return usuarios
