@@ -32,13 +32,25 @@ async function comprarProductos(e) {
   };
   console.log(objetoTransaccion);
   const rpta = await transaccionCompra(SERVER, objetoTransaccion);
-
+  console.log(rpta);
   if (rpta.status == "1") {
+    guardarPedidos();
     localStorage.clear();
-    window.location.href = `${SERVER}/`;
+    alert("Compra realizada con éxito");
+    //window.location.href = `${SERVER}/mis_pedidos`;
   }
 }
+function guardarPedidos() {
+  const listaPedidos = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const pedido = localStorage.getItem(key);
 
+    listaPedidos.push(pedido);
+  }
+  localStorage.setItem("mis_pedidos", JSON.stringify(listaPedidos));
+  console.log(listaPedidos);
+}
 function arregloProductos() {
   const productos = [];
 

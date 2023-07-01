@@ -1,7 +1,4 @@
-const datosAutorizacion = {
-  username: "grupo5",
-  password: "grupo5",
-};
+import { datosAutorizacion } from "./config.js";
 
 let token;
 
@@ -27,7 +24,6 @@ async function obtenerCremas(SERVER, IDCATEGORIACREMAS, mapCremas) {
 
 async function transaccionCompra(SERVER, datosTransaccion) {
   const url = `${SERVER}/transaccion_compra`;
-
   try {
     await autorizacion(SERVER);
     const response = await fetch(url, {

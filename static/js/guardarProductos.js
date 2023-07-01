@@ -1,10 +1,7 @@
-import { SERVER } from "./config.js";
+import { SERVER, datosAutorizacion } from "./config.js";
 const agregarCarrito = document.querySelector("#agregar-carrito");
 const cremas = document.querySelectorAll("input[type=checkbox]");
-const autorizacion = {
-  username: "grupo5",
-  password: "grupo5",
-};
+
 let id;
 let url;
 let cremasElegidas = [];
@@ -28,7 +25,7 @@ async function obtener_data_producto() {
   try {
     const accesToken = await fetch(`${SERVER}/auth`, {
       method: "POST",
-      body: JSON.stringify(autorizacion),
+      body: JSON.stringify(datosAutorizacion),
       headers: {
         "Content-Type": "application/json",
       },
