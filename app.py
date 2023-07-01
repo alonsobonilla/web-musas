@@ -8,7 +8,7 @@ from controllers.autenticacion import *
 from controllers.admin_productos import *
 from controllers.admin_categoria_producto import *
 from controllers.admin_usuarios import *
-
+from controllers.admin_pedidos import *
 #Importando apis
 from APIS.productos import *
 from APIS.usuarios import api_usuarios
@@ -62,6 +62,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 admin.register_blueprint(productos)
 admin.register_blueprint(categoria_producto)
 admin.register_blueprint(usuarios)
+admin.register_blueprint(pedidos)
 admin.register_blueprint(auth)
 cliente.register_blueprint(auth)
 
