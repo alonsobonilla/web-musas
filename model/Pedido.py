@@ -110,3 +110,11 @@ class Pedido:
         if key is None:
             return False
         return True
+    def get_pedidos_ordenados_horarios():
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("select * from registroPedido where estadoRecojo = false and fechaPedido = (select current_date()) order by horaRecojo;")
+            pedidos = cursor.fetchall()
+        conexion.close()
+        return Pedido.diccionario_pedidos(pedidos)
+    

@@ -1,4 +1,4 @@
-import { datosAutorizacion } from "./config.js";
+import { datosAutorizacion, SERVER } from "./config.js";
 
 let token;
 
@@ -40,6 +40,23 @@ async function transaccionCompra(SERVER, datosTransaccion) {
   }
 }
 
+async function transaccionComprobante(datosTransaccion) {
+  const url = `${SERVER}/transaccion_comprobante`;
+  try {
+    await autorizacion(SERVER);
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(datosTransaccion),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token.access_token}`,
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 async function autorizacion(SERVER) {
   try {
     const accesToken = await fetch(`${SERVER}/auth`, {
@@ -54,4 +71,4 @@ async function autorizacion(SERVER) {
     console.log(error);
   }
 }
-export { obtenerCremas, transaccionCompra };
+export { obtenerCremas, transaccionCompra, transaccionComprobante };

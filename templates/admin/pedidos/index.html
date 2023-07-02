@@ -1,5 +1,61 @@
 {% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%
 block contenido %}
+<h3 class="m-3 fs-5 fw-bold">Pedidos</h3>
+{% for pedido in pedidos %}
+<div class="row m-0 mb-2">
+  <div class="col-9">
+    <div class="d-flex gap-2 justify-content-around">
+      <p class="fs-6">
+        <span class="fs-6">Cliente:</span> {{pedido["nombres"]}}
+      </p>
+      <p class="fs-6">
+        <span class="fs-6">Dni:</span> {{pedido["dniNoRegistrado"]}}
+      </p>
+      <p class="fs-6">
+        <span class="fs-6">Hora de recojo:</span> {{pedido["horaRecojo"]}}
+      </p>
+    </div>
+    {% for orden in ordenes %} {% if orden["idPedido"] == pedido["idPedido"] %}
+    <div class="row m-0 align-items-center">
+      <div class="col-4 text-center">
+        <p class="fs-6">{{orden["nombreProducto"]}}</p>
+      </div>
+      <div class="col-4 text-center">
+        <p class="fs-6">Cantidad: {{orden["cantidad"]}}</p>
+        <p class="fs-6">Precio: {{orden["precioUnidad"]}}</p>
+        <p class="fs-6">Precio total: {{orden["precioTotal"]}}</p>
+      </div>
 
-<section></section>
-{% end block %}
+      <div class="col-4 text-center">
+        <p class="fw-bold fs-6">Cremas:</p>
+        <div class="d-flex gap-2 justify-content-center">
+          {% for crema in cremas %} {% if crema[2] == orden["idDetalleOrden"] %}
+          <p class="fs-6">{{crema[3]}}</p>
+          {% endif %} {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+  <div class="col-3">
+    <form action="#" method="" class="d-flex gap-2 align-items-center mb-2">
+      <input
+        id="idPedido"
+        type="hidden"
+        value="{{pedido['idPedido']}}"
+        name="idPedido"
+      />
+      <label for="" class="form-label m-0">KeyPedido:</label>
+      <input
+        id="keyPedido"
+        type="number"
+        class="form-control"
+        required
+        name="keyPedido"
+      />
+    </form>
+    <a class="btn btn-success w-100" id="btn-recogido"> Recogido </a>
+  </div>
+</div>
+<hr />
+{% endfor %} {% endblock %}

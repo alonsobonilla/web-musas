@@ -24,3 +24,12 @@ class DetalleCremas:
             juego = cursor.fetchone()
         conexion.close()
         return juego
+
+    def obtner_detalle_cremas_pedidos_recoger():
+        conexion = obtener_conexion()
+        detalleCremas = []
+        with conexion.cursor() as cursor:
+            cursor.execute("select dc.*, pr.nombre from detalleCremas dc inner join producto pr on dc.idCrema = pr.idProducto where dc.idDetalleOrden = (select dor.idDetalleOrden from detalleorden dor where dor.idPedido = (select rp.idPedido from registroPedido rp where rp.estadoRecojo = false and rp.fechaPedido = (select current_date()) and rp.idPedido = dor.idPedido order by rp.horaRecojo) and dor.idDetalleOrden = dc.idDetalleOrden);")
+            detalleCremas = cursor.fetchall()
+        conexion.close()
+        return detalleCremas
