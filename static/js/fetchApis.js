@@ -22,10 +22,10 @@ async function obtenerCremas(SERVER, IDCATEGORIACREMAS, mapCremas) {
   }
 }
 
-async function transaccionCompra(SERVER, datosTransaccion) {
+async function transaccionCompra(datosTransaccion) {
   const url = `${SERVER}/transaccion_compra`;
   try {
-    await autorizacion(SERVER);
+    await autorizacion();
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(datosTransaccion),
@@ -43,7 +43,7 @@ async function transaccionCompra(SERVER, datosTransaccion) {
 async function transaccionComprobante(datosTransaccion) {
   const url = `${SERVER}/transaccion_comprobante`;
   try {
-    await autorizacion(SERVER);
+    await autorizacion();
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(datosTransaccion),
@@ -57,7 +57,7 @@ async function transaccionComprobante(datosTransaccion) {
     console.log(error);
   }
 }
-async function autorizacion(SERVER) {
+async function autorizacion() {
   try {
     const accesToken = await fetch(`${SERVER}/auth`, {
       method: "POST",

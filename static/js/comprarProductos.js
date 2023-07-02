@@ -31,13 +31,13 @@ async function comprarProductos(e) {
     productos,
   };
   console.log(objetoTransaccion);
-  const rpta = await transaccionCompra(SERVER, objetoTransaccion);
+  const rpta = await transaccionCompra(objetoTransaccion);
   console.log(rpta);
   if (rpta.status == "1") {
     guardarPedidos();
     localStorage.clear();
     alert("Compra realizada con éxito");
-    //window.location.href = `${SERVER}/mis_pedidos`;
+    window.location.href = `${SERVER}/`;
   }
 }
 function guardarPedidos() {
