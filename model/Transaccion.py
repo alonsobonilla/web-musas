@@ -49,10 +49,9 @@ class Transaccion:
                     cremas = producto["cremas"]
     
                     cursor.execute(queryDetalleOrden, (idDetalleOrden, idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
-                    with conexion.cursor() as cursor:
-                        for crema in cremas:
-                            idCrema = crema
-                            cursor.execute(queryDetalleCremas,(idPedido, idCrema, idDetalleOrden))
+                    for crema in cremas:
+                        idCrema = crema
+                        cursor.execute(queryDetalleCremas,(idPedido, idCrema, idDetalleOrden))
                     idDetalleOrden += 1 
                 
             conexion.commit()
