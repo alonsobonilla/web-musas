@@ -23,21 +23,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret-key"
 jwt = JWT(app, authenticate, identity)
 
-# @jwt.authentication_handler
-# def handler():
-
-# @app.before_request
-# def validar_token():
-#     redirect(url_for("app.autenticacion"))
-
-# @app.route("/auth", methods=["POST"])
-# def autenticacion():
-#     username = request.json.get("username", None)
-#     password = request.json.get("password", None)
-#     if username is None or password is None:
-#         return jsonify({"mensaje": "Falta username o password"})
-#     return jsonify({"mensaje": "Credenciales incorrectas"})
-
 #swagger
 SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
 API_URL = '/static/documentacion.yaml'  # Our API url (can of course be a local resource)
