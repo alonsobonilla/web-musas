@@ -4,8 +4,11 @@ from model.DetalleOrden import DetalleOrden
 from model.Comprobante import Comprobante
 from model.Pedido import Pedido
 from datetime import time, datetime, date
+
+
 class Transaccion:
     conteo = 0
+
     @classmethod
     def insertarCompra(cls, datosPedido, productos):
 
@@ -13,15 +16,16 @@ class Transaccion:
         dniNoRegistrado = datosPedido["dniNoRegistrado"]
         numeroTelefono = datosPedido["telefono"]
         nombres = datosPedido["nombres"]
-        horaRecojo = datetime.strptime(datosPedido["horaRecojo"], "%H:%M").time() 
+        horaRecojo = datetime.strptime(
+            datosPedido["horaRecojo"], "%H:%M").time()
         estadoBoleta = datosPedido["estadoBoleta"]
         billeteraDigital = datosPedido["billeteraDigital"]
-    
+
         if idUsuario == "":
             queryPedido = "INSERT INTO registroPedido(idPedido,dniNoRegistrado, nombres, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         else:
             queryPedido = "INSERT INTO registroPedido(idPedido, idUsuario, dniNoRegistrado, nombres, numeroTelefono, horaRecojo,estadoBoleta, billeteraDigital, keyPedido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s)"
-        
+
         queryDetalleOrden = "INSERT INTO detalleOrden(idDetalleOrden, idPedido, idProducto, nombreProducto, precioUnidad, cantidad, preciototal) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         queryDetalleCremas = "INSERT INTO detalleCremas(idPedido, idCrema, idDetalleOrden) VALUES (%s, %s, %s)"
 
@@ -36,9 +40,11 @@ class Transaccion:
             conexion = obtener_conexion()
             with conexion.cursor() as cursor:
                 if idUsuario == "":
-                    cursor.execute(queryPedido, (idPedido, dniNoRegistrado, nombres, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital, keyPedido))
+                    cursor.execute(queryPedido, (idPedido, dniNoRegistrado, nombres,
+                                   numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital, keyPedido))
                 else:
-                    cursor.execute(queryPedido, (idPedido, idUsuario, dniNoRegistrado, nombres, numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital, keyPedido))
+                    cursor.execute(queryPedido, (idPedido, idUsuario, dniNoRegistrado, nombres,
+                                   numeroTelefono, horaRecojo, estadoBoleta, billeteraDigital, keyPedido))
             with conexion.cursor() as cursor:
                 for producto in productos:
                     idProducto = producto["idProducto"]
@@ -47,20 +53,23 @@ class Transaccion:
                     cantidad = producto["cantidad"]
                     precioTotal = producto["precioTotal"]
                     cremas = producto["cremas"]
-    
-                    cursor.execute(queryDetalleOrden, (idDetalleOrden, idPedido, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
+
+                    cursor.execute(queryDetalleOrden, (idDetalleOrden, idPedido,
+                                   idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
                     for crema in cremas:
                         idCrema = crema
-                        cursor.execute(queryDetalleCremas,(idPedido, idCrema, idDetalleOrden))
-                    idDetalleOrden += 1 
-                
+                        cursor.execute(queryDetalleCremas,
+                                       (idPedido, idCrema, idDetalleOrden))
+                    idDetalleOrden += 1
+
             conexion.commit()
-            return True   
+            return True
         except Exception as e:
             conexion.rollback()
             raise e
         finally:
             conexion.close()
+
     def insertarComprobante(idPedido, keyPedido):
         datosPedido = Pedido.obtener_dni_pedido(idPedido)
         idUsuario = datosPedido[0]
@@ -83,8 +92,9 @@ class Transaccion:
         try:
             conexion = obtener_conexion()
             with conexion.cursor() as cursor:
-                cursor.execute(queryComprobante, (idComprobante, idPedido, idUsuario, dniNoRegistrado, fechaComprobante, horaComprobante, subTotal, montoTotal, igv, numComprobante))
-                
+                cursor.execute(queryComprobante, (idComprobante, idPedido, idUsuario, dniNoRegistrado,
+                               fechaComprobante, horaComprobante, subTotal, montoTotal, igv, numComprobante))
+
             with conexion.cursor() as cursor:
                 for orden in ordenes:
                     idProducto = orden[2]
@@ -92,9 +102,20 @@ class Transaccion:
                     precioUnidad = orden[4]
                     cantidad = orden[5]
                     precioTotal = orden[6]
-                    cursor.execute(queryDetalleComprobante, (idComprobante, idProducto, nombreProducto, precioUnidad, cantidad, precioTotal))
+                    try:
+                        cursor.execute(queryDetalleComprobante, (idComprobante, idProducto,
+                                       nombreProducto, precioUnidad, cantidad, precioTotal))
+                    except:
+                        cursor.execute(
+                            "select cantidad,precioTotal from detalleComprobante where idComprobante = %s and idProducto = %s", (idComprobante, idProducto))
+                        data = cursor.fetchone()
+                        cantidad += data[0]
+                        precioTotal += data[1]
+                        cursor.execute("update detalleComprobante set cantidad = %s, precioTotal = %s where idComprobante = %s and idProducto = %s", (
+                            cantidad, precioTotal, idComprobante, idProducto))
             with conexion.cursor() as cursor:
-                cursor.execute("UPDATE registroPedido SET estadoRecojo = %s WHERE idPedido = %s", (True, idPedido))
+                cursor.execute(
+                    "UPDATE registroPedido SET estadoRecojo = %s WHERE idPedido = %s", (True, idPedido))
             conexion.commit()
             return True
         except Exception as e:
@@ -102,4 +123,3 @@ class Transaccion:
             raise e
         finally:
             conexion.close()
-            
