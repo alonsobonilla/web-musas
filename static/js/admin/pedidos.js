@@ -5,8 +5,8 @@ if (btnpedido) {
   btnpedido.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       e.preventDefault();
-      const id = document.querySelector("#idPedido").value;
-      const key = document.querySelector("#keyPedido").value;
+      const id = btn.parentElement.querySelector("#idPedido").value;
+      const key = btn.parentElement.querySelector("#keyPedido").value;
 
       const datosTransaccion = {
         idPedido: id,
