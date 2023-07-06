@@ -1,0 +1,46 @@
+{% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%block
+contenido %}
+
+<section>
+  <div class="columns">
+    <div class="column">
+      <h3 class="m-3 fs-5 fw-bold">Ventas</h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Dni</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>SubTotal</th>
+            <th>Igv</th>
+            <th>Total</th>
+            <th>Ver Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comprobante in comprobantes %}
+          <tr>
+            <td>{{comprobante[3]}}</td>
+            <td>{{comprobante[4]}}</td>
+            <td>{{comprobante[5]}}</td>
+            <td>{{comprobante[6]}}</td>
+            <td>{{comprobante[8]}}</td>
+            <td>{{comprobante[7]}}</td>
+            <td>
+              {# Pasar el id (lo que hay en producto[0]) #}
+              <a
+                href="{{url_for('admin.ventas.show_detalle', idComprobante = comprobante[0])}}"
+                class="btn btn-info"
+                >Ver detalle</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
