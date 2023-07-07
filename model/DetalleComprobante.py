@@ -3,7 +3,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from model.Producto import Producto
 from model.Comprobante import Comprobante
 from model.DetalleOrden import DetalleOrden
-#obtener, insertar, obtener por id
+# obtener, insertar, obtener por id
+
+
 class detalleComprobante:
     idComprobante = 0
     idProducto = 0
@@ -13,8 +15,8 @@ class detalleComprobante:
     precioTotal = 0.0
     midic = dict()
 
-    def __init__(self,p_idComprobante,p_idProducto,p_nombreProducto,p_precioUnidad,p_cantidad,p_precioTotal):
-        self.idComprobante= p_idComprobante
+    def __init__(self, p_idComprobante, p_idProducto, p_nombreProducto, p_precioUnidad, p_cantidad, p_precioTotal):
+        self.idComprobante = p_idComprobante
         self.idProducto = p_idProducto
         self.nombreProducto = p_nombreProducto
         self.precioUnidad = p_precioUnidad
@@ -27,12 +29,12 @@ class detalleComprobante:
         self.midic["cantidad"] = p_cantidad
         self.midic["precioTotal"] = p_precioTotal
 
-    def obtener_detalleComprobante_id(idcomprobante,idproducto):
+    def obtener_detalleComprobante_id(idcomprobante):
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            query = "SELECT * FROM detalleComprobante WHERE idProducto = %s AND idComprobante= %s"
-            values = (idproducto,idcomprobante)
-            cursor.execute(query,values)
+            query = "SELECT * FROM detalleComprobante WHERE idComprobante= %s"
+            values = (idcomprobante)
+            cursor.execute(query, values)
             detalleComprobante = cursor.fetchall()
         conexion.close()
         return detalleComprobante
@@ -45,4 +47,3 @@ class detalleComprobante:
             detalleC = cursor.fetchall()
         conexion.close()
         return detalleC
-
