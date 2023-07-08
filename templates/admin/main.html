@@ -89,11 +89,13 @@
         {% if usuario: %}
 
         <div>
-          <p>Nombre de usuario : {{usuario["nombres"]}}</p>
+          <p style="font-size: 15px; color: var(--color1)">
+            Nombre de usuario : {{usuario["nombres"]}}
+          </p>
         </div>
         <div>
           <a href="{{url_for('admin.auth.logout')}}">
-            <button>Cerrar sesión</button>
+            <button class="btn btn-danger">Cerrar sesión</button>
           </a>
         </div>
         {% endif %}
