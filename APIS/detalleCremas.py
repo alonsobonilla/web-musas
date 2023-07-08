@@ -19,4 +19,4 @@ def obtener_detalleCremas(idPedido, idDetalleOrden):
             return jsonify({"Mensaje":"Detalle crema obtenida correctamente", "status:":"1", "Detalle crema":lista})
         return jsonify({"Mensaje":"El detalle crema no existe", "Status":"0"})
     except Exception as ex:
-        return jsonify({"Mensaje":"Error al obtener detalle crema", "status:":"0", "errror":str(ex)})
+        return jsonify({"Mensaje":"Error al obtener detalle crema", "status:":"0", "error":str(ex)})
