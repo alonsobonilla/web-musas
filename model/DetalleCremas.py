@@ -20,7 +20,7 @@ class DetalleCremas:
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
-            cursor.execute("select * from detalleCremas where idPedido = %s and idDetalleOrden", (idPedido, idDetalleOrden))
+            cursor.execute("select * from detalleCremas where idPedido = %s and idDetalleOrden = %s", (idPedido, idDetalleOrden))
             juego = cursor.fetchone()
         conexion.close()
         return juego
