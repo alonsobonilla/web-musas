@@ -2,12 +2,13 @@ from bd import obtener_conexion
 from model.Pedido import Pedido
 from model.Producto import Producto
 
+
 class DetalleCremas:
     idPedido = 0
     idCrema = 0
     idDetalleOrden = 0
     midic = dict()
-   
+
     def __init__(self, p_idPedido, p_idCrema, p_idDetalleOrden):
         self.idPedido = p_idPedido
         self.idCrema = p_idCrema
@@ -15,13 +16,14 @@ class DetalleCremas:
         self.midic["idPedido"] = p_idPedido
         self.midic["idCrema"] = p_idCrema
         self.midic["idDetalleOrden"] = p_idDetalleOrden
-       
-    def obtener_detalleCremas_idPedido(idPedido,idDetalleOrden):
+
+    def obtener_detalleCremas_idPedido(idPedido, idDetalleOrden):
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
-            cursor.execute("select * from detalleCremas where idPedido = %s and idDetalleOrden = %s", (idPedido, idDetalleOrden))
-            juego = cursor.fetchone()
+            cursor.execute(
+                "select * from detalleCremas where idPedido = %s and idDetalleOrden = %s", (idPedido, idDetalleOrden))
+            juego = cursor.fetchall()
         conexion.close()
         return juego
 
