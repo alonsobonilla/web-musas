@@ -592,44 +592,59 @@ paths:
           content:
             aplication/json:
               schema:
-                $ref: '#/components/schemas/Autenticacion' 
-  /actualizar_estado_recojo:
+                $ref: '#/components/schemas/Autenticacion'
+                
+  /insertar_pedido:
     post:
       tags:
       - Registro Pedidos
-      summary: Actualizar el estado de recojo
+      summary: Registrar un pedido
       parameters:
-      - $ref: '#/components/parameters/token'
+        - $ref: '#/components/parameters/token'
       requestBody:
-        description: "Key del pedido que permite la identificación del mismo"
         content:
-          aplication/json:
+          application/json:
             schema:
-              type: object
               properties:
-                keyPedido:
-                  type: string
-        required: True
+                Pedido:
+                  $ref: '#/components/schemas/Pedido'
+        required: true        
       responses:
-        200:
-          description: Operación completada correctamente
-          content:
-            aplication/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Estado de recojo actualizado correctamente"
-                  status:
-                    type: string
-                    example: "1"
+      200:
+        description: Operación completada
+        content: 
+          application/json:
+            schema:
+              type: object 
+              properties: 
+                mensaje:
+                  type: string
+                  example: "Pedido registrado correctamente"
+                status: 
+                  type: string
+                  example: "1"
         401:
           description: Falla de autenticación
           content:
             aplication/json:
               schema:
-                $ref: '#/components/schemas/Autenticacion'
+              $ref: '#/components/schemas/Autenticacion'
+        402:
+          description: Error al insertar comprobante
+          content:
+            aplication/json:
+              schema:
+                type: object
+                properties:
+                  mensaje: 
+                    type: string
+                    example: "Error al regristrar comprobante"
+                  status:
+                    type: string
+                    example: "0"  
+
+
+
   #Detalle comprobante        
   /api_obtenerdetalleComprobante:
     get:
@@ -661,22 +676,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Autenticacion'
                 
-  /api_obtenerdetalleComprobante/{idcomprobante}/{idproducto}:
+  /api_obtenerdetalleComprobante/{idcomprobante}:
     get:
       tags:
         - Detalle Comprobante
-      summary: Obtener detalle de un comprobante por idproducto y idcomprobante
+      summary: Obtener detalle de un comprobante por idcomprobante
       parameters:
         - $ref: '#/components/parameters/token'
         - name: idcomprobante
           in: path
           description: Identificador del comprobante
-          required: true
-          schema:
-            type: integer
-        - name: idproducto
-          in: path
-          description: Identificador del producto
           required: true
           schema:
             type: integer
@@ -1391,6 +1400,26 @@ components:
             type: string
           descripcion:
             type: string
+            
+    Pedido:
+      type: array
+      items:
+        type: object
+        properties:
+          idUsuario:
+            type: integer
+          dniNoRegistrado:
+            type: string
+          numeroTelefono:
+            type: string
+          horaRecojo:
+            type: string
+            pattern: ^(\d{2}:\d{2})*$
+            example: "08:08"
+          estadoBoleta:
+            type: integer
+          billeteraDigital:
+            type: integer
     
   parameters:
     token:
