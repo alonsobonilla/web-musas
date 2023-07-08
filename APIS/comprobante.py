@@ -27,11 +27,12 @@ def obtener_comprobante():
 @jwt_required()
 def obtener_comprobante_cliente(id):
     try:
-        comprobante = Comprobante.obtener_comprobante_idUsuario(id)
+        comprobantes = Comprobante.obtener_comprobante_idUsuario(id)
         lista = []
-        miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4],
-                            comprobante[5], comprobante[6], comprobante[7], comprobante[8], comprobante[9])
-        lista.append(miobj.midic.copy())
+        for comprobante in comprobantes:
+            miobj = Comprobante(comprobante[0], comprobante[1], comprobante[2], comprobante[3], comprobante[4],
+                                comprobante[5], comprobante[6], comprobante[7], comprobante[8], comprobante[9])
+            lista.append(miobj.midic.copy())
         return jsonify({"Mensaje": "Comprobante obtenido correctamente", "status:": "1", "Comprobante:": lista})
     except Exception as e:
         return jsonify({"Mensaje": "Error al obtener comprobante", "status": "0", "error": str(e)})

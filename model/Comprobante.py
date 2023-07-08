@@ -56,7 +56,7 @@ class Comprobante:
         with conexion.cursor() as cursor:
             cursor.execute(
                 "select * from comprobante where idUsuario = %s", (idUsuario))
-            juego = cursor.fetchone()
+            juego = cursor.fetchall()
         conexion.close()
         return juego
 
