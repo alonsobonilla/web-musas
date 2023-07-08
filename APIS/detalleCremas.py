@@ -17,9 +17,10 @@ def obtener_detalleCremas(idPedido, idDetalleOrden):
             idPedido, idDetalleOrden)
         lista = []
         if detalleCrema is not None:
-            lista.append(DetalleCremas(
-                detalleCrema[0], detalleCrema[1], detalleCrema[2]).midic.copy())
-            return jsonify({"Mensaje": "Detalle crema obtenida correctamente", "status:": "1", "Detalle crema": lista})
+            for detalle in detalleCrema:
+                lista.append(DetalleCremas(
+                    detalle[0], detalle[1], detalle[2]).midic.copy())
+                return jsonify({"Mensaje": "Detalle crema obtenida correctamente", "status:": "1", "Detalle crema": lista})
         return jsonify({"Mensaje": "El detalle crema no existe", "Status": "0"})
     except Exception as ex:
         return jsonify({"Mensaje": "Error al obtener detalle crema", "status:": "0", "error": str(ex)})
