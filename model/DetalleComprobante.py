@@ -35,7 +35,7 @@ class detalleComprobante:
             query = "SELECT * FROM detalleComprobante WHERE idComprobante= %s"
             values = (idcomprobante)
             cursor.execute(query, values)
-            detalleComprobante = cursor.fetchone()
+            detalleComprobante = cursor.fetchall()
         conexion.close()
         return detalleComprobante
 
