@@ -28,13 +28,13 @@
         <form action="{{url_for('admin.auth.login')}}" method="post">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"
-              >Usuario:
+              >Dni:
             </label>
             <input
               type="usuario"
               class="form-control"
               id="exampleFormControlInput1"
-              placeholder="usuario"
+              placeholder="dni"
               name="usuario"
             />
           </div>
@@ -47,10 +47,14 @@
               class="form-control"
               aria-labelledby="passwordHelpBlock"
               name="contraseña"
+              placeholder="***********"
             />
           </div>
-
-          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+          <div class="text-center w-100">
+            <button type="submit" class="btn btn-primary w-100 text-uppercase">
+              Iniciar sesión
+            </button>
+          </div>
         </form>
       </div>
     </div>
