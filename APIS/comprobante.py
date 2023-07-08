@@ -9,6 +9,7 @@ api_comprobante = Blueprint('api_comprobante', __name__)
 
 
 @api_comprobante.route('/insertar_comprobante', methods=['POST'])
+@jwt_required()
 def insertar_comprobante():
     try:
         idPedido = request.json["idPedido"]
@@ -22,6 +23,7 @@ def insertar_comprobante():
 
 
 @api_comprobante.route("/obtener_comprobantes")
+@jwt_required()
 def obtener_comprobante():
     try:
         comprobantes = Comprobante.obtener_comprobante()
@@ -34,6 +36,7 @@ def obtener_comprobante():
         return jsonify({"Mensaje": "Error al obtener comprobante", "errror": str(e)})
 
 @api_comprobante.route('/obtener_comprobante_cliente/<int:id>')
+@jwt_required()
 def obtener_comprobante_cliente(id):
     try:
         comprobante = Comprobante.obtener_comprobante_idUsuario(id)
