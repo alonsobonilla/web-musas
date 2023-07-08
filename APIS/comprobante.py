@@ -20,7 +20,7 @@ def obtener_comprobante():
             listaComprobante.append(miobj.midic.copy())
         return jsonify({"Mensaje": "Comprobantes encontrados", "Comprobantes": listaComprobante})
     except Exception as e:
-        return jsonify({"Mensaje": "Error al obtener comprobante", "errror": str(e)})
+        return jsonify({"Mensaje": "Error al obtener comprobante", "error": str(e)})
 
 
 @api_comprobante.route('/obtener_comprobante_cliente/<int:id>')
@@ -34,4 +34,4 @@ def obtener_comprobante_cliente(id):
         lista.append(miobj.midic.copy())
         return jsonify({"Mensaje": "Comprobante obtenido correctamente", "status:": "1", "Comprobante:": lista})
     except Exception as e:
-        return jsonify({"Mensaje": "Error al obtener comprobante", "status": "0", "errror": str(e)})
+        return jsonify({"Mensaje": "Error al obtener comprobante", "status": "0", "error": str(e)})
