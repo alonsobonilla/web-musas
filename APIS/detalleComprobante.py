@@ -4,6 +4,7 @@ from flask import jsonify, Blueprint, request
 from model.DetalleComprobante import detalleComprobante
 from model.Producto import Producto
 from model.Comprobante import Comprobante
+from flask_jwt import jwt_required
 
 api_detalleComprobante = Blueprint('om',__name__)
 @api_detalleComprobante.route("/api_obtenerdetalleComprobante")

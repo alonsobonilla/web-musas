@@ -7,8 +7,9 @@ contenido %}
       <h3 class="m-3 fs-5 fw-bold">Ventas</h3>
 
       <table class="table">
-        <thead>
+        <thead class="text-center">
           <tr>
+            <th>#</th>
             <th>Dni</th>
             <th>Fecha</th>
             <th>Hora</th>
@@ -18,9 +19,10 @@ contenido %}
             <th>Ver Detalle</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
           {% for comprobante in comprobantes %}
           <tr>
+            <td>{{loop.index + pagination.skip}}</td>
             <td>{{comprobante[3]}}</td>
             <td>{{comprobante[4]}}</td>
             <td>{{comprobante[5]}}</td>
@@ -39,6 +41,7 @@ contenido %}
           {% endfor %}
         </tbody>
       </table>
+      {{ pagination.links }}
     </div>
   </div>
 </section>

@@ -8,6 +8,7 @@ block contenido %}
       <table class="table">
         <thead>
           <tr>
+            <th>#</th>
             <th>Categoría</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -20,6 +21,7 @@ block contenido %}
         <tbody>
           {% for producto in productos %}
           <tr>
+            <td>{{ loop.index + pagination.skip }}</td>
             <td>{{producto['nombreCategoria']}}</td>
             <td>{{producto['nombre']}}</td>
             <td>{{producto['descripcion']}}</td>
@@ -57,6 +59,7 @@ block contenido %}
           >Agregar</a
         >
       </div>
+      {{ pagination.links }}
     </div>
   </div>
 </section>

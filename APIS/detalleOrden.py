@@ -8,13 +8,13 @@ from model.Pedido import Pedido
 
 api_detalleOrden = Blueprint('api_detalleOrden',__name__)
 @api_detalleOrden.route("/api_obtenerdetalleorden")
-
+@jwt_required()
 def api_obtenerdetalleorden():
     try:
         detallesorden = DetalleOrden.obtener_detalleOrden()
         listaserializable = []
         for deO in detallesorden:
-            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
+            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
             listaserializable.append(miobj.midic.copy())
 
         return jsonify({"Mensaje":"detalles obtenidos correctamente", "status:":"1", "detalles": listaserializable})
@@ -22,30 +22,8 @@ def api_obtenerdetalleorden():
         return jsonify({"mensaje": "Error al obtener detalles orden", "error": str(e)})
 
 
-@api_detalleOrden.route("/api_guardardetalleorden", methods=["POST"])
-
-def api_guardardetalleOrden():
-    try:
-        idproducto = request.json["idproducto"]
-        idpedido = request.json["idpedido"]
-        cantidad = request.json["cantidad"]
-
-        validar_idProducto = Producto.obtener_producto_por_id(idproducto)
-        validar_idPedido = Pedido.validar_idPedido_existente(idpedido)
-        
-
-        if validar_idProducto is None:
-            return jsonify({"Mensaje": "El producto no existe"})
-        elif not validar_idPedido:
-            return jsonify({"Mensaje": "El idpedido no existe"})
-        else:
-            DetalleOrden.insertar_detalleOrden(idproducto, idpedido, cantidad)
-            return jsonify({"Mensaje": "DetalleOrden registrado correctamente"})
-    except Exception as e:
-        return jsonify({"mensaje": "Error al guardar detalle orden", "error": str(e)})
-
 @api_detalleOrden.route("/api_obtenerdetalleorden/<int:idDetalleOrden>/<int:idpedido>")
-
+@jwt_required()
 def api_obtenedetalleorden(idDetalleOrden,idpedido):
     try:
         listaserializable = []
@@ -58,7 +36,7 @@ def api_obtenedetalleorden(idDetalleOrden,idpedido):
             return jsonify({"Mensaje": "El detalle de orden no existe"})
         else:
             listaserializable = []
-            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5])
+            miobj = DetalleOrden(deO[0],deO[1],deO[2],deO[3],deO[4],deO[5],deO[6])
             listaserializable.append(miobj.midic.copy())
             return jsonify({"Mensaje":"detalle de orden obtenido correctamente", "status:":"1", "detalle": listaserializable})
     except Exception as e:

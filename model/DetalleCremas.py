@@ -16,11 +16,11 @@ class DetalleCremas:
         self.midic["idCrema"] = p_idCrema
         self.midic["idDetalleOrden"] = p_idDetalleOrden
        
-    def obtener_detalleCremas_idPedido(idPedido):
+    def obtener_detalleCremas_idPedido(idPedido,idDetalleOrden):
         conexion = obtener_conexion()
         juego = None
         with conexion.cursor() as cursor:
-            cursor.execute("select * from detalleCremas where idPedido = %s ", (idPedido))
+            cursor.execute("select * from detalleCremas where idPedido = %s and idDetalleOrden", (idPedido, idDetalleOrden))
             juego = cursor.fetchone()
         conexion.close()
         return juego

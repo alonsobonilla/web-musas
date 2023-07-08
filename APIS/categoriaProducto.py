@@ -8,7 +8,7 @@ api_categoriaProducto = Blueprint('api_categoriaProducto',__name__)
 
 
 @api_categoriaProducto.route("/api_obtenercategorias")
-
+@jwt_required()
 def api_obtenercategorias():
     try:
         categorias=CategoriaProducto.obtener_categorias()
@@ -23,7 +23,7 @@ def api_obtenercategorias():
 
 
 @api_categoriaProducto.route("/api_eliminarcategoria/<int:idCategoria>", methods=["POST"])
-
+@jwt_required()
 def api_eliminarcategoria(idCategoria):
     try:
         CategoriaProducto.eliminar_categoria(idCategoria)

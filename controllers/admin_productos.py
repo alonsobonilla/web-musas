@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, url_for, g
+from flask_paginate import Pagination, get_page_parameter
 from controllers.admin import admin
 from model.Producto import Producto
 from model.CategoriaProducto import CategoriaProducto
@@ -8,8 +9,21 @@ productos = Blueprint("productos", __name__, url_prefix='/productos')
 
 @productos.route("/")
 def home():
-    productos = Producto.obtener_productos()
-    return render_template("admin/productos/index.html", productos=productos, usuario=g.user)
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+
+    productosTotal = Producto.obtener_total_productos()
+    per_page = 9
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    start_index = (page - 1) * per_page + 1
+
+    pagination = Pagination(page=page, total=productosTotal, per_page=per_page,
+                            search=search, record_name='productos')
+
+    productos = Producto.obtener_productos_paginacion(per_page, start_index)
+    return render_template("admin/productos/index.html", productos=productos, usuario=g.user, pagination=pagination)
 
 
 @productos.route("/agregar_producto")

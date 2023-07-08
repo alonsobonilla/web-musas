@@ -7,7 +7,7 @@ from model.Usuario import Usuario
 api_registro_pedidos = Blueprint('api_registro_pedidos', __name__)
 
 @api_registro_pedidos.route('/obtener_pedidos', methods=['GET'])
-
+@jwt_required()
 def obtener_pedidos():
     try:
         pedidos = Pedido.get_pedidos()
@@ -16,7 +16,7 @@ def obtener_pedidos():
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/obtener_pedidos_por_dni/<string:dni>')
-
+@jwt_required()
 def obtener_pedidos_por_dni(dni):
     try:
         usuario = Usuario.obtener_usuario_dni_tipo(dni, True)
@@ -34,7 +34,7 @@ def obtener_pedidos_por_dni(dni):
         return jsonify({'message': 'Error al obtener los pedidos', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/insertar_pedido', methods=['POST'])
-
+@jwt_required()
 def insertar_pedido():
     try:
         idUsuario = request.json['idUsuario']
@@ -56,7 +56,7 @@ def insertar_pedido():
         return jsonify({'message': 'Error al registrar el pedido', 'status':'0', 'error':str(ex)})
 
 @api_registro_pedidos.route('/actualizar_estado_recojo', methods=['POST'])
-
+@jwt_required()
 def actualizar_estado_recojo():
     try:
         keyPedido = request.json['keyPedido']
