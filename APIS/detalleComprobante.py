@@ -36,7 +36,7 @@ def api_obtenerdetalleComprobante(idcomprobante):
             listaserializable.append(miobj.midic.copy())
             return jsonify({"Mensaje":"detalle de comprobante obtenido correctamente", "status:":"1", "detalle": listaserializable})
     except Exception as e:
-        return jsonify({"mensaje": "Error al obtener detalle orden", "error": str(e)})
+        return jsonify({"mensaje": "Error al obtener detalle de comprobante", "error": str(e)})
 
 
 

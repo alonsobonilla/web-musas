@@ -66,6 +66,7 @@ class Comprobante:
             consulta = "SELECT COUNT(*) FROM comprobante WHERE idComprobante = %s"
             cursor.execute(consulta, (idComprobante,))
             resultado = cursor.fetchone()
+        conexion.close()
         if resultado[0] > 0:
             return True
         else:
