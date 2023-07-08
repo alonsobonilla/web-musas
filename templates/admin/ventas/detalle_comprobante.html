@@ -1,6 +1,72 @@
 {% extends "admin/main.html" %} {% block titulo %} Discos {% endblock %} {%block
 contenido %}
 
-<h1>Hola</h1>
+<div class="p-5">
+  <h1>Detalle Venta</h1>
+  <div>
+    <div class="d-flex gap-2">
+      <div class="d-flex gap-2">
+        <p class="fw-bold fs-6">Fecha:</p>
+        <p class="fs-6">{{comprobante[4]}}</p>
+      </div>
+      <div class="d-flex gap-2">
+        <p class="fw-bold fs-6">Hora:</p>
+        <p class="fs-6">{{comprobante[5]}}</p>
+      </div>
+    </div>
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">Cliente:</p>
+      <p class="fs-6">{{pedido[3]}}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">Dni:</p>
+      <p class="fs-6">{{pedido[2]}}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">Forma de pago:</p>
+      <p class="fs-6">{{forma_pago}}</p>
+    </div>
+  </div>
+  <table class="table fs-6">
+    <thead class="text-center">
+      <tr>
+        <th>Nombre del Producto</th>
+        <th>Precio unidad</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      {% for producto in productos %}
+      <tr>
+        <td>{{producto[2]}}</td>
+        <td>{{producto[3]}}</td>
+        <td>{{producto[4]}}</td>
+        <td>{{producto[5]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="d-flex flex-column align-items-end">
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">SubTotal:</p>
+      <p class="fs-6">{{comprobante[6]}}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">Igv:</p>
+      <p class="fs-6">{{comprobante[8]}}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <p class="fw-bold fs-6">Total:</p>
+      <p class="fs-6">{{comprobante[7]}}</p>
+    </div>
+  </div>
+
+  <div>
+    <a class="btn btn-success" href="{{url_for('admin.ventas.home')}}"
+      >Volver</a
+    >
+  </div>
+</div>
 
 {% endblock %}

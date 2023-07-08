@@ -62,7 +62,7 @@ function showProductos() {
     img.src = "/static/img/hamburguesas/h-2.jpg";
     img.alt = "Imagen de la hamburguesa";
     img.style.width = "200px";
-
+    divInformacion.classList.add("w-50");
     divInformacion.appendChild(nombre);
     divInformacion.appendChild(precio);
     divInformacion.appendChild(cantidad);
