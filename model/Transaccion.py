@@ -78,8 +78,9 @@ class Transaccion:
         fechaComprobante = date.today()
         horaComprobante = datetime.now().time()
         subTotal = DetalleOrden.obtener_subTotal(idPedido)
-        igv = subTotal*0.18
-        montoTotal = subTotal + igv
+        base = subTotal/1.18
+        igv = subTotal-base
+        montoTotal = subTotal
         numComprobante = Comprobante.obtener_numero_comprobante()
         ordenes = DetalleOrden.obtener_detalle_orden_id_pedido(idPedido)
 
