@@ -87,45 +87,8 @@
             />
           </a>
         </div>
+
         <div class="main-top-right">
-          {% if cliente: %}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-user"
-            width="44"
-            height="44"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#DB4200"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="7" r="4" />
-            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-          </svg>
-          <p>{{cliente}}</p>
-          {% else: %}
-          <a href="{{url_for('cliente.auth.login')}}">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-user"
-              width="44"
-              height="44"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="#DB4200"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <circle cx="12" cy="7" r="4" />
-              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-            </svg>
-          </a>
-          {% endif %}
           <button class="icono-carrito">
             <a href="{{url_for('cliente.pag_carrito')}}">
               <svg
@@ -148,8 +111,52 @@
               </svg>
             </a>
           </button>
+
           {% if cliente: %}
-          <a href="{{url_for('cliente.auth.logout')}}">Cerrar sesión</a>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-user"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#DB4200"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="7" r="4" />
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+          </svg>
+          <div class="d-flex gap-2 align-items-center">
+            <p style="text-transform: uppercase; font-size: 14px">
+              {{cliente}}
+            </p>
+            <a href="{{url_for('cliente.auth.logout')}}" class="btn btn-danger"
+              >Cerrar sesión</a
+            >
+          </div>
+
+          {% else: %}
+          <a href="{{url_for('cliente.auth.login')}}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-user"
+              width="44"
+              height="44"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#DB4200"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+            </svg>
+          </a>
           {% endif %}
         </div>
       </div>
