@@ -60,7 +60,7 @@ def api_eliminarusuario():
 
 @api_usuarios.route("/api_obtenerusuario", methods=["POST"])
 @jwt_required()
-def api_obtenerusuario_por_dni_tipo():
+def api_obtenerusuario_por_dni_tipo():  
     try:
         dni = request.json["DNI"]
         tipoUsuario = request.json["tipoUsuario"]
