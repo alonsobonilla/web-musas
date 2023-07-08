@@ -19,17 +19,14 @@ def api_obtenerdetallecomprobante():
     except:
         return jsonify ({"Mensaje":"Error al obtener detalle de comprobante"})
 
-@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idcomprobante>/<int:idproducto>")
-def api_obtenerdetalleComprobante(idcomprobante,idproducto):
+@api_detalleComprobante.route("/api_obtenerdetalleComprobante/<int:idcomprobante>")
+def api_obtenerdetalleComprobante(idcomprobante):
     try:
-        deC = detalleComprobante.obtener_detalleComprobante_id(idcomprobante,idproducto)
-        validar_idProducto = Producto.obtener_producto_por_id(idproducto)
+        deC = detalleComprobante.obtener_detalleComprobante_id(idcomprobante)
         validar_Comprobante = Comprobante.validar_idComprobante_existente(idcomprobante)
         listaserializable = []
 
-        if validar_idProducto is None:
-            return jsonify({"Mensaje": "El producto no existe"})
-        elif not validar_Comprobante:
+        if not validar_Comprobante:
             return jsonify({"Mensaje": "El Comprobante no existe"})
         elif deC is None:
               return jsonify({"Mensaje": "El detalle de comprobante no existe"})
