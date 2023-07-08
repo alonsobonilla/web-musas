@@ -66,7 +66,7 @@ async function autorizacion() {
         "Content-Type": "application/json",
       },
     });
-    token = accesToken.json();
+    token = await accesToken.json();
   } catch (error) {
     console.log(error);
   }
