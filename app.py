@@ -9,7 +9,8 @@ from controllers.admin_productos import *
 from controllers.admin_categoria_producto import *
 from controllers.admin_usuarios import *
 from controllers.admin_pedidos import *
-#Importando apis
+from controllers.admin_ventas import *
+# Importando apis
 from APIS.productos import *
 from APIS.usuarios import api_usuarios
 from APIS.registro_pedidos import api_registro_pedidos
@@ -23,13 +24,15 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret-key"
 jwt = JWT(app, authenticate, identity)
 
-#swagger
+# swagger
 SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
-API_URL = '/static/documentacion.yaml'  # Our API url (can of course be a local resource)
+# Our API url (can of course be a local resource)
+API_URL = '/static/documentacion.yaml'
 
 # Call factory function to create our blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    SWAGGER_URL,
     API_URL,
     config={  # Swagger UI config overrides
         'app_name': "Test application"
@@ -48,14 +51,15 @@ admin.register_blueprint(productos)
 admin.register_blueprint(categoria_producto)
 admin.register_blueprint(usuarios)
 admin.register_blueprint(pedidos)
+admin.register_blueprint(ventas)
 admin.register_blueprint(auth)
 cliente.register_blueprint(auth)
 
 app.register_blueprint(admin)
 app.register_blueprint(cliente)
-#Registro de swagger
+# Registro de swagger
 app.register_blueprint(swaggerui_blueprint)
-#Registrando apis
+# Registrando apis
 app.register_blueprint(api_productos)
 app.register_blueprint(api_usuarios)
 app.register_blueprint(api_registro_pedidos)
